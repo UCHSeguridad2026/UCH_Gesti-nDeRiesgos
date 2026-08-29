@@ -1,0 +1,37 @@
+# ==========================================================
+# SimpleRisk - Entorno reproducible con Docker Compose
+# TP Seguridad de Sistemas - Cangialosi Leonardo (LU 31041361)
+# ==========================================================
+#
+# Levanta SimpleRisk a partir de la imagen oficial de DockerHub.
+#
+# Uso:
+#   docker compose up -d
+#   Luego abrir https://localhost/  (aceptar el certificado autofirmado)
+#   Usuario inicial: admin  /  contrasena inicial: admin  (CAMBIAR de inmediato)
+#
+# Nota sobre Apple Silicon (M1/M2/M3):
+#   La imagen simplerisk/simplerisk solo se publica para amd64 (x86_64).
+#   En Macs ARM se debe forzar la plataforma con emulacion (Rosetta/QEMU),
+#   por eso se declara "platform: linux/amd64". En Mac Intel o Linux x86
+#   esta linea es inofensiva.
+
+services:
+  simplerisk:
+    image: simplerisk/simplerisk:latest
+    platform: linux/amd64          # necesario en Apple Silicon; ignorable en x86
+    container_name: simplerisk
+    restart: unless-stopped
+    ports:
+      - "80:80"                    # HTTP  (redirige a HTTPS)
+      - "443:443"                  # HTTPS (interfaz web)
+    healthcheck:
+      test: ["CMD", "curl", "-fsk", "https://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    # Persistencia opcional de la base de datos fuera del contenedor.
+    # Descomentar para que los riesgos cargados NO se pierdan al hacer
+    # 'docker rm'. El .gitignore excluye db_data/ para no subir datos reales.
+    # volumes:
+    #   - ./db_data:/var/lib/mysql

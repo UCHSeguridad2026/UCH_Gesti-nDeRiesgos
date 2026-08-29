@@ -1,0 +1,45 @@
+# ==========================================================
+# .gitignore OBLIGATORIO - TP SimpleRisk (Seguridad de Sistemas)
+# Cangialosi Leonardo Arturo - LU 31041361 - Comision G
+# ==========================================================
+
+# --- Credenciales y secretos ---
+*.env
+.env.*
+config.php
+*credentials*
+*secrets*
+*.key
+*.pem
+
+# --- Bases de datos con datos reales ---
+*.sql
+*.dump
+*.bak
+
+# --- Binarios pesados / imagenes de VM ---
+*.ova
+*.vmdk
+*.vdi
+*.vhd
+*.iso
+*.zip
+*.tar.gz
+
+# --- Snapshots de VM ---
+snapshots/
+
+# --- OS e IDE ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Logs con datos sensibles ---
+*.log
+logs/
+
+# --- Extra: dumps y volumenes de docker con datos reales ---
+db_data/
+mysql_data/
+simplerisk_backup*
