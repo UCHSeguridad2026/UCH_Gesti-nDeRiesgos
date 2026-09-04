@@ -1,0 +1,179 @@
+# Registro de Riesgos
+
+## Contexto y criterio de valoración
+
+El registro corresponde al análisis de una clínica privada con 120 empleados y aproximadamente 800 pacientes atendidos diariamente. La organización utiliza sistemas digitales para historias clínicas, turnos, información de obras sociales y procesos administrativos.
+
+La probabilidad y el impacto se valoraron de 1 a 5. El nivel académico se obtuvo mediante Probabilidad × Impacto, clasificándose los resultados de 1 a 4 como Bajo, 5 a 9 como Medio, 10 a 15 como Alto y 16 a 25 como Crítico.
+
+SimpleRisk aplica una normalización adicional en el método Classic, por lo que los valores mostrados por la herramienta pueden diferir de la clasificación de la matriz 5x5 utilizada para el trabajo.
+
+---
+
+## R01 - Compromiso de credenciales del personal médico
+
+*Descripción:* Las credenciales de profesionales o empleados podrían ser obtenidas mediante phishing, reutilización de contraseñas o técnicas de ingeniería social, permitiendo el ingreso ilegítimo a sistemas de la clínica.
+
+*Categoría:* Confidencialidad.
+
+*Activos afectados:* Credenciales, aplicación de historias clínicas y datos personales de pacientes.
+
+*Probabilidad:* 4 - Probable.
+
+*Justificación:* La existencia de múltiples usuarios que utilizan diariamente cuentas individuales genera una superficie relevante para ataques dirigidos al robo de credenciales.
+
+*Impacto:* 5 - Catastrófico.
+
+*Justificación:* Una cuenta comprometida podría permitir el acceso a información médica sensible y generar consecuencias legales, reputacionales y operativas graves.
+
+*Valor:* 20 - Crítico.
+
+*Controles existentes:* Cuentas individuales y autenticación mediante usuario y contraseña.
+
+*Tratamiento:* Mitigar mediante MFA, fortalecimiento de políticas de autenticación, capacitación frente a phishing, mínimo privilegio y monitoreo de accesos.
+
+*Propietario:* Valentina Ríos - Analista de Riesgos.
+
+---
+
+## R02 - Propagación de malware desde equipos administrativos
+
+*Descripción:* Un archivo malicioso recibido mediante correo electrónico o descargado desde Internet podría infectar una estación administrativa y propagarse hacia otros sistemas de la clínica.
+
+*Categoría:* Disponibilidad / Integridad.
+
+*Activos afectados:* Estaciones de trabajo, red interna, servidores y sistemas clínicos.
+
+*Probabilidad:* 4 - Probable.
+
+*Justificación:* El uso cotidiano de correo electrónico, navegación y archivos externos genera diferentes oportunidades de infección.
+
+*Impacto:* 5 - Catastrófico.
+
+*Justificación:* La propagación hacia infraestructura clínica podría producir indisponibilidad, alteración de información e interrupciones significativas en la atención.
+
+*Valor:* 20 - Crítico.
+
+*Controles existentes:* Antivirus y controles básicos de acceso.
+
+*Tratamiento:* Mitigar mediante EDR, segmentación de red, filtrado de correo, restricciones de privilegios y capacitación.
+
+*Propietario:* Valentina Ríos - Analista de Riesgos.
+
+---
+
+## R03 - Caída de infraestructura que soporta la atención de pacientes
+
+*Descripción:* Una falla de servidores, red o componentes de infraestructura podría impedir el acceso a las aplicaciones utilizadas durante la atención.
+
+*Categoría:* Disponibilidad.
+
+*Activos afectados:* Servidores, red interna y aplicaciones asistenciales.
+
+*Probabilidad:* 3 - Posible.
+
+*Justificación:* La prestación depende de múltiples componentes tecnológicos susceptibles a fallas de hardware, software o comunicaciones.
+
+*Impacto:* 5 - Catastrófico.
+
+*Justificación:* Una interrupción prolongada podría afectar significativamente la atención de aproximadamente 800 pacientes diarios.
+
+*Valor:* 15 - Alto.
+
+*Controles existentes:* Soporte técnico y copias de seguridad.
+
+*Tratamiento:* Mitigar mediante redundancia, monitoreo, procedimientos de contingencia y pruebas de recuperación.
+
+*Propietario:* Responsable de Seguridad.
+
+---
+
+## R04 - Modificación accidental de datos médicos por permisos excesivos
+
+*Descripción:* Un empleado podría modificar información clínica que no debería tener autorización para editar debido a una asignación excesiva de privilegios.
+
+*Categoría:* Integridad.
+
+*Activos afectados:* Historias clínicas digitales y aplicación clínica.
+
+*Probabilidad:* 3 - Posible.
+
+*Justificación:* Diferentes perfiles utilizan diariamente los sistemas y una gestión inadecuada de privilegios puede permitir operaciones innecesarias.
+
+*Impacto:* 5 - Catastrófico.
+
+*Justificación:* Información clínica incorrecta podría influir sobre decisiones asistenciales y producir consecuencias graves.
+
+*Valor:* 15 - Alto.
+
+*Controles existentes:* Cuentas individuales y permisos básicos.
+
+*Tratamiento:* Mitigar mediante control de acceso basado en roles, mínimo privilegio, revisión periódica de accesos, registros y trazabilidad de modificaciones.
+
+*Propietario:* Valentina Ríos - Analista de Riesgos.
+
+---
+
+## R05 - Envío accidental de información sensible a terceros no autorizados
+
+*Descripción:* Un empleado podría enviar por error documentación clínica, datos personales o información de obras sociales a un destinatario incorrecto.
+
+*Categoría:* Confidencialidad.
+
+*Activos afectados:* Datos personales, historias clínicas y documentación administrativa.
+
+*Probabilidad:* 3 - Posible.
+
+*Justificación:* El intercambio cotidiano de información entre empleados y terceros hace posible la ocurrencia de errores humanos.
+
+*Impacto:* 4 - Mayor.
+
+*Justificación:* La exposición de información sensible podría generar reclamos, consecuencias regulatorias y daño reputacional.
+
+*Valor:* 12 - Alto.
+
+*Controles existentes:* Cuentas individuales y procedimientos internos.
+
+*Tratamiento:* Mitigar mediante DLP, clasificación de información, capacitación y controles adicionales antes del envío de información sensible.
+
+*Propietario:* Responsable de Seguridad.
+
+---
+
+## R06 - Imposibilidad de restaurar información luego de una falla crítica
+
+*Descripción:* Ante una falla grave, las copias de seguridad podrían encontrarse incompletas, corruptas o no haber sido probadas, impidiendo recuperar información.
+
+*Categoría:* Disponibilidad / Operativo.
+
+*Activos afectados:* Historias clínicas, turnos, bases de datos y facturación.
+
+*Probabilidad:* 2 - Improbable.
+
+*Justificación:* Una pérdida crítica no debería producirse frecuentemente, aunque la ausencia de pruebas de restauración mantiene una posibilidad real.
+
+*Impacto:* 5 - Catastrófico.
+
+*Justificación:* La pérdida irreversible de información clínica y administrativa tendría consecuencias operativas, legales y reputacionales severas.
+
+*Valor:* 10 - Alto.
+
+*Controles existentes:* Copias de seguridad periódicas.
+
+*Tratamiento:* Mitigar mediante estrategia 3-2-1, backups offline o inmutables, pruebas periódicas de restauración y definición de RPO/RTO.
+
+*Propietario:* Responsable de Seguridad.
+
+---
+
+## R07 - Falla de integración con sistemas de obras sociales
+
+*Descripción:* Una interrupción o error en las interfaces utilizadas para intercambiar información con obras sociales podría impedir temporalmente validar o procesar prestaciones.
+
+*Categoría:* Operativo.
+
+*Activos afectados:* Sistema de facturación, información administrativa e interfaces con terceros.
+
+*Probabilidad:* 3 - Posible.
+
+*Justificación:* El funcionamiento depende parcialmente de servicios externos cuya disponibilidad no se encuentra bajo control d
