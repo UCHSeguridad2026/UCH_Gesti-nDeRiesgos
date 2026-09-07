@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  db_clinica:
+    image: mysql:5.7
+    container_name: simplerisk_db_clinica
+    environment:
+      - MYSQL_ROOT_PASSWORD=Password!Demo
+      - MYSQL_DATABASE=simplerisk
+      - MYSQL_USER=admin_demo
+      - MYSQL_PASSWORD=Password!Demo
+    volumes:
+      - datos_db:/var/lib/mysql
+
+  # App principal
+  app_riesgos:
+    image: simplerisk/simplerisk:latest
+    container_name: simplerisk_app_clinica
+    ports:
+      - "8000:80"
+    environment:
+      - DB_HOST=db_clinica
+      - DB_USER=admin_demo
+      - DB_PASS=Password!Demo
+      - DB_NAME=simplerisk
+    depends_on:
+      - db_clinica
+
+volumes:
+  datos_db:
