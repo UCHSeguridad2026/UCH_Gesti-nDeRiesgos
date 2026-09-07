@@ -112,5 +112,5 @@ Palabra clave de verificación de lectura de la consigna: girasol.
 - [x] Los archivos `.sql` o dumps no están subidos.
 - [x] El informe está en un formato legible.
 - [x] El reporte ejecutivo está completo.
-- [ ] Los mensajes de commit son descriptivos.
-- [ ] Mi branch está actualizada y funciona correctamente.
+- [x] Los mensajes de commit son descriptivos.
+- [x] Mi branch está actualizada y funciona correctamente.
