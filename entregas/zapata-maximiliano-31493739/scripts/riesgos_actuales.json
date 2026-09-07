@@ -1,0 +1,74 @@
+[
+  {
+    "id": "R01",
+    "nombre": "Robo de credenciales del sistema de gestión (EPyme)",
+    "categoria": "Access Management",
+    "nivel": "Alto",
+    "valor": 12,
+    "propietario": "Dueño/responsable"
+  },
+  {
+    "id": "R02",
+    "nombre": "Pérdida de datos por falta de backup del sistema EPyme",
+    "categoria": "Sensitive Data Management",
+    "nivel": "Alto",
+    "valor": 12,
+    "propietario": "Dueño/responsable técnico"
+  },
+  {
+    "id": "R03",
+    "nombre": "Acceso físico no autorizado a la caja/POS fuera de horario",
+    "categoria": "Physical Security",
+    "nivel": "Medio",
+    "valor": 6,
+    "propietario": "Dueño"
+  },
+  {
+    "id": "R04",
+    "nombre": "Grabaciones de cámaras de seguridad accesibles sin protección",
+    "categoria": "Sensitive Data Management",
+    "nivel": "Medio",
+    "valor": 6,
+    "propietario": "Encargado sistemas/dueño"
+  },
+  {
+    "id": "R05",
+    "nombre": "Error humano al cargar precios o stock en el sistema",
+    "categoria": "Policy and Procedure",
+    "nivel": "Medio",
+    "valor": 8,
+    "propietario": "Encargado de stock"
+  },
+  {
+    "id": "R06",
+    "nombre": "Fuga de datos de empleados por mal manejo de archivos",
+    "categoria": "Sensitive Data Management",
+    "nivel": "Alto",
+    "valor": 12,
+    "propietario": "Dueño/responsable administrativo"
+  },
+  {
+    "id": "R07",
+    "nombre": "Interrupción del sistema de gestión por falla del proveedor",
+    "categoria": "Third-Party Management",
+    "nivel": "Medio",
+    "valor": 6,
+    "propietario": "Dueño"
+  },
+  {
+    "id": "R08",
+    "nombre": "Uso de dispositivo personal del empleado sin control (BYOD)",
+    "categoria": "Access Management",
+    "nivel": "Medio",
+    "valor": 9,
+    "propietario": "Dueño"
+  },
+  {
+    "id": "R09",
+    "nombre": "Exposición de datos de tarjeta por mal manejo del POS/QR de pago",
+    "categoria": "Sensitive Data Management",
+    "nivel": "Medio",
+    "valor": 8,
+    "propietario": "Dueño/cajero responsable"
+  }
+]
