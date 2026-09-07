@@ -238,8 +238,49 @@ Entre ellas:
 - El trabajo se realizó sobre una branch individual del repositorio.
 
 ---
+# 6. Parte D - Análisis de seguridad de la instalación
 
-# 6. Conclusiones
+## 5.1 Evaluación de la instalación propia de SimpleRisk
+
+Como actividad adicional se realizó una revisión básica de seguridad sobre la instalación de SimpleRisk utilizada durante el trabajo. El análisis permitió identificar tres configuraciones que podrían fortalecerse en un entorno real.
+
+### Hallazgo 1 - Exposición del servicio en todas las interfaces
+
+Mediante la revisión de los puertos publicados por Docker se comprobó que SimpleRisk escucha en los puertos 8080 y 8443 sobre las direcciones `0.0.0.0` e `[::]`. Esto implica que el servicio se encuentra publicado sobre todas las interfaces de red disponibles en la máquina virtual.
+
+Para un entorno de laboratorio esta configuración facilita el acceso, pero representa una superficie de exposición mayor a la necesaria cuando la aplicación solamente debe utilizarse localmente.
+
+Como mitigación se propone limitar la publicación de los puertos a la interfaz loopback, por ejemplo:
+
+`127.0.0.1:8080:80`
+
+`127.0.0.1:8443:443`
+
+Cuando sea necesario permitir acceso remoto, se recomienda restringir los orígenes autorizados mediante controles de red y firewall.
+
+### Hallazgo 2 - Utilización de una imagen Docker sin versión fija
+
+La instalación utiliza la imagen `simplerisk/simplerisk:latest`.
+
+El uso de la etiqueta `latest` implica que una nueva ejecución o descarga de la imagen podría obtener una versión diferente de la utilizada originalmente. Esto reduce la reproducibilidad del entorno y puede incorporar cambios de funcionamiento o seguridad que no hayan sido previamente evaluados.
+
+Como mitigación se recomienda fijar una versión específica de SimpleRisk o utilizar el digest de una imagen previamente validada. Las actualizaciones deberían realizarse de forma controlada después de verificar su funcionamiento y revisar los cambios de seguridad correspondientes.
+
+### Hallazgo 3 - Firewall del sistema operativo inactivo
+
+La comprobación realizada mediante `ufw status verbose` indicó que el firewall UFW se encuentra inactivo.
+
+Aunque la máquina virtual utilizada para el laboratorio se encuentra en un entorno controlado, la ausencia de una política de firewall del host limita la capacidad de restringir conexiones entrantes si la configuración de red cambia o se publican nuevos servicios.
+
+Como mitigación se propone habilitar UFW y establecer una política restrictiva que permita únicamente las conexiones y puertos estrictamente necesarios para la operación del entorno.
+
+## 5.2 Resultado del análisis
+
+Los hallazgos identificados no impidieron el desarrollo del laboratorio, pero muestran diferencias importantes entre una configuración orientada a pruebas y una instalación destinada a producción.
+
+En un entorno real se recomienda reducir la superficie de exposición de red, utilizar versiones de software controladas y aplicar mecanismos de filtrado de tráfico. Estas medidas contribuyen a mejorar la reproducibilidad, reducir configuraciones innecesariamente permisivas y aplicar el principio de defensa en profundidad.
+
+# 7. Conclusiones
 
 La utilización de SimpleRisk permitió construir un registro inicial de riesgos para el escenario planteado y aplicar de manera práctica las etapas de identificación, valoración y tratamiento.
 
@@ -253,7 +294,7 @@ Como resultado, se considera prioritario fortalecer la gestión de identidades y
 
 ---
 
-# 7. Referencias
+# 8. Referencias
 
 - NIST. Guide for Conducting Risk Assessments. Special Publication 800-30 Revision 1.
 - SimpleRisk. Documentación oficial.
