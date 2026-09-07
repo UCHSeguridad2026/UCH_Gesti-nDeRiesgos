@@ -4,8 +4,8 @@
 
 - **Nombre completo:** Maximiliano Zapata
 - **LU:** 31493739
-- **Email institucional:** [PLACEHOLDER - completar]
-- **Comisión:** [PLACEHOLDER - completar]
+- **Email institucional:** zapatamaximilianp@gmail.com
+- **Comisión:** 4G
 
 ## Instrucciones para levantar el entorno
 
@@ -53,11 +53,11 @@ solicitado por la cátedra.)
 
 ## Checklist de auto-revisión
 
-- [ ] item 1
-- [ ] item 2
-- [ ] item 3
-- [ ] item 4
-- [ ] item 5
-- [ ] item 6
-- [ ] item 7
-- [ ] item 8
+- [ ] No hay credenciales en el repositorio.
+- [ ] El archivo `.gitignore` está correctamente configurado.
+- [ ] Las capturas de pantalla no muestran datos sensibles.
+- [ ] Los archivos `.sql` o dumps no están subidos.
+- [ ] El informe está en un formato legible.
+- [ ] El reporte ejecutivo está completo.
+- [ ] Los mensajes de commit son descriptivos.
+- [ ] Mi branch está actualizada y funciona correctamente.
