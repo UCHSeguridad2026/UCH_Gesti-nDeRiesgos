@@ -66,3 +66,67 @@ El entorno debe volver a estar disponible en `https://localhost:8443/` sin pasos
 
 - Si el puerto `8080` u `8443` ya está en uso en tu máquina, cambiá el mapeo en `docker-compose.yml` (por ejemplo `"8081:80"`) y volvé a levantar el entorno.
 - Si la página no carga al primer intento, esperá unos segundos más: MySQL puede tardar en inicializar dentro del contenedor la primera vez.
+
+
+
+# Decisiones de diseño
+
+## Contexto del escenario
+
+La organización simulada es una clínica privada de 120 empleados que atiende 800 pacientes por día, y maneja tres tipos de información sensible:
+
+- **Historias clínicas digitales:** dato de salud, considerado dato sensible bajo la Ley 25.326 de Protección de Datos Personales, y regulado también por la Ley 26.529 de Derechos del Paciente / Historia Clínica.
+- **Datos de obras sociales:** implican vinculación con terceros (aseguradoras/obras sociales) para validación de afiliados y prestaciones.
+- **Facturación:** datos financieros, con superficie de fraude propia.
+
+La clínica acaba de sufrir una auditoría externa que identificó debilidades en su gestión de riesgos, lo que justifica que se esté armando recién ahora un registro formal de riesgos, y permite asumir que no existía previamente un proceso de gestión de riesgos consolidado.
+
+## Supuestos del escenario
+
+Dado que la consigna no especifica la infraestructura de la clínica, se asumió lo siguiente para poder definir riesgos realistas:
+
+- La clínica opera un sistema de Historia Clínica Electrónica (HCE) accedido por personal médico y administrativo desde estaciones de trabajo y/o tablets.
+- Existe una red interna con Wi-Fi para personal, separada de la red de pacientes/visitas.
+- La facturación y la integración con obras sociales se realiza mediante un sistema conectado a internet (envío de prestaciones, validación de afiliados).
+- Hay guardias con turnos rotativos que operan fuera del horario administrativo habitual, lo que implica accesos al sistema fuera de horario o en forma remota.
+- No existía previamente un área formal de seguridad de la información; el responsable de seguridad (rol asumido en este TP) es una función nueva en la organización.
+- Marco legal aplicable: Ley 25.326 (Protección de Datos Personales) y Ley 26.529 (Historia Clínica).
+
+## Metodología de evaluación de riesgos
+
+SimpleRisk trabaja de forma nativa con una matriz de Probabilidad × Impacto en escala 1-5. Antes de cargar los riesgos se definieron los criterios de cada escala, para que los valores asignados a cada riesgo sean consistentes y justificables.
+
+### Escala de Probabilidad
+
+| Valor | Nivel | Criterio |
+|---|---|---|
+| 1 | Muy baja | Nunca ocurrió en el sector o en la organización; requeriría múltiples fallas simultáneas |
+| 2 | Baja | Posible pero poco frecuente (una vez cada varios años) |
+| 3 | Media | Ocurre ocasionalmente en organizaciones similares (cada 1-2 años) |
+| 4 | Alta | Ocurre con cierta frecuencia en el sector salud (según reportes como Verizon DBIR) |
+| 5 | Muy alta | Ya ocurrió en la organización o es prácticamente inevitable sin controles |
+
+### Escala de Impacto
+
+Adaptada al contexto específico de una clínica, incorporando el efecto sobre la atención al paciente como criterio (no solo el efecto técnico u operativo):
+
+| Valor | Nivel | Criterio |
+|---|---|---|
+| 1 | Insignificante | Sin efecto en pacientes ni operación; molestia menor |
+| 2 | Menor | Afecta a un área puntual, sin exposición de datos ni interrupción de atención |
+| 3 | Moderado | Interrupción parcial de atención, o exposición de datos de un grupo acotado de pacientes |
+| 4 | Mayor | Exposición masiva de historias clínicas/datos financieros, sanción regulatoria probable, o interrupción significativa de atención médica |
+| 5 | Catastrófico | Riesgo para la seguridad/vida de pacientes, o incidente que compromete la continuidad de la clínica |
+
+### Categorías de riesgo
+
+Se utilizan las categorías propuestas por la consigna: Confidencialidad, Integridad, Disponibilidad, Legal, Operativo.
+
+### Propietarios de riesgo
+
+Para mantener consistencia entre los riesgos definidos, se establecieron de antemano los owners naturales según el tipo de riesgo:
+
+- **Jefe de IT / Sistemas:** riesgos técnicos (infraestructura, backups, accesos).
+- **Responsable de Seguridad de la Información:** riesgos transversales de confidencialidad y legales.
+- **Dirección Médica:** riesgos que afectan directamente la atención al paciente.
+- **Administración/Facturación:** riesgos vinculados a obras sociales y facturación.
