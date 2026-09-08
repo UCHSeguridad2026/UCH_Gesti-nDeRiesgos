@@ -53,10 +53,14 @@ Abrir **https://localhost:8443**
 El certificado es autofirmado, por lo que el navegador muestra una advertencia.
 Es el comportamiento esperado de la imagen: se acepta la excepción y se continúa.
 
-En el primer arranque, SimpleRisk presenta su instalador web. La credencial
-inicial es la que trae el producto por defecto y **se cambia antes de cargar
-cualquier dato**. Por política de la cátedra, ninguna contraseña —ni real ni de
-demostración— se documenta en este repositorio.
+En el primer acceso, SimpleRisk presenta la pantalla *Default Admin Account
+Creation*: la aplicación **no incluye una cuenta administradora preconfigurada**,
+sino que exige crearla en ese momento definiendo usuario y contraseña propios.
+Esto elimina de raíz el riesgo de credenciales por defecto conocidas, una de las
+malas prácticas más frecuentes en despliegues de aplicaciones web.
+
+Por política de la cátedra, ninguna contraseña —ni real ni de demostración— se
+documenta en este repositorio.
 
 ### Comandos útiles
 
@@ -107,12 +111,36 @@ real de la aplicación.
 ### 3.4 Metodología de valoración de riesgos
 
 Se utiliza la matriz clásica **Probabilidad × Impacto** en escala 1–5, alineada
-con la plantilla de la Actividad A03 y con la matriz nativa de SimpleRisk. Los
-niveles resultantes son: Bajo (1–4), Medio (5–9), Alto (10–15), Crítico (16–25).
+con la plantilla de la Actividad A03. En SimpleRisk se selecciona el método de
+scoring **Classic**, y no CVSS, DREAD ni OWASP, porque es el único que responde a
+esa misma lógica; los demás métodos responden a modelos de puntuación distintos y
+no serían comparables con la plantilla de la cátedra.
 
-Cada valoración se justifica de forma explícita. Cuando la justificación se
-apoya en datos de incidentes reales del sector salud, se cita la fuente en
-`configuracion/riesgos.md`.
+**Equivalencia de escalas.** Las denominaciones de SimpleRisk se corresponden una
+a una con las de la plantilla A03:
+
+| Valor | Probabilidad (SimpleRisk) | Probabilidad (A03) | Impacto (SimpleRisk) | Impacto (A03) |
+|:-:|---|---|---|---|
+| 1 | Remote | Raro | Insignificant | Insignificante |
+| 2 | Unlikely | Improbable | Minor | Menor |
+| 3 | Credible | Posible | Moderate | Moderado |
+| 4 | Likely | Probable | Major | Mayor |
+| 5 | Almost Certain | Casi seguro | Extreme/Catastrophic | Catastrófico |
+
+**Diferencia en la escala de resultado.** Ambos enfoques calculan el mismo
+producto, pero lo expresan de forma distinta. La plantilla A03 conserva el
+producto en su rango natural de 1 a 25; SimpleRisk lo normaliza a una escala de
+0 a 10 mediante la expresión (P × I) / 25 × 10.
+
+El riesgo de validación cargado durante la Parte A ilustra el efecto: valorado
+como Credible (3) y Moderate (3), la plantilla A03 arroja un valor de 9 y
+SimpleRisk muestra 3.6. Son la misma valoración expresada en dos escalas.
+
+**Criterio adoptado.** Los niveles de riesgo se clasifican según la tabla de la
+plantilla A03 —Bajo (1–4), Medio (5–9), Alto (10–15), Crítico (16–25)—, por ser
+el instrumento formal de la cátedra. En `configuracion/riesgos.md` se consignan
+ambos valores para cada riesgo, de modo que la documentación resulte contrastable
+contra las capturas de SimpleRisk sin ambigüedad.
 
 ### 3.5 Supuestos del escenario
 
@@ -178,9 +206,9 @@ entregas/cabrera-uriel-31673361/
 
 - [X] No hay credenciales en el repositorio
 - [X] El `.gitignore` está correctamente configurado
-- [ ] Las capturas no muestran datos sensibles
-- [ ] Los archivos `.sql` o dumps no están subidos
+- [X] Las capturas no muestran datos sensibles
+- [X] Los archivos `.sql` o dumps no están subidos
 - [ ] El informe está en formato legible
 - [ ] El reporte ejecutivo está completo
-- [ ] Los mensajes de commit son descriptivos
-- [ ] Mi branch está actualizada y funciona
+- [X] Los mensajes de commit son descriptivos
+- [X] Mi branch está actualizada y funciona
