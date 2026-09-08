@@ -326,6 +326,116 @@ aplicar un análisis cuantitativo únicamente sobre los riesgos críticos, cuand
 organización acumule datos suficientes y deba decidir sobre inversiones de
 magnitud significativa.
 
+### C.2 Integración con una herramienta externa
+
+Se documentó e **implementó** una integración entre SimpleRisk y Discord, que
+notifica automáticamente los riesgos cuyo score supera un umbral configurable.
+
+#### Justificación de la herramienta elegida
+
+Se evaluaron tres alternativas de integración:
+
+| Alternativa | Ventaja | Limitación |
+|---|---|---|
+| SIEM | Correlación con eventos de seguridad reales | Requiere infraestructura de la que la clínica no dispone |
+| Jira / sistema de tickets | Convierte cada riesgo en una tarea con seguimiento | SimpleRisk ofrece integración nativa, pero como Extra de pago |
+| Mensajería (Discord / Slack / Teams) | Notificación inmediata, sin infraestructura adicional | No genera seguimiento; solo informa |
+
+Se optó por la mensajería instantánea por ser la única implementable de forma
+completa en el entorno del trabajo práctico. En un despliegue real de la clínica,
+la integración con un sistema de tickets resultaría más adecuada, dado que la
+notificación por sí sola no garantiza que el riesgo sea efectivamente tratado.
+
+#### Restricción encontrada: la API es un Extra de pago
+
+SimpleRisk expone una API REST, pero está disponible únicamente mediante el *API
+Extra*, uno de los complementos comerciales listados en el panel de
+configuración. La instalación base no permite consultar los riesgos por vía
+programática.
+
+Esta restricción condicionó el diseño de la integración: ante la imposibilidad de
+utilizar la interfaz prevista por el fabricante, la consulta se realiza
+directamente sobre la base de datos MySQL del contenedor.
+
+La decisión tiene una contrapartida que corresponde señalar: **acceder
+directamente a la base de datos de una aplicación es una práctica frágil**. El
+esquema de la base no es una interfaz pública, por lo que puede cambiar entre
+versiones sin previo aviso y romper la integración. En un entorno productivo, la
+alternativa correcta sería adquirir el Extra correspondiente o utilizar
+notificaciones nativas.
+
+#### Arquitectura de la solución
+
+El flujo consta de tres pasos:
+
+1. Un script en Bash consulta la base de datos de SimpleRisk mediante `docker
+   exec`, uniendo las tablas `risks` y `risk_scoring` por su identificador.
+2. Filtra los riesgos cuyo campo `calculated_risk` supera el umbral configurado y
+   que no se encuentran cerrados.
+3. Construye un mensaje con formato *embed* y lo envía por HTTP POST a la URL del
+   webhook de Discord.
+
+La consulta utilizada es la siguiente:
+
+    SELECT r.id, r.subject, s.calculated_risk,
+           s.CLASSIC_likelihood, s.CLASSIC_impact
+    FROM risks r
+    JOIN risk_scoring s ON r.id = s.id
+    WHERE s.calculated_risk >= <umbral>
+      AND r.close_id IS NULL
+    ORDER BY s.calculated_risk DESC;
+
+La tabla `risk_scoring` almacena los valores de las escalas cargadas por el
+analista (`CLASSIC_likelihood` y `CLASSIC_impact`) junto con el score derivado
+(`calculated_risk`). La condición sobre `close_id` evita notificar riesgos ya
+cerrados.
+
+#### Tratamiento de las credenciales
+
+La integración requiere dos credenciales: la contraseña de la base de datos y la
+URL del webhook de Discord, que constituye en sí misma un secreto —quien la posea
+puede publicar mensajes en el canal.
+
+Ninguna de las dos está escrita en el script. Ambas se leen desde un archivo
+`.env` ubicado en el mismo directorio, que **no se versiona**. El repositorio
+incluye en su lugar un archivo `.env.example` con la estructura de variables
+requeridas y valores de reemplazo, de modo que la configuración necesaria quede
+documentada sin exponer los valores reales.
+
+Para que esto funcione, el `.gitignore` de la entrega incorpora una excepción
+explícita:
+
+    .env.*
+    !.env.example
+
+La primera línea bloquea cualquier archivo con ese patrón; la segunda lo
+reincorpora únicamente para la plantilla. El orden es significativo: la excepción
+debe declararse después de la regla que la bloquea.
+
+#### Resultado
+
+La ejecución del script sobre el registro de riesgos cargado detectó cinco
+riesgos con score igual o superior a 6 —R08, R07, R10, R02 y R09— y los notificó
+correctamente en el canal de Discord configurado, indicando para cada uno su
+identificador, denominación, score y los valores de probabilidad e impacto
+asignados.
+
+Evidencia: `capturas/05-webhook-discord.png`.
+
+Archivos: `scripts/notificar_riesgos_altos.sh` y `scripts/.env.example`.
+
+#### Posibles extensiones
+
+La implementación actual requiere ejecución manual. Las mejoras inmediatas serían:
+
+- **Programación periódica** mediante `cron`, para una verificación diaria o
+  semanal automática.
+- **Registro de notificaciones ya enviadas**, de modo que solo se informen riesgos
+  nuevos o cuyo score haya aumentado, evitando repetir el mismo listado en cada
+  ejecución.
+- **Diferenciación por nivel**, enviando los riesgos críticos a un canal distinto
+  del de los altos, o mencionando al responsable correspondiente.
+
 #### Referencias 
 #### (la búsqueda bibliográfica de esta sección se realizó con asistencia de IA; las fuentes fueron verificadas por el autor)
 
@@ -334,3 +444,4 @@ magnitud significativa.
 - Jones, J. A. (2005). *An Introduction to Factor Analysis of Information Risk (FAIR)*. Risk Management Insight LLC.
 - NIST (2012). *Guide for Conducting Risk Assessments* (SP 800-30 Rev. 1).
 - ISO/IEC (2018). *ISO/IEC 27005: Information security risk management*.
+
