@@ -1,28 +1,50 @@
-# UCH - Seguridad - Gestión de Riesgos
-> `#UCH_GestiónDeRiesgos`
+# TP SimpleRisk – Gestión de Riesgos
 
-Este repositorio público está destinado únicamente para las entregas de los estudiantes.
+## Datos personales
 
----
+- **Nombre completo:** [Exequiel Caliri]
+- **LU:** [31141377]
+- **Email institucional:** [Exequielcaliri686@gmail.com]
+- **Comisión:** [COMPLETAR]
 
-## 📌 Checklist de Auto-Revisión
-*Por favor, marca las casillas correspondientes antes de realizar tu entrega:*
+## Cómo levantar el entorno
 
-- [ ] No hay credenciales en el repositorio.
-- [ ] El archivo `.gitignore` está correctamente configurado.
-- [ ] Las capturas de pantalla no muestran datos sensibles.
-- [ ] Los archivos `.sql` o dumps no están subidos.
-- [ ] El informe está en un formato legible.
-- [ ] El reporte ejecutivo está completo.
-- [ ] Los mensajes de commit son descriptivos.
-- [ ] Mi branch está actualizada y funciona correctamente.
+Este TP usa la imagen oficial de SimpleRisk en Docker.
 
----
+```bash
+# 1. Descargar la imagen desde DockerHub
+docker pull simplerisk/simplerisk
 
-## ⚠️ Política de Branches y Resolución de Conflictos
+# 2. Levantar el contenedor
+docker run --name simplerisk -d -p 80:80 -p 443:443 simplerisk/simplerisk
 
-- **Responsabilidad:** Cada estudiante es responsable exclusivo de su propia branch.
-- **Errores de Commit:** Si por error haces un commit sobre `main` o sobre la branch de otro compañero, avisa inmediatamente al docente.
-- **Restricciones:** No se permite hacer `git push --force` sobre ninguna branch compartida.
-- **Soporte:** Ante dudas sobre Git, consulta al docente antes de realizar operaciones destructivas (`reset`, `rebase`, `push -f`).
+# 3. Probar la instancia
+# Abrir en el navegador:
+https://localhost/
+```
 
+> Nota: el certificado es autofirmado, el navegador va a mostrar una advertencia de seguridad la primera vez — es esperable en un entorno local de pruebas.
+
+Para detener y volver a levantar el contenedor más adelante:
+
+```bash
+docker stop simplerisk
+docker start simplerisk
+```
+
+## Decisiones de diseño
+
+- **Metodología de riesgos utilizada:** [COMPLETAR — ej. matriz probabilidad × impacto 1-5 de SimpleRisk]
+- **Supuestos del escenario:** [COMPLETAR — ej. cantidad de servidores, ubicación de historias clínicas, proveedores externos asumidos, etc.]
+- **Otras decisiones relevantes:** [COMPLETAR]
+
+## Checklist de auto-revisión
+
+- [ ] No hay credenciales en el repositorio
+- [ ] El .gitignore está correctamente configurado
+- [ ] Las capturas no muestran datos sensibles
+- [ ] Los archivos .sql o dumps no están subidos
+- [ ] El informe está en formato legible
+- [ ] El reporte ejecutivo está completo
+- [ ] Los mensajes de commit son descriptivos
+- [ ] Mi branch está actualizada y funciona
