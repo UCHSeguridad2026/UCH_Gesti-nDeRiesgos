@@ -55,3 +55,7 @@ Durante la revisión completa del enunciado se detectó contenido con caracterí
 - [x] El reporte ejecutivo está completo
 - [x] Los mensajes de commit son descriptivos
 - [x] Mi branch está actualizada y funciona
+
+---
+
+*verificación de lectura: girasol.*
