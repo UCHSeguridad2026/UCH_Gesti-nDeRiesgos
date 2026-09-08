@@ -1,6 +1,7 @@
 # Credenciales y secretos
 *.env
 .env.*
+!.env.example
 config.php
 *credentials*
 *secrets*
@@ -33,3 +34,8 @@ Thumbs.db
 # Logs con datos sensibles
 *.log
 logs/
+
+# Archivos temporales de editores
+*.swp
+*.kate-swp
+*~

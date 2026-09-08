@@ -191,3 +191,146 @@ se distribuyó entre las tres cuentas por razones de practicidad del entorno de
 laboratorio. En un despliegue productivo, el registro de riesgos correspondería a
 la cuenta de analista y la aprobación de mitigaciones a la de responsable de
 tratamiento.
+
+
+---
+
+## Parte C — Análisis crítico y profundización
+
+### C.1 Comparación metodológica: matriz probabilidad × impacto frente a FAIR
+
+#### El enfoque de SimpleRisk
+
+SimpleRisk implementa, en su método de scoring *Classic*, el enfoque tradicional
+de matriz de probabilidad por impacto. El analista selecciona un nivel de
+probabilidad y uno de impacto sobre escalas ordinales de cinco valores etiquetados
+(*Remote* a *Almost Certain*, *Insignificant* a *Catastrophic*) y la herramienta
+deriva un valor de riesgo que permite ordenar el registro.
+
+Es el mismo modelo conceptual que propone la plantilla de la cátedra, y el que se
+aplicó en el análisis desarrollado en la Parte B.
+
+#### El enfoque de FAIR
+
+FAIR (Factor Analysis of Information Risk) es un marco cuantitativo que, a
+diferencia de los modelos cualitativos basados en clasificaciones alta, media o
+baja, utiliza modelos probabilísticos para estimar la frecuencia y la magnitud de
+las pérdidas posibles, expresadas en términos financieros.
+
+Su diferencia estructural no es solamente el uso de números en lugar de
+etiquetas, sino la **descomposición del riesgo en factores**. Donde la matriz
+clásica pide dos juicios globales —qué tan probable es y qué tan grave sería—,
+FAIR descompone el riesgo en dos componentes principales, la frecuencia del
+evento de pérdida y la magnitud de la pérdida, y a su vez descompone la primera
+en frecuencia del evento de amenaza y vulnerabilidad, entendida como la
+probabilidad de que la acción del atacante efectivamente derive en una pérdida.
+
+Una segunda diferencia relevante es que FAIR expresa sus resultados como
+distribuciones de probabilidad y no como estimaciones puntuales, incorporando la
+incertidumbre como parte constitutiva del análisis en lugar de ocultarla detrás de
+un número único.
+
+#### Ventajas del enfoque de SimpleRisk
+
+**Costo de aplicación bajo.** El análisis desarrollado en este trabajo, con diez
+riesgos valorados y tratados, requirió únicamente el conocimiento del contexto de
+la organización. No demandó datos históricos de incidentes, estimaciones de costos
+por hora de indisponibilidad ni herramientas de simulación.
+
+**Accesibilidad para participantes no especializados.** Las escalas etiquetadas
+permiten que personas ajenas al área de seguridad —responsables de RRHH,
+mantenimiento o administración— participen de la valoración. En una clínica de
+120 empleados sin área de seguridad constituida, esta característica es
+determinante para que el análisis pueda realizarse.
+
+**Suficiencia para la función de priorizar.** Cuando el objetivo es decidir qué
+tratar primero, el ordenamiento relativo alcanza. El análisis realizado permitió
+identificar sin ambigüedad los cuatro riesgos críticos y fundamentar tres planes
+de acción.
+
+#### Desventajas del enfoque de SimpleRisk
+
+**Los valores no son magnitudes.** Esta limitación se verificó empíricamente
+durante el desarrollo del trabajo. Como se documentó en el punto B.3, el mismo
+riesgo R08 obtuvo un valor de 20 sobre 25 según la plantilla y de 8 sobre 10 según
+SimpleRisk. Ambos instrumentos implementan el mismo modelo conceptual y arrojan el
+mismo ordenamiento, pero magnitudes distintas. Esto evidencia que el número
+producido no mide una cantidad de riesgo existente en el mundo, sino que expresa
+una posición dentro de una escala convencional. En consecuencia, no admite
+operaciones aritméticas: no tiene sentido afirmar que un riesgo de valor 20 es el
+doble de grave que uno de valor 10, ni sumar los diez valores para obtener la
+exposición total de la organización.
+
+**No permite evaluar la conveniencia económica del tratamiento.** El plan sobre
+R07 tiene un costo estimado de $4.500.000. La matriz permite afirmar que reduce el
+riesgo de nivel Crítico a Medio, pero no permite responder si esa reducción
+justifica la inversión, porque no existe una unidad común entre el costo del
+control y el beneficio esperado. FAIR, al expresar ambos en términos monetarios,
+convierte esa comparación en una operación directa.
+
+**Oculta el razonamiento detrás de un juicio global.** Al asignar probabilidad 4 a
+R07 se condensa en un único valor la frecuencia con que llegan correos maliciosos,
+la proporción de empleados susceptibles de hacer clic y la efectividad de los
+controles existentes. La descomposición en factores que propone FAIR obliga a
+explicitar cada uno de esos supuestos, lo que los vuelve discutibles y revisables
+de manera independiente.
+
+**Favorece el sesgo de concentración en los niveles altos.** El análisis
+desarrollado ilustra el fenómeno: la valoración inicial no arrojó ningún riesgo de
+nivel Bajo y solo uno Medio. Sin un anclaje externo que discipline la asignación
+de valores, la tendencia es a sobrevalorar, lo que degrada la capacidad de la
+matriz para discriminar entre riesgos.
+
+#### Ventajas y desventajas de FAIR
+
+FAIR resuelve las limitaciones anteriores: produce magnitudes comparables entre
+sí, permite el análisis de costo-beneficio de los controles y explicita los
+supuestos. Sin embargo, su aplicación requiere datos de los que la clínica no
+dispone —frecuencia histórica de incidentes, costo por hora de indisponibilidad
+del sistema de historias clínicas, valor de la información comprometida—, así como
+formación específica en el modelo y capacidad de análisis probabilístico.
+
+Aplicado sin esos insumos, FAIR produce estimaciones cuantitativas construidas
+sobre supuestos igualmente subjetivos que los de la matriz, pero presentadas con
+una apariencia de precisión que no poseen. Este es su principal riesgo de uso: la
+falsa precisión resulta más peligrosa que la imprecisión declarada, porque induce
+confianza injustificada en el resultado.
+
+#### En qué contexto conviene cada uno
+
+**La matriz de probabilidad × impacto resulta apropiada** para organizaciones que
+inician su gestión de riesgos, cuando no existen datos históricos, cuando la
+valoración debe involucrar a personas sin formación técnica, y cuando el objetivo
+es priorizar antes que cuantificar. Es el caso de la clínica analizada: no cuenta
+con área de seguridad constituida, no dispone de registro histórico de incidentes
+y necesita definir por dónde empezar.
+
+**FAIR resulta apropiado** para organizaciones con un programa de gestión de
+riesgos ya establecido, que disponen de datos históricos, que deben justificar
+inversiones de seguridad ante un directorio en términos financieros, o que operan
+en sectores regulados donde se exige demostrar la razonabilidad económica de las
+decisiones de tratamiento.
+
+#### Conclusión
+
+Los dos enfoques no compiten por el mismo lugar sino que corresponden a etapas
+distintas de madurez. La matriz cualitativa responde a la pregunta *qué tratamos
+primero*; FAIR responde a *cuánto conviene invertir en tratarlo*. La segunda
+pregunta solo tiene sentido una vez respondida la primera, y requiere una base de
+datos históricos que únicamente se construye después de haber operado un programa
+de gestión de riesgos durante cierto tiempo.
+
+Para el escenario analizado, el enfoque de SimpleRisk es el adecuado. Una
+progresión razonable consistiría en mantener la matriz para el registro general y
+aplicar un análisis cuantitativo únicamente sobre los riesgos críticos, cuando la
+organización acumule datos suficientes y deba decidir sobre inversiones de
+magnitud significativa.
+
+#### Referencias 
+#### (la búsqueda bibliográfica de esta sección se realizó con asistencia de IA; las fuentes fueron verificadas por el autor)
+
+- The Open Group. *Risk Analysis (O-RA)*. Estándar del modelo FAIR.
+- FAIR Institute. *What is FAIR*. https://www.fairinstitute.org/what-is-fair
+- Jones, J. A. (2005). *An Introduction to Factor Analysis of Information Risk (FAIR)*. Risk Management Insight LLC.
+- NIST (2012). *Guide for Conducting Risk Assessments* (SP 800-30 Rev. 1).
+- ISO/IEC (2018). *ISO/IEC 27005: Information security risk management*.
