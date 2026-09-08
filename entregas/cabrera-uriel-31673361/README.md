@@ -118,6 +118,31 @@ apoya en datos de incidentes reales del sector salud, se cita la fuente en
 
 Documentados en detalle en `informe/informe.md`, sección "Contexto y supuestos".
 
+### 3.6 Normalización de fines de línea (`.gitattributes`)
+
+Windows y Linux marcan el fin de línea de manera distinta: Windows usa CRLF
+(retorno de carro + salto de línea) y Linux usa únicamente LF. El desarrollo de
+esta entrega se realizó en Windows, pero el entorno se ejecuta sobre
+contenedores Linux.
+
+La consecuencia práctica es que un script convertido a CRLF **no se ejecuta**:
+`bash` interpreta el carácter `\r` sobrante como parte del comando y falla con
+un error poco descriptivo (`$'\r': command not found`).
+
+El archivo `.gitattributes` fija el criterio en el propio repositorio:
+
+```
+* text=auto
+*.sh  text eol=lf
+*.yml text eol=lf
+```
+
+Con esto, `setup.sh` y `docker-compose.yml` conservan finales de línea LF en
+cualquier clon del repositorio, sea cual sea el sistema operativo de quien lo
+descargue. Sin este archivo, la reproducibilidad que exige la consigna A.1
+quedaría sujeta a la configuración local `core.autocrlf` de cada máquina, es
+decir, a un factor externo al repositorio y fuera del control del autor.
+
 ---
 
 ## 4. Verificación
@@ -132,6 +157,7 @@ Palabra clave de verificación de lectura: **girasol**
 entregas/cabrera-uriel-31673361/
 ├── README.md                    # este archivo
 ├── .gitignore
+├── .gitattributes               # normalización de fines de línea (ver 3.6)
 ├── entorno/
 │   ├── docker-compose.yml
 │   └── setup.sh

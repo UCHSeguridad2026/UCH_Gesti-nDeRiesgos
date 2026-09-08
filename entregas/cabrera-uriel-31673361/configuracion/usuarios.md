@@ -13,6 +13,11 @@
 
 ## Matriz de permisos
 
+> **Pendiente de ajuste.** Los permisos listados abajo son funcionales. Una vez
+> creados los usuarios, esta tabla se reescribe con los nombres exactos de los
+> permisos tal como aparecen en la pantalla de SimpleRisk, para que coincida con
+> las capturas de `../informe/capturas/`.
+
 | Permiso | Administrador | Analista | Auditor |
 |---|:---:|:---:|:---:|
 | Crear/editar riesgos | ✅ | ✅ | ❌ |

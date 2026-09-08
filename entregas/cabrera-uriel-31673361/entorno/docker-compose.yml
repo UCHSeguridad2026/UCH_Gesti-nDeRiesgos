@@ -48,7 +48,7 @@ services:
         limits:
           memory: 2G
 
-    
+    # --- Endurecimiento basico ----------------------------------------------
     # no-new-privileges impide que un proceso dentro del contenedor gane
     # privilegios via binarios setuid. Practica estandar de Docker.
     security_opt:
