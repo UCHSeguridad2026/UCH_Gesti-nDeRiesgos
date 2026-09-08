@@ -445,3 +445,113 @@ La implementación actual requiere ejecución manual. Las mejoras inmediatas ser
 - NIST (2012). *Guide for Conducting Risk Assessments* (SP 800-30 Rev. 1).
 - ISO/IEC (2018). *ISO/IEC 27005: Information security risk management*.
 
+## Parte D — Actividades optativas
+
+### D1. Análisis de seguridad de la propia instalación de SimpleRisk
+
+Se analizó la instalación por defecto con el objetivo de identificar debilidades
+de configuración. El diagnóstico se apoyó en la herramienta *Health Check* que
+provee la propia aplicación (Settings → Health Check) y en la observación del
+comportamiento durante la instalación.
+
+Datos de la instancia analizada: Ubuntu 24.04.4 LTS, PHP 8.3.6, MySQL 8.0.46,
+SimpleRisk versión 20260828-001.
+
+#### Hallazgo 1: creación de la cuenta administrativa sin autenticación previa
+
+**Descripción.** La imagen se inicia sin ninguna cuenta de administrador creada.
+El primer acceso por HTTP a la aplicación redirige de forma automática a la
+pantalla *Default Admin Account Creation*, que permite definir el usuario
+administrador sin requerir credencial, token de instalación ni validación alguna.
+
+**Riesgo.** En una instancia accesible desde una red no confiable durante la
+ventana que transcurre entre el arranque del contenedor y la creación manual de
+la cuenta, cualquier usuario que alcance el servicio obtiene el control
+administrativo completo de la plataforma. El acceso legítimo posterior quedaría
+bloqueado, y el atacante dispondría de la totalidad del registro de riesgos de la
+organización, que constituye información sensible en sí misma: describe
+exactamente dónde es débil la organización.
+
+**Mitigación propuesta.** Completar la instalación con el servicio restringido a
+la interfaz de loopback o a una red de administración, publicándolo únicamente una
+vez creada la cuenta administrativa. Como control complementario, un token de
+instalación generado en el arranque y accesible solo desde los registros del
+contenedor —mecanismo que emplean otras aplicaciones web— eliminaría la ventana
+de exposición.
+
+#### Hallazgo 2: directorio de la aplicación escribible por el usuario del servidor web
+
+**Descripción.** La pestaña *Permissions* del Health Check informa dos
+condiciones:
+
+- El directorio `/var/www/simplerisk` es escribible por el usuario web
+  (señalado como correcto).
+- El archivo `/var/www/simplerisk/includes/config.php` no es escribible por el
+  usuario web (señalado como incorrecto).
+
+**Análisis.** La verificación del Health Check evalúa la capacidad operativa de la
+aplicación, no su postura de seguridad, y en este caso ambos criterios resultan
+inversos a los que corresponderían desde una perspectiva de seguridad:
+
+- Que `config.php` **no** sea escribible es deseable. El archivo contiene las
+  credenciales de acceso a la base de datos, y su inmutabilidad frente al proceso
+  web limita el impacto de una eventual vulnerabilidad de ejecución de código.
+- Que el **directorio completo** sea escribible constituye una debilidad. Un
+  directorio servido por el servidor web con permiso de escritura para el proceso
+  que lo sirve es la condición que permite que una vulnerabilidad de carga de
+  archivos derive en ejecución remota de código.
+
+El requisito de escritura responde a la funcionalidad de actualización automática
+de la aplicación, lo que expresa un compromiso entre comodidad operativa y
+seguridad resuelto en favor de la primera.
+
+**Mitigación propuesta.** Restringir el permiso de escritura a los directorios que
+efectivamente lo requieran (carga de documentación adjunta y archivos temporales),
+manteniendo el resto en solo lectura para el usuario del servidor web. Configurar
+el servidor para impedir la ejecución de código en los directorios de carga.
+Otorgar escritura sobre el árbol completo únicamente durante las actualizaciones y
+revertirla al finalizar.
+
+#### Hallazgo 3: certificado TLS autofirmado
+
+**Descripción.** La imagen incorpora un certificado autofirmado, por lo que el
+navegador presenta una advertencia de sitio no confiable en cada acceso y la barra
+de direcciones señala la conexión como no segura.
+
+**Riesgo.** El cifrado del canal se mantiene, pero se pierde la autenticación del
+extremo: no existe forma de verificar que el servidor al que se conecta el usuario
+es el legítimo, lo que habilita ataques de intermediario. El efecto secundario es
+igualmente relevante: la advertencia recurrente entrena a los usuarios a
+descartarla sin leerla, degradando la utilidad del mecanismo cuando la
+advertencia sea genuina.
+
+**Mitigación propuesta.** En un despliegue productivo, sustituir el certificado
+por uno emitido por una autoridad reconocida —Let's Encrypt resulta suficiente— o,
+en una instalación exclusivamente interna, por uno emitido por la autoridad
+certificante propia de la organización, distribuida como confiable en los equipos
+del personal.
+
+#### Observación adicional sobre el resultado del Health Check
+
+La pestaña *Connectivity* reporta la imposibilidad de comunicarse con la API de
+SimpleRisk. Esta condición no constituye una debilidad de seguridad, sino la
+consecuencia de que la funcionalidad de API se distribuye como complemento
+comercial (*API Extra*) y no está incluida en la instalación base, según se
+detalla en el punto C.2.
+
+Se registra aquí porque ilustra una limitación general de las herramientas de
+diagnóstico automatizado: señalan desviaciones respecto de una configuración
+esperada, sin distinguir entre las que representan un problema de seguridad, las
+que responden a decisiones de licenciamiento y las que —como en el Hallazgo 2—
+constituyen precisamente la configuración correcta. La interpretación del
+resultado requiere criterio propio y no puede delegarse en la herramienta.
+
+### D2. Implementación de una integración real
+
+Se implementó la integración descrita en el punto C.2: un script que consulta el
+registro de riesgos de SimpleRisk y notifica en un canal de Discord aquellos cuyo
+score supera el umbral configurado. La integración se encuentra operativa y su
+funcionamiento fue verificado.
+
+Detalle de la implementación, arquitectura y tratamiento de credenciales: punto C.2.
+Evidencia: `capturas/05-webhook-discord.png`.
