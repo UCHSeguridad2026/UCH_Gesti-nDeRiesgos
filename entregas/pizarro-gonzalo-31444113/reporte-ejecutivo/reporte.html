@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reporte ejecutivo - Clinica UCH</title>
+<style>
+@page { size: A4; margin: 16mm 17mm 15mm; }
+* { box-sizing: border-box; }
+body { font-family: Arial, Helvetica, sans-serif; color: #18212b; font-size: 10.2pt; line-height: 1.32; margin: 0; }
+h1 { color: #123b5d; font-size: 25pt; margin: 0 0 3px; }
+h2 { color: #123b5d; font-size: 14pt; border-bottom: 2px solid #2b7a78; padding-bottom: 3px; margin: 17px 0 8px; }
+h3 { color: #2b5d7c; font-size: 10.5pt; margin: 10px 0 3px; }
+p { margin: 5px 0; }
+.header { border-bottom: 5px solid #2b7a78; padding-bottom: 9px; margin-bottom: 13px; }
+.subtitle { color: #53636f; font-size: 11pt; }
+.meta { color: #53636f; font-size: 9pt; margin-top: 8px; }
+.summary { background: #edf5f4; border-left: 5px solid #2b7a78; padding: 9px 12px; }
+.kpis { width: 100%; border-collapse: separate; border-spacing: 7px 0; margin: 9px 0 12px -7px; }
+.kpis td { background: #f2f5f7; padding: 8px; text-align: center; width: 25%; }
+.kpis strong { display: block; color: #123b5d; font-size: 17pt; }
+.kpis span { color: #53636f; font-size: 8.5pt; }
+table { width: 100%; border-collapse: collapse; margin: 7px 0 10px; }
+th { background: #123b5d; color: white; text-align: left; font-size: 8.6pt; padding: 5px; }
+td { border-bottom: 1px solid #d5dde2; padding: 5px; vertical-align: top; font-size: 8.5pt; }
+.risk-critical { color: #a52d2d; font-weight: bold; }
+.risk-high { color: #a15b16; font-weight: bold; }
+.plan { border: 1px solid #ccd8de; border-left: 4px solid #2b7a78; padding: 7px 9px; margin: 7px 0; }
+.plan strong { color: #123b5d; }
+ul { margin: 5px 0 5px 18px; padding: 0; }
+li { margin: 3px 0; }
+.footer { color: #6a7780; border-top: 1px solid #ccd8de; margin-top: 18px; padding-top: 5px; font-size: 8pt; }
+.page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Clínica UCH</h1>
+  <div class="subtitle">Reporte ejecutivo de gestión de riesgos de seguridad</div>
+  <div class="meta">Dirigido al Directorio | Evaluación inicial | 09 de septiembre de 2026</div>
+</div>
+
+<h2>Resumen ejecutivo</h2>
+<div class="summary">
+<p>La Clínica UCH cuenta con 120 empleados, atiende aproximadamente 800 pacientes por día y depende de historias clínicas electrónicas, sistemas de admisión, obras sociales y facturación. La evaluación inicial identifica dos riesgos críticos y cinco altos. Las prioridades son proteger la continuidad de atención, las historias clínicas y la capacidad de recuperación ante incidentes.</p>
+<p>Se recomienda aprobar tres planes inmediatos: fortalecer las copias de seguridad, desplegar autenticación multifactor y probar el procedimiento de contingencia de la historia clínica electrónica. Los importes y vencimientos son estimaciones académicas que deben validarse con la dirección y el área financiera.</p>
+</div>
+<table class="kpis"><tr>
+<td><strong>7</strong><span>riesgos identificados</span></td>
+<td><strong>2</strong><span>riesgos críticos</span></td>
+<td><strong>5</strong><span>riesgos altos</span></td>
+<td><strong>3</strong><span>planes prioritarios</span></td>
+</tr></table>
+
+<h2>Top 5 riesgos por nivel</h2>
+<table>
+<tr><th>Prioridad</th><th>Riesgo</th><th>Nivel</th><th>Consecuencia principal</th><th>Tratamiento</th></tr>
+<tr><td>1</td><td>R-01. Ransomware en sistemas clínicos</td><td class="risk-critical">Crítico 20</td><td>Indisponibilidad de HCE y admisión; posible pérdida de integridad.</td><td>Mitigar</td></tr>
+<tr><td>2</td><td>R-02. Phishing y robo de credenciales</td><td class="risk-critical">Crítico 20</td><td>Acceso no autorizado a historias clínicas y sistemas institucionales.</td><td>Mitigar</td></tr>
+<tr><td>3</td><td>R-03. Caída del sistema de HCE</td><td class="risk-high">Alto 15</td><td>Interrupción de consultas, admisión y continuidad asistencial.</td><td>Mitigar</td></tr>
+<tr><td>4</td><td>R-04. Acceso indebido a historias clínicas</td><td class="risk-high">Alto 15</td><td>Exposición de datos sanitarios, sanciones y daño reputacional.</td><td>Mitigar</td></tr>
+<tr><td>5</td><td>R-06. Pérdida o filtración de backups</td><td class="risk-high">Alto 15</td><td>Compromiso simultáneo de confidencialidad y recuperación.</td><td>Mitigar</td></tr>
+</table>
+<p><strong>Criterio:</strong> el nivel resulta de probabilidad por impacto en escala 1 a 5. R-05 obtuvo 12 y R-07 obtuvo 10; ambos permanecen en seguimiento alto.</p>
+
+<div class="page-break"></div>
+<h2>Estado de los planes de acción</h2>
+<div class="plan"><strong>PA-01 | Recuperación ante ransomware</strong><br>
+Diseñar el esquema 3-2-1, aislar una copia y ejecutar una restauración documentada. <strong>Responsable:</strong> Infraestructura. <strong>Vencimiento:</strong> 09/10/2026. <strong>Presupuesto:</strong> ARS 1.500.000. <strong>Estado:</strong> No iniciado.</div>
+<div class="plan"><strong>PA-02 | Autenticación multifactor y anti-phishing</strong><br>
+Habilitar MFA para cuentas privilegiadas y profesionales y ejecutar una campaña de phishing simulado. <strong>Responsable:</strong> Seguridad de la información. <strong>Vencimiento:</strong> 23/10/2026. <strong>Presupuesto:</strong> ARS 900.000. <strong>Estado:</strong> No iniciado.</div>
+<div class="plan"><strong>PA-03 | Continuidad de la HCE</strong><br>
+Documentar y probar la atención manual y la recuperación del sistema de historias clínicas electrónicas. <strong>Responsables:</strong> Sistemas y Dirección médica. <strong>Vencimiento:</strong> 06/11/2026. <strong>Presupuesto:</strong> ARS 600.000. <strong>Estado:</strong> No iniciado.</div>
+
+<h2>Recomendaciones prioritarias</h2>
+<ol>
+<li>Aprobar PA-01, PA-02 y PA-03, asignar responsables y revisar semanalmente sus avances.</li>
+<li>Separar las copias de seguridad de la red productiva, cifrarlas, controlar el acceso y demostrar una restauración exitosa.</li>
+<li>Aplicar MFA primero a administradores y profesionales con acceso a historias clínicas; complementar con capacitación y simulaciones.</li>
+<li>Definir objetivos de recuperación, un procedimiento manual y una prueba periódica para mantener la atención durante una caída.</li>
+<li>Recertificar permisos trimestralmente y revisar accesos a historias clínicas mediante registros y alertas.</li>
+<li>Validar con la dirección los presupuestos, fechas y controles declarados antes de convertir este registro inicial en el registro operativo.</li>
+</ol>
+
+<div class="footer">Clínica UCH | Documento académico de evaluación inicial | Fuente de detalle: configuracion/riesgos.md</div>
+</body>
+</html>
