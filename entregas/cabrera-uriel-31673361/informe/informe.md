@@ -37,7 +37,9 @@ HTTPS aceptando el certificado autofirmado. Es decir, la verificación no
 confirma únicamente que el contenedor esté en ejecución, sino que la aplicación
 responde efectivamente por el puerto esperado.
 
-> Evidencia: `capturas/a1-contenedor-running.png`
+![Contenedor simplerisk_app en estado Up (healthy), con los puertos 8080 y 8443 publicados](capturas/a1-contenedor-running.png)
+
+*Contenedor simplerisk_app en estado Up (healthy), con los puertos 8080 y 8443 publicados*
 
 **Observación sobre credenciales iniciales:**
 
@@ -48,8 +50,17 @@ riesgo asociado a credenciales por defecto conocidas, que constituye una de las
 debilidades más habituales en despliegues de aplicaciones web y una vía de
 acceso inicial frecuentemente explotada.
 
-> Evidencia: `capturas/a1-simplerisk-admin-creation.png`,
-> `capturas/a1-home-simplerisk.png`
+![Pantalla Default Admin Account Creation: la aplicación exige definir la cuenta administradora en el primer acceso](capturas/a1-simplerisk-admin-creation.png)
+
+*Pantalla Default Admin Account Creation: la aplicación exige definir la cuenta administradora en el primer acceso*
+
+![Pantalla de acceso en localhost:8443](capturas/a1-simplerisk-login.png)
+
+*Pantalla de acceso en `localhost:8443`. La advertencia del navegador corresponde al certificado autofirmado que genera la imagen*
+
+![Aplicación operativa tras el primer ingreso](capturas/a1-home-simplerisk.png)
+
+*Aplicación operativa tras el primer ingreso*
 
 ### A.2 Usuarios y permisos
 
@@ -89,11 +100,38 @@ sesión del administrador. El auditor visualiza el riesgo registrado y los panel
 de reporte, pero la interfaz no le expone ninguna acción de creación o
 modificación.
 
-> Evidencia: `capturas/a2-usuarios-creados.png`,
-> `capturas/a2-analista-riesgos-creacion.png`,
-> `capturas/a2-auditor-interno-creacion.png`,
-> `capturas/a2-permisos-analista-1.png` a `-3.png`,
-> `capturas/a2-permisos-auditor.png`, `capturas/a2-verificacion-auditor.png`
+![Permisos del auditor: seis en total, todos de acceso de lectura. Ninguna capacidad de creación, modificación o eliminación](capturas/a2-permisos-auditor.png)
+
+*Permisos del auditor: seis en total, todos de acceso de lectura. Ninguna capacidad de creación, modificación o eliminación*
+
+![Sesión iniciada como auditor_interno: la barra superior no ofrece el ícono de configuración presente en la sesión del administrador](capturas/a2-verificacion-auditor.png)
+
+*Sesión iniciada como auditor_interno: la barra superior no ofrece el ícono de configuración presente en la sesión del administrador*
+
+<details>
+<summary><b>Ver el resto de la evidencia de la Parte A.2</b> (5 capturas)</summary>
+
+![Los tres usuarios dados de alta](capturas/a2-usuarios-creados.png)
+
+*Los tres usuarios dados de alta*
+
+![Datos de identidad del analista de riesgos](capturas/a2-analista-riesgos-creacion.png)
+
+*Datos de identidad del analista de riesgos*
+
+![Datos de identidad del auditor interno](capturas/a2-auditor-interno-creacion.png)
+
+*Datos de identidad del auditor interno*
+
+![Permisos del analista, primera parte](capturas/a2-permisos-analista-1.png)
+
+![Permisos del analista, segunda parte](capturas/a2-permisos-analista-2.png)
+
+![Permisos del analista, tercera parte](capturas/a2-permisos-analista-3.png)
+
+*Los 13 permisos del analista de riesgos*
+
+</details>
 
 ### A.3 Primer riesgo de prueba
 
@@ -142,8 +180,13 @@ aplicación acepta el formulario, persiste el registro en la base de datos,
 calcula el score conforme a la fórmula configurada y lo refleja en el panel de
 reportes.
 
-> Evidencia: `capturas/a3-riesgo-prueba-formulario.png`,
-> `capturas/a3-riesgo-prueba-detalle.png`
+![Riesgo 1001 con la configuración por defecto: 3.6 / Low, resultado que no coincidía con el valor 9 (Medio) de la plantilla A03](capturas/a3-riesgo-prueba-detalle.png)
+
+*Riesgo 1001 con la configuración por defecto: 3.6 / Low, resultado que no coincidía con el valor 9 (Medio) de la plantilla A03*
+
+![Formulario de alta del riesgo de validación](capturas/a3-riesgo-prueba-formulario.png)
+
+*Formulario de alta del riesgo de validación*
 
 ---
 
@@ -224,8 +267,42 @@ la plantilla A03 consignados en `../configuracion/riesgos.md`, lo que confirma
 que la configuración de scoring descrita en el README, sección 3.4, produce el
 resultado buscado.
 
-> Evidencia: `capturas/b1-riesgos-cargados.png`,
-> `capturas/b1-riesgo-r01-detalle.png` a `b1-riesgo-r07-detalle.png`
+![Los siete riesgos registrados en SimpleRisk con sus niveles, ordenados por valor descendente](capturas/b1-riesgos-cargados.png)
+
+*Los siete riesgos registrados en SimpleRisk con sus niveles, ordenados por valor descendente*
+
+![Ficha completa de R01: valoración, justificación en Additional Notes y External Reference ID](capturas/b1-riesgo-r01-detalle.png)
+
+*Ficha completa de R01: valoración, justificación en Additional Notes y External Reference ID*
+
+<details>
+<summary><b>Ver las fichas de los seis riesgos restantes</b></summary>
+
+![Ficha de R02](capturas/b1-riesgo-r02-detalle.png)
+
+*R02 — Acceso de personal a historias clínicas ajenas a su función*
+
+![Ficha de R03](capturas/b1-riesgo-r03-detalle.png)
+
+*R03 — Compromiso de credenciales por phishing al área administrativa*
+
+![Ficha de R04](capturas/b1-riesgo-r04-detalle.png)
+
+*R04 — Fuga de datos de obras sociales por envío inseguro de planillas*
+
+![Ficha de R05](capturas/b1-riesgo-r05-detalle.png)
+
+*R05 — Imposibilidad de restaurar los backups ante un incidente*
+
+![Ficha de R06](capturas/b1-riesgo-r06-detalle.png)
+
+*R06 — Interrupción del servicio por falla eléctrica o de climatización*
+
+![Ficha de R07](capturas/b1-riesgo-r07-detalle.png)
+
+*R07 — Incumplimiento de la Ley 25.326 en el tratamiento de datos sensibles*
+
+</details>
 
 **Distribución resultante.** Cuatro riesgos de nivel Crítico, dos de nivel Alto y
 uno Medio. La concentración en los niveles superiores es coherente con el punto
@@ -307,7 +384,13 @@ contemplada en el enunciado y en la bibliografía de la materia. La herramienta
 admite Accept, Mitigate, Transfer, Research y Watch, de modo que no permite
 documentar la decisión de discontinuar la actividad que origina un riesgo.
 
-> Evidencia: `capturas/b3-mitigacion-r01-1.png`, `capturas/b3-mitigacion-r01-2.png`
+![Mitigación de R01: el estado pasó a Mitigation Planned y el riesgo residual se mantiene en 20, igual al inherente](capturas/b3-mitigacion-r01-1.png)
+
+*Mitigación de R01: el estado pasó a Mitigation Planned y el riesgo residual se mantiene en 20, igual al inherente*
+
+![Requisitos y recomendaciones de seguridad del plan PA01](capturas/b3-mitigacion-r01-2.png)
+
+*Requisitos y recomendaciones de seguridad del plan PA01*
 
 ### Reporte ejecutivo
 
@@ -333,33 +416,19 @@ Crítico, por ser los de mayor reducción de riesgo por unidad de inversión.
 
 ### C.1 Comparación metodológica
 
-*(Pendiente: comparación con la metodología alternativa elegida —
-FAIR, OCTAVE, NIST SP 800-30 o ISO 27005—, ventajas, desventajas y contexto de
-aplicación de cada una.)*
+Se compara el enfoque de SimpleRisk —matriz Probabilidad × Impacto— con **FAIR**
+(*Factor Analysis of Information Risk*), estandarizado por The Open Group en el
+Risk Taxonomy Standard (O-RT) versión 3.0 y el Risk Analysis Standard (O-RA)
+versión 2.0. Se eligió FAIR porque es la alternativa que aborda directamente la
+limitación detectada durante la configuración del entorno, descrita a
+continuación.
 
-**Hallazgo: la escala de presentación no es neutral.**
+#### El hallazgo que motivó la comparación
 
-Este hallazgo no fue buscado. Surgió al advertir que el resultado del riesgo de
-validación (Parte A.3) no coincidía con el que arrojaba la plantilla A03 para la
-misma valoración, y de rastrear a qué se debía esa diferencia.
-
-**Primera observación: la normalización.** La pantalla *Configure → Risk Formula*
-reveló que SimpleRisk aplica por defecto la opción *Normalize scoring on a 0-10
-scale*. La fórmula sigue siendo Probabilidad × Impacto, pero el producto se
-reescala mediante (P × I) / 25 × 10. Por eso un valor de 9 se presentaba como
-3.6. Ambos números expresan la misma valoración en escalas distintas.
-
-**Segunda observación: los umbrales quedan desalineados.** Al desactivar la
-normalización, el valor pasó correctamente a 9, pero la clasificación se volvió
-*High* en lugar de *Medium*. La causa es que los umbrales que trae la instalación
-(10.1 / 7.0 / 4.0 / 0.0) están dimensionados para la escala 0–10. Aplicados sobre
-valores de 1 a 25 desplazan toda la clasificación hacia arriba: cualquier riesgo
-con producto igual o mayor a 10.1 queda como *Very High*, lo que abarca más de la
-mitad de la matriz.
-
-Es decir que la configuración por defecto subvaluaba, y desactivar la
-normalización sin ajustar los umbrales sobrevaluaba. Un mismo análisis comunicaba
-tres severidades distintas:
+Durante la Parte A se advirtió que el resultado del riesgo de validación no
+coincidía con el que arrojaba la plantilla A03 para la misma valoración. El
+rastreo de esa diferencia reveló que un mismo análisis podía comunicar tres
+severidades distintas según cómo estuviera configurada la herramienta:
 
 | Configuración de SimpleRisk | Valor mostrado | Nivel comunicado | Nivel según A03 |
 |---|:-:|---|---|
@@ -367,28 +436,186 @@ tres severidades distintas:
 | Normalización desactivada, umbrales por defecto | 9 | High | Medio |
 | Normalización desactivada, umbrales alineados | 9 | Medium | Medio |
 
-**Configuración adoptada.** Se desactivó la normalización y se redefinieron los
-cuatro umbrales según los cortes de la plantilla A03 (Very High ≥ 16, High ≥ 10,
-Medium ≥ 5, Low ≥ 0). Recién con ambos ajustes la herramienta y el instrumento
-formal de la cátedra comunican el mismo nivel para una misma valoración.
+La causa de la segunda fila es que los umbrales de la instalación
+(10.1 / 7.0 / 4.0 / 0.0) están dimensionados para una escala de 0 a 10; aplicados
+sobre valores de 1 a 25 desplazan la clasificación hacia arriba. La configuración
+por defecto subvaluaba y su corrección parcial sobrevaluaba.
 
-**Implicancia para la comparación metodológica.** El episodio ilustra una
-limitación del enfoque de matriz probabilidad × impacto que suele pasarse por
-alto: la aparente objetividad del número depende de decisiones de configuración
-—escala de presentación y cortes de clasificación— que rara vez se documentan y
-que quien lee el reporte no puede inferir del resultado.
+El episodio no es una anécdota de configuración. Expone que la etiqueta de nivel
+—que es lo que determina la asignación de presupuesto y la urgencia del
+tratamiento cuando el registro llega a Dirección— depende de decisiones que rara
+vez se documentan y que el lector del reporte no puede inferir del resultado.
 
-En un registro de riesgos elevado a dirección, la etiqueta de nivel es lo que
-determina la asignación de presupuesto y la urgencia del tratamiento. Una
-instalación no revisada puede llevar a omitir riesgos que merecían plan de acción
-o, en el escenario inverso, a saturar el plan de falsos críticos. La metodología
-alternativa que se analiza a continuación aborda este problema de otro modo.
+![Matriz con la normalización a 0–10 activada, tal como viene la instalación: la celda 3×3 muestra 3.6](capturas/c1-matriz-normalizada-0-10.png)
 
-> Evidencia: `capturas/c1-matriz-normalizada-0-10.png`,
-> `capturas/c1-matriz-sin-normalizar-1-25.png`,
-> `capturas/c1-score-normalizado-3-6.png`,
-> `capturas/c1-score-sin-normalizar-9.png`,
-> `capturas/c1-umbrales-configurados.png`
+*Matriz con la normalización a 0–10 activada, tal como viene la instalación: la celda 3×3 muestra 3.6*
+
+![La misma matriz con la normalización desactivada: la celda 3×3 muestra 9, pero los colores revelan que los umbrales quedaron desalineados](capturas/c1-matriz-sin-normalizar-1-25.png)
+
+*La misma matriz con la normalización desactivada: la celda 3×3 muestra 9, pero los colores revelan que los umbrales quedaron desalineados*
+
+![Umbrales finales, alineados a los cortes de la plantilla A03](capturas/c1-umbrales-configurados.png)
+
+*Umbrales finales, alineados a los cortes de la plantilla A03*
+
+<details>
+<summary><b>Ver el efecto sobre el riesgo de validación</b></summary>
+
+![Riesgo 1001 con normalización activada](capturas/a3-riesgo-prueba-detalle.png)
+
+*Con normalización: 3.6 / Low — es la misma captura de la Parte A.3, reproducida aquí para la comparación*
+
+![Riesgo 1001 sin normalización y con umbrales por defecto](capturas/c1-score-sin-normalizar-9.png)
+
+*Sin normalización y con umbrales sin ajustar: 9 / High*
+
+</details>
+
+#### En qué consiste FAIR
+
+FAIR define el riesgo como la frecuencia probable y la magnitud probable de
+pérdida futura que un stakeholder primario soportará dentro de un período
+determinado. La diferencia inicial con el enfoque de la matriz es que FAIR no
+califica riesgos: los **mide**, y los expresa en unidades monetarias anualizadas.
+
+Para lograrlo descompone el riesgo en dos ramas:
+
+- **Frecuencia de eventos de pérdida** (*Loss Event Frequency*), que a su vez se
+  descompone en la frecuencia de eventos de amenaza y la vulnerabilidad,
+  entendida como la fracción de eventos de amenaza que efectivamente derivan en
+  pérdida.
+- **Magnitud de pérdida** (*Loss Magnitude*), compuesta por la pérdida primaria
+  —el costo económico directo del evento— y la pérdida secundaria, que incorpora
+  la probabilidad condicional de que la pérdida primaria genere consecuencias
+  adicionales y su magnitud. Las estimaciones se agregan por tipo de pérdida:
+  productividad, respuesta al incidente, reemplazo de activos, multas y
+  sentencias, ventaja competitiva y reputación.
+
+Cada factor se estima en rangos —mínimo, más probable, máximo— con un nivel de
+confianza asociado, y el conjunto se procesa mediante simulación para obtener una
+distribución de pérdida esperada. El estándar es explícito en un punto que
+conviene destacar: **las mediciones de riesgo no son predicciones**, sino
+estimaciones que pueden resultar acertadas o no. FAIR no promete certeza; promete
+una estructura para razonar sobre la incertidumbre.
+
+Un requisito formal del método merece mención: FAIR exige que todo escenario de
+pérdida esté correctamente delimitado indicando amenaza, activo y efecto. Varios
+de los riesgos de este registro cumplen ese estándar, pero R07 —incumplimiento
+normativo— no encajaría sin reformularse, por tratarse de un estado permanente y
+no de un evento.
+
+#### Contraste entre ambos enfoques
+
+**1. Naturaleza de la escala.** La matriz produce números ordinales disfrazados
+de cantidades. En este registro R01 obtuvo 20 y R05 obtuvo 15, pero esa
+diferencia no significa que R01 sea un tercio peor: 4 × 5 y 3 × 5 son
+multiplicaciones entre etiquetas ordenadas, no entre magnitudes. La operación es
+aritméticamente inválida aunque el resultado se vea como un número. FAIR opera
+sobre cantidades reales, donde la diferencia entre dos resultados sí es
+interpretable.
+
+**2. Decidibilidad económica.** Esta es la limitación más severa en términos
+prácticos. El plan PA01 requiere USD 12.000 y atiende un riesgo valorado en 20.
+**La matriz no permite establecer si esa inversión se justifica**, porque un
+riesgo de "20" y un costo de doce mil dólares son magnitudes incomparables: no
+comparten unidad. Bajo FAIR la pregunta se vuelve respondible, al contrastar la
+pérdida anualizada esperada del escenario contra el costo del control.
+
+Lo mismo ocurre en sentido inverso con PA06: USD 8.000 sobre el riesgo de menor
+nivel del registro. La matriz no ofrece herramientas para discutir si esa
+asignación es razonable; sólo permite señalar que el riesgo es Medio.
+
+**3. Dependencia de la configuración.** Es el hallazgo descrito arriba. La
+aparente objetividad del número producido por la matriz descansa sobre
+convenciones —escala de presentación, cortes de clasificación— que se fijan una
+vez y luego se vuelven invisibles. FAIR no elimina la subjetividad, pero la
+desplaza a un lugar donde queda expuesta: las estimaciones de frecuencia y
+magnitud son explícitas, se declaran en rangos y llevan un nivel de confianza
+asociado. La incertidumbre se documenta en lugar de disolverse en una etiqueta.
+
+**4. Granularidad del análisis.** La matriz trata cada riesgo como una unidad con
+dos atributos. FAIR lo descompone en factores estimables por separado, lo que
+permite identificar dónde un control actúa efectivamente. En R01, por ejemplo,
+la segmentación de red reduce la vulnerabilidad mientras que el respaldo fuera de
+línea reduce la magnitud de pérdida: son dos efectos distintos que la matriz
+agrupa bajo una única reducción de nivel.
+
+**5. Limitaciones adicionales observadas en la herramienta.** Durante la carga de
+las mitigaciones se registraron tres restricciones que no derivan de la
+metodología sino de su implementación en SimpleRisk, y que refuerzan el
+diagnóstico general:
+
+- La mitigación es un atributo del riesgo y no una entidad independiente, por lo
+  que un plan que atiende dos riesgos debe duplicarse. La herramienta no puede
+  representar que dos riesgos comparten un control.
+- El campo de costo de mitigación ofrece rangos de cien mil dólares. Los seis
+  planes de este trabajo, entre USD 1.500 y USD 12.000, quedan indistinguibles
+  entre sí.
+- El campo de estrategia de tratamiento no incluye **Evitar**, contemplada en el
+  enunciado y en la bibliografía de la materia.
+
+#### Ventajas del enfoque de SimpleRisk
+
+El contraste anterior no convierte a la matriz en un instrumento inadecuado.
+Sus ventajas son reales y explican su predominio:
+
+**Costo de aplicación mínimo.** Los siete riesgos de este trabajo se valoraron
+con dos decisiones por riesgo. Un análisis FAIR equivalente habría exigido
+estimar frecuencia de contacto, probabilidad de acción, capacidad de la amenaza,
+resistencia del control y seis formas de pérdida por escenario, con datos que la
+clínica no posee.
+
+**Comunicabilidad.** El registro debe ser comprendido por Dirección Médica, por
+el Jefe de Administración y por el Jefe de Mantenimiento, ninguno de ellos
+especialista en riesgo. "Crítico" comunica de inmediato; una distribución de
+pérdida anualizada requiere alfabetización estadística que no puede presuponerse.
+
+**No exige datos históricos.** FAIR necesita insumos —frecuencias observadas,
+costos de incidentes previos— que una organización sin función de seguridad
+constituida no ha recolectado. La matriz opera con juicio experto estructurado,
+que es lo único disponible en el punto de partida de esta clínica.
+
+**Trazabilidad inmediata.** La matriz permite reconstruir cómo se llegó a un
+resultado con dos valores. Un análisis FAIR requiere documentar decenas de
+estimaciones para que un tercero pueda auditarlo.
+
+#### Contexto de aplicación de cada enfoque
+
+| Criterio | Favorece a la matriz P × I | Favorece a FAIR |
+|---|---|---|
+| Madurez de la función de seguridad | Inicial o inexistente | Consolidada |
+| Disponibilidad de datos históricos | Nula o escasa | Suficiente |
+| Objetivo del análisis | Identificar y priorizar | Justificar inversión |
+| Audiencia | No especializada | Dirección financiera, comité de riesgos |
+| Cantidad de riesgos a evaluar | Muchos, para barrido inicial | Pocos, seleccionados |
+| Magnitud de la inversión en juego | Baja | Alta |
+| Requisito regulatorio o de aseguradora | No aplica | Frecuentemente exigido |
+
+#### Conclusión aplicada al caso
+
+Para el estado actual de la clínica, el enfoque de SimpleRisk es el adecuado. La
+organización no tenía registro alguno de riesgos hasta esta intervención; lo que
+necesita en este ciclo es identificar, dimensionar y priorizar con rapidez, y
+producir un documento que el Directorio pueda leer y sobre el cual pueda decidir.
+FAIR, aplicado íntegramente en este punto, habría consumido el tiempo disponible
+en estimar parámetros sin producir el registro que la auditoría externa reclamaba.
+
+La conclusión no es, sin embargo, que una metodología sea superior a la otra,
+sino que corresponden a momentos distintos del ciclo de madurez. Se propone en
+consecuencia un **uso selectivo de FAIR en el segundo ciclo de gestión**,
+restringido a los escenarios donde la decisión de inversión lo justifique:
+
+- **R01**, cuyo plan asociado requiere USD 12.000 y donde el análisis cuantitativo
+  permitiría además contrastar el costo del control contra la alternativa de
+  transferir parte del riesgo mediante un seguro de ciberseguridad.
+- **R06**, cuyo plan demanda USD 8.000 sobre el riesgo de menor nivel del
+  registro, y donde un análisis cuantitativo permitiría verificar si esa
+  asignación es proporcionada o si convendría postergarla en favor de otros
+  controles.
+
+En ambos casos la pregunta que la matriz no puede responder —si el control vale
+lo que cuesta— es precisamente la que el Directorio formulará al momento de
+aprobar el presupuesto.
 
 ### C.2 Integración con herramienta externa
 *(Pendiente.)*
@@ -397,4 +624,12 @@ alternativa que se analiza a continuación aborda este problema de otro modo.
 
 ## Referencias
 
-*(Pendiente.)*
+- Ley 25.326 de Protección de los Datos Personales (Argentina).
+- The Open Group (2020). *Risk Taxonomy (O-RT) Standard, Version 3.0*.
+- The Open Group (2020). *Risk Analysis (O-RA) Standard, Version 2.0*.
+- FAIR Institute. *What is FAIR*. https://www.fairinstitute.org/what-is-fair
+- Verizon Business (2026). *2026 Data Breach Investigations Report — Healthcare
+  snapshot*.
+- ISO/IEC 27005: Information security risk management.
+- NIST (2012). *SP 800-30 Rev. 1: Guide for Conducting Risk Assessments*.
+- SimpleRisk. *Documentación oficial*. https://www.simplerisk.com/documentation

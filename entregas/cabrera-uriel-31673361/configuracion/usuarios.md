@@ -114,36 +114,36 @@ implica escalamiento a dirección.
 Capturas en `../informe/capturas/`:
 
 **Parte A.1 — Instalación**
-- `a1-contenedor-running.png` — contenedor `simplerisk_app` en estado *Up (healthy)*
-- `a1-simplerisk-admin-creation.png` — creación de la cuenta administradora inicial
-- `a1-simplerisk-login.png` — pantalla de acceso en `localhost:8443`
-- `a1-home-simplerisk.png` — aplicación operativa tras el primer ingreso
+- [`a1-contenedor-running.png`](../informe/capturas/a1-contenedor-running.png) — contenedor `simplerisk_app` en estado *Up (healthy)*
+- [`a1-simplerisk-admin-creation.png`](../informe/capturas/a1-simplerisk-admin-creation.png) — creación de la cuenta administradora inicial
+- [`a1-simplerisk-login.png`](../informe/capturas/a1-simplerisk-login.png) — pantalla de acceso en `localhost:8443`
+- [`a1-home-simplerisk.png`](../informe/capturas/a1-home-simplerisk.png) — aplicación operativa tras el primer ingreso
 
 **Parte A.2 — Usuarios y permisos**
-- `a2-usuarios-creados.png` — los tres usuarios dados de alta
-- `a2-analista-riesgos-creacion.png` — datos de identidad del analista
-- `a2-auditor-interno-creacion.png` — datos de identidad del auditor
-- `a2-permisos-analista-1.png` a `-3.png` — los 13 permisos del analista
-- `a2-permisos-auditor.png` — los 6 permisos del auditor
-- `a2-verificacion-auditor.png` — sesión del auditor: sin acceso a configuración
+- [`a2-usuarios-creados.png`](../informe/capturas/a2-usuarios-creados.png) — los tres usuarios dados de alta
+- [`a2-analista-riesgos-creacion.png`](../informe/capturas/a2-analista-riesgos-creacion.png) — datos de identidad del analista
+- [`a2-auditor-interno-creacion.png`](../informe/capturas/a2-auditor-interno-creacion.png) — datos de identidad del auditor
+- [`a2-permisos-analista-1.png`](../informe/capturas/a2-permisos-analista-1.png) a `-3.png` — los 13 permisos del analista
+- [`a2-permisos-auditor.png`](../informe/capturas/a2-permisos-auditor.png) — los 6 permisos del auditor
+- [`a2-verificacion-auditor.png`](../informe/capturas/a2-verificacion-auditor.png) — sesión del auditor: sin acceso a configuración
 
 **Parte A.3 — Riesgo de validación**
-- `a3-riesgo-prueba-formulario.png` — formulario de alta completado
-- `a3-riesgo-prueba-detalle.png` — riesgo 1001 con la configuración por defecto
+- [`a3-riesgo-prueba-formulario.png`](../informe/capturas/a3-riesgo-prueba-formulario.png) — formulario de alta completado
+- [`a3-riesgo-prueba-detalle.png`](../informe/capturas/a3-riesgo-prueba-detalle.png) — riesgo 1001 con la configuración por defecto
 
 **Parte B.1 — Registro de riesgos**
-- `b1-riesgos-cargados.png` — los siete riesgos con sus niveles en SimpleRisk
-- `b1-riesgo-r01-detalle.png` a `b1-riesgo-r07-detalle.png` — ficha completa de
+- [`b1-riesgos-cargados.png`](../informe/capturas/b1-riesgos-cargados.png) — los siete riesgos con sus niveles en SimpleRisk
+- [`b1-riesgo-r01-detalle.png`](../informe/capturas/b1-riesgo-r01-detalle.png) a [`b1-riesgo-r07-detalle.png`](../informe/capturas/b1-riesgo-r07-detalle.png) — ficha completa de
   cada riesgo, con valoración, justificación y *External Reference ID*
 
 **Parte B.3 — Planes de acción**
-- `b3-mitigacion-r01-1.png` — mitigación de R01: estado *Mitigation Planned*,
+- [`b3-mitigacion-r01-1.png`](../informe/capturas/b3-mitigacion-r01-1.png) — mitigación de R01: estado *Mitigation Planned*,
   estrategia, esfuerzo, costo y solución actual
-- `b3-mitigacion-r01-2.png` — requisitos y recomendaciones de seguridad del plan
+- [`b3-mitigacion-r01-2.png`](../informe/capturas/b3-mitigacion-r01-2.png) — requisitos y recomendaciones de seguridad del plan
 
 **Parte C.1 — Análisis metodológico**
-- `c1-matriz-normalizada-0-10.png` — matriz con normalización activada
-- `c1-matriz-sin-normalizar-1-25.png` — matriz con normalización desactivada
-- `c1-score-normalizado-3-6.png` — el riesgo 1001 mostrando 3.6 / Low
-- `c1-score-sin-normalizar-9.png` — el riesgo 1001 mostrando 9 / High
-- `c1-umbrales-configurados.png` — umbrales finales alineados a la plantilla A03
+- [`c1-matriz-normalizada-0-10.png`](../informe/capturas/c1-matriz-normalizada-0-10.png) — matriz con normalización activada
+- [`c1-matriz-sin-normalizar-1-25.png`](../informe/capturas/c1-matriz-sin-normalizar-1-25.png) — matriz con normalización desactivada
+- [`a3-riesgo-prueba-detalle.png`](../informe/capturas/a3-riesgo-prueba-detalle.png) — el riesgo 1001 mostrando 3.6 / Low (misma captura que la Parte A.3)
+- [`c1-score-sin-normalizar-9.png`](../informe/capturas/c1-score-sin-normalizar-9.png) — el riesgo 1001 mostrando 9 / High
+- [`c1-umbrales-configurados.png`](../informe/capturas/c1-umbrales-configurados.png) — umbrales finales alineados a la plantilla A03
