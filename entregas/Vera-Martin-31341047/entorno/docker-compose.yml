@@ -1,0 +1,27 @@
+version: '3'
+services:
+  simplerisk:
+    image: simplerisk/simplerisk:latest
+    ports:
+      - "8888:80"
+      - "8443:443"
+    environment:
+      - DB_HOST=simplerisk-db
+      - DB_USER=simplerisk
+      - DB_PASSWORD=Passw0rd!Demo
+      - DB_NAME=simplerisk
+    depends_on:
+      - simplerisk-db
+
+  simplerisk-db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=RootPassw0rd!Demo
+      - MYSQL_DATABASE=simplerisk
+      - MYSQL_USER=simplerisk
+      - MYSQL_PASSWORD=Passw0rd!Demo
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
