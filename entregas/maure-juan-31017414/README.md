@@ -34,3 +34,22 @@ Con los contenedores en estado activo, abra un navegador web e ingrese a la sigu
 
 https://localhost:8443
 
+6. Decisiones de Diseño
+
+Para el desarrollo de este trabajo práctico, se tomaron las siguientes decisiones metodológicas y supuestos sobre el escenario:
+* -Metodología de Riesgos: Se adoptó el enfoque cualitativo nativo de SimpleRisk (matriz clásica de Probabilidad x Impacto) por su agilidad y adecuación a la etapa inicial de madurez en seguridad de la clínica, priorizando la rápida visibilidad para el directorio frente a enfoques cuantitativos más complejos.
+* -Supuestos del Escenario: Se asumió que, dado el volumen de 120 empleados y 800 pacientes diarios, la clínica no cuenta con personal de seguridad dedicado 24/7, por lo que se priorizaron controles automatizados (gestión de parches, EDR y backups en la nube).
+* -Verificación: Para confirmar la lectura completa de las consignas, se incluye la palabra clave **girasol**.
+
+7. Checklist de Auto-Revisión
+
+A continuación, se presenta la validación de los requisitos de entrega:
+
+- [x] No hay credenciales en el repositorio
+- [x] El .gitignore está correctamente configurado
+- [x] Las capturas no muestran datos sensibles
+- [x] Los archivos .sql o dumps no están subidos
+- [x] El informe está en formato legible
+- [x] El reporte ejecutivo está completo
+- [x] Los mensajes de commit son descriptivos
+- [x] Mi branch está actualizada y funciona
