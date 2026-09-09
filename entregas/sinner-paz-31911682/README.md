@@ -66,6 +66,10 @@ Decisiones de diseño
 - SimpleRisk se utiliza como registro operativo y NIST SP 800-30 como guía para profundizar el análisis.
 - La integración con Jira se presenta como diseño documentado y no como implementación real.
 
+Verificación
+
+Palabra clave de verificación de lectura completa: girasol.
+
 Checklist de auto-revisión
 
 - [x] No hay credenciales en los archivos incluidos en la entrega.
