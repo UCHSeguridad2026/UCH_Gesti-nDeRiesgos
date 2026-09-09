@@ -1,0 +1,27 @@
+# docker-compose.yml — Entorno reproducible de SimpleRisk
+# Uso: docker compose up -d   (luego abrir https://localhost/ )
+# Login inicial por defecto: admin / admin  (cambiar en el primer ingreso)
+#
+# La imagen oficial "simplerisk/simplerisk" es autocontenida: incluye el servidor
+# web (Apache + PHP) y la base de datos MySQL, lo que simplifica la reproducción.
+
+services:
+  simplerisk:
+    image: simplerisk/simplerisk:latest
+    container_name: simplerisk
+    restart: unless-stopped
+    ports:
+      - "80:80"     # HTTP  -> http://localhost/
+      - "443:443"   # HTTPS -> https://localhost/
+    volumes:
+      - simplerisk_db:/var/lib/mysql      # persistencia de la base de datos
+      - simplerisk_files:/var/www/simplerisk   # persistencia de archivos de la app
+    healthcheck:
+      test: ["CMD", "curl", "-kf", "https://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  simplerisk_db:
+  simplerisk_files:
