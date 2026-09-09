@@ -291,7 +291,7 @@ correlato empírico además de normativo.
 **Controles existentes.** Consentimiento informado de pacientes, con cobertura
 parcial y sin verificación sistemática.
 
-**Plan de tratamiento: Mitigar.**
+**Plan de tratamiento: Mitigar.** Ver plan de acción PA05.
 
 ---
 
@@ -316,15 +316,22 @@ permanente de información, siempre que el apagado no corrompa la base de datos.
 
 **Controles existentes.** UPS que protege el servidor principal.
 
-**Plan de tratamiento: Mitigar.**
+**Plan de tratamiento: Mitigar.** Ver plan de acción PA06.
 
 ---
 
 ## Planes de acción
 
-Se definen cuatro planes de acción, uno por cada riesgo de nivel Crítico. PA01
-atiende simultáneamente R01 y R05, dado que ambos comparten la copia de respaldo
-verificada como control determinante.
+Se definen seis planes de acción, de modo que los siete riesgos del registro
+cuenten con tratamiento definido. PA01 atiende simultáneamente R01 y R05, dado
+que ambos comparten la copia de respaldo verificada como control determinante.
+
+Los planes se agrupan en dos ciclos. El primero (PA01 a PA04) atiende los cuatro
+riesgos de nivel Crítico con plazos de entre 45 y 120 días. El segundo (PA05 y
+PA06) atiende los riesgos de niveles Alto y Medio restantes, con plazos mayores
+justificados en que ninguno de los dos presenta materialización súbita: R07 es
+una exposición permanente de naturaleza administrativa y R06 admite una respuesta
+operativa transitoria.
 
 | ID | Riesgo | Título | Vencimiento | Responsable | Presupuesto | Estado |
 |---|---|---|---|---|---|---|
@@ -332,6 +339,8 @@ verificada como control determinante.
 | PA02 | R02 | Trazabilidad y perfilado de accesos a la historia clínica | 60 días | Responsable de Sistemas | USD 3.500 | No iniciado |
 | PA03 | R03 | Segundo factor de autenticación y concientización del personal | 120 días | Jefe de Administración | USD 5.000 | No iniciado |
 | PA04 | R04 | Procedimiento seguro de intercambio con obras sociales | 45 días | Jefe de Administración | USD 1.500 | No iniciado |
+| PA05 | R07 | Regularización del tratamiento de datos sensibles | 180 días | Dirección General | USD 2.500 | No iniciado |
+| PA06 | R06 | Redundancia eléctrica y de climatización | 150 días | Jefe de Mantenimiento | USD 8.000 | No iniciado |
 
 ### PA01 — Esquema de respaldo verificado y contención de propagación
 
@@ -404,6 +413,45 @@ Esto lo convierte en la acción de mayor retorno inmediato del plan de tratamien
 **Vencimiento:** 45 días. **Responsable:** Jefe de Administración.
 **Presupuesto estimado:** USD 1.500. **Estado inicial:** No iniciado.
 
+### PA05 — Regularización del tratamiento de datos sensibles
+
+**Riesgo que atiende:** R07 (Alto, 12).
+
+**Descripción.** Registro de las bases de datos ante la autoridad de aplicación;
+redacción y publicación de una política de privacidad; verificación de la
+cobertura efectiva del consentimiento informado; incorporación de cláusulas de
+confidencialidad y tratamiento de datos a los contratos con el proveedor del HCE
+y con todo tercero que acceda a datos de pacientes; designación de un responsable
+del tratamiento dentro de la organización.
+
+**Justificación del plazo.** Requiere intervención de asesoría legal y
+renegociación contractual con terceros, procesos cuya duración no depende
+exclusivamente de la clínica. El riesgo es de exposición permanente pero no de
+materialización súbita, lo que admite un plazo mayor que los planes del primer
+ciclo.
+
+**Vencimiento:** 180 días. **Responsable:** Dirección General, con asesoría legal.
+**Presupuesto estimado:** USD 2.500. **Estado inicial:** No iniciado.
+
+### PA06 — Redundancia eléctrica y de climatización
+
+**Riesgo que atiende:** R06 (Medio, 9).
+
+**Descripción.** Incorporación de un generador de respaldo dimensionado para la
+sala de servidores y los puestos críticos de atención; instalación de un segundo
+equipo de climatización en configuración redundante; monitoreo de temperatura con
+alerta automática; definición y documentación del procedimiento de registro
+manual transitorio.
+
+**Justificación de la prioridad.** Es el riesgo de menor nivel del registro y el
+único cuyo impacto admite una respuesta operativa transitoria mediante
+procedimientos manuales. El componente documental —el procedimiento de registro
+manual— puede implementarse de inmediato y a costo nulo, mientras que la
+inversión en infraestructura se planifica para el segundo ciclo.
+
+**Vencimiento:** 150 días. **Responsable:** Jefe de Mantenimiento.
+**Presupuesto estimado:** USD 8.000. **Estado inicial:** No iniciado.
+
 ---
 
 ## Correspondencia con la carga en SimpleRisk
@@ -433,6 +481,54 @@ propia aplicación y no depende de esta tabla.
 En todos los casos: **Site/Location** All Sites, **Team** Information Security,
 **Risk Scoring Method** Classic, **Owner** `analista_riesgos`,
 **Owner's Manager** `admin_sistemas_clinica`.
+
+### Carga de las mitigaciones
+
+SimpleRisk no admite asociar una misma mitigación a varios riesgos: la mitigación
+es un atributo del riesgo, no una entidad independiente. Por esa razón el plan
+PA01 se registra por duplicado, en los riesgos 1002 (R01) y 1006 (R05).
+
+| Riesgo | ID SimpleRisk | Plan | Vencimiento cargado |
+|---|:-:|---|---|
+| R01 | 1002 | PA01 | 07/12/2026 |
+| R02 | 1003 | PA02 | 07/11/2026 |
+| R03 | 1004 | PA03 | 06/01/2027 |
+| R04 | 1005 | PA04 | 23/10/2026 |
+| R05 | 1006 | PA01 *(duplicado)* | 07/12/2026 |
+| R06 | 1007 | PA06 | 05/02/2027 |
+| R07 | 1008 | PA05 | 07/03/2027 |
+
+El campo *Mitigation Percent* se carga en 0 en los siete casos, de modo que el
+riesgo residual coincide con el inherente: ningún plan fue ejecutado aún. El
+campo *Planning Strategy* se completa con **Mitigate**, coherente con el
+tratamiento definido para los siete riesgos.
+
+**Limitación registrada en la carga.** El campo *Mitigation Cost* de SimpleRisk
+ofrece rangos de cien mil dólares, comenzando en "$0 to $100,000". Los seis planes
+del registro se ubican entre USD 1.500 y USD 12.000, por lo que todos quedan
+consignados en el primer tramo y el campo no discrimina entre ellos, pese a que
+el plan más costoso multiplica por ocho al más económico. La escala está
+dimensionada para organizaciones de porte considerablemente mayor al del
+escenario. El presupuesto específico de cada plan se consigna en el texto del
+campo *Security Recommendations*, de modo que la información no se pierde. Esta
+observación se retoma en la Parte C del informe.
+
+**Equivalencia de estrategias de tratamiento.** Las opciones que ofrece
+*Planning Strategy* no coinciden exactamente con las que plantea el enunciado:
+
+| Enunciado | SimpleRisk | Observación |
+|---|---|---|
+| Mitigar | Mitigate | Correspondencia directa |
+| Transferir | Transfer | Correspondencia directa |
+| Aceptar | Accept | Correspondencia directa |
+| Evitar | *(no disponible)* | SimpleRisk no ofrece esta estrategia |
+| — | Research | Estado intermedio: riesgo bajo análisis |
+| — | Watch | Estado intermedio: riesgo en observación sin acción |
+
+La ausencia de *Evitar* no afectó esta entrega, dado que los siete riesgos se
+tratan por mitigación, pero constituye una restricción del modelo de la
+herramienta: no permite registrar la decisión de discontinuar la actividad que
+genera el riesgo, que es una respuesta legítima y a veces la única razonable.
 
 ## Referencias
 

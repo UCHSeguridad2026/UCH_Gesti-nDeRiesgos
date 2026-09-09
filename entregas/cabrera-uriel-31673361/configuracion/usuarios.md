@@ -136,6 +136,11 @@ Capturas en `../informe/capturas/`:
 - `b1-riesgo-r01-detalle.png` a `b1-riesgo-r07-detalle.png` — ficha completa de
   cada riesgo, con valoración, justificación y *External Reference ID*
 
+**Parte B.3 — Planes de acción**
+- `b3-mitigacion-r01-1.png` — mitigación de R01: estado *Mitigation Planned*,
+  estrategia, esfuerzo, costo y solución actual
+- `b3-mitigacion-r01-2.png` — requisitos y recomendaciones de seguridad del plan
+
 **Parte C.1 — Análisis metodológico**
 - `c1-matriz-normalizada-0-10.png` — matriz con normalización activada
 - `c1-matriz-sin-normalizar-1-25.png` — matriz con normalización desactivada

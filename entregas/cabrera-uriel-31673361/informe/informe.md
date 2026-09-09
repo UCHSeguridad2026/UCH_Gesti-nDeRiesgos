@@ -254,21 +254,78 @@ favorable a sus conclusiones no resiste una revisión externa.
 
 ### Planes de acción
 
-Se definieron cuatro planes, uno por cada riesgo de nivel Crítico, detallados en
-`../configuracion/riesgos.md`. El primero (PA01) atiende simultáneamente R01 y
-R05, dado que la copia de respaldo fuera de línea con restauración verificada es
-el control determinante en ambos: es lo que convierte un incidente de ransomware
-de pérdida definitiva en interrupción recuperable.
+Se definieron seis planes que cubren la totalidad de los riesgos identificados.
+El detalle de cada uno —descripción, justificación de la prioridad y alcance—
+está en `../configuracion/riesgos.md`.
 
-El orden de prioridad no responde únicamente al valor de riesgo. PA04 atiende un
-riesgo Crítico con el menor presupuesto y el menor plazo de todo el plan, por lo
-que ofrece la mayor reducción de riesgo por unidad de inversión; se trata de un
-control de proceso, no de una inversión tecnológica. PA03, en cambio, requiere el
-plazo más extenso porque su componente de concientización sólo produce efecto
-medible sostenido en el tiempo.
+| Plan | Objetivo | Riesgos | Plazo | Responsable | Presupuesto | Estado |
+|---|---|---|:-:|---|---:|---|
+| PA01 | Respaldo verificado y contención de propagación | R01, R05 | 90 días | Responsable de Sistemas | USD 12.000 | No iniciado |
+| PA02 | Trazabilidad y perfilado de accesos a la historia clínica | R02 | 60 días | Responsable de Sistemas | USD 3.500 | No iniciado |
+| PA03 | Segundo factor de autenticación y concientización | R03 | 120 días | Jefe de Administración | USD 5.000 | No iniciado |
+| PA04 | Procedimiento seguro de intercambio con obras sociales | R04 | 45 días | Jefe de Administración | USD 1.500 | No iniciado |
+| PA05 | Regularización del tratamiento de datos sensibles | R07 | 180 días | Dirección General | USD 2.500 | No iniciado |
+| PA06 | Redundancia eléctrica y de climatización | R06 | 150 días | Jefe de Mantenimiento | USD 8.000 | No iniciado |
+| | | | | **Total** | **USD 32.500** | |
+
+**Criterio de priorización.** El orden de vencimientos no replica el orden de
+severidad. PA04 vence primero y es el más económico pese a atender un riesgo
+Crítico, porque se resuelve definiendo un procedimiento y no adquiriendo
+tecnología; ofrece por lo tanto la mayor reducción de riesgo por unidad de
+inversión. PA03, en cambio, tiene el plazo más extenso porque su componente de
+concientización sólo produce efecto medible sostenido en el tiempo. PA05 y PA06
+integran un segundo ciclo: atienden riesgos que no presentan materialización
+súbita y cuya ejecución depende de terceros —asesoría legal y proveedores de
+equipamiento— o admite respuesta operativa transitoria.
+
+**Carga en la herramienta.** Las mitigaciones se registraron con la cuenta
+`analista_riesgos`, que posee *Able to Plan Mitigations* pero no *Able to Accept
+Mitigations*: puede proponer un tratamiento, no aprobarlo. La separación de
+funciones declarada en la Parte A.2 opera efectivamente sobre el ciclo de vida
+del riesgo.
+
+Al registrar la mitigación, el estado del riesgo pasó de *New* a
+**Mitigation Planned**, y el riesgo residual se mantuvo idéntico al inherente en
+los siete casos, dado que el campo *Mitigation Percent* se cargó en 0: ningún
+plan fue ejecutado todavía.
+
+**Limitaciones de la herramienta observadas durante la carga.** Se registran dos,
+ambas relevantes para el análisis de la Parte C:
+
+1. *La mitigación es un atributo del riesgo, no una entidad independiente.*
+   SimpleRisk no permite asociar un mismo plan a varios riesgos, por lo que PA01
+   —que atiende conjuntamente R01 y R05— debió cargarse por duplicado. La
+   herramienta no puede representar que dos riesgos comparten un control.
+
+2. *La escala de costos no discrimina en organizaciones pequeñas.* El campo
+   *Mitigation Cost* ofrece rangos de cien mil dólares. Los seis planes, que van
+   de USD 1.500 a USD 12.000, quedan todos en el primer tramo pese a que el más
+   costoso multiplica por ocho al más económico.
+
+Se registra además que *Planning Strategy* no ofrece la estrategia **Evitar**,
+contemplada en el enunciado y en la bibliografía de la materia. La herramienta
+admite Accept, Mitigate, Transfer, Research y Watch, de modo que no permite
+documentar la decisión de discontinuar la actividad que origina un riesgo.
+
+> Evidencia: `capturas/b3-mitigacion-r01-1.png`, `capturas/b3-mitigacion-r01-2.png`
 
 ### Reporte ejecutivo
-Ver `../reporte-ejecutivo/reporte.pdf`.
+
+Se elaboró un reporte de tres páginas dirigido al Directorio de la clínica,
+disponible en `../reporte-ejecutivo/reporte.pdf`. El fuente LaTeX se incluye en
+la misma carpeta para permitir su verificación y recompilación.
+
+El documento fue redactado con criterio de comunicación gerencial: prescinde de
+terminología técnica, expresa cada riesgo en términos de su efecto sobre la
+operación asistencial y la exposición legal de la institución, y concentra las
+decisiones que requieren aprobación del Directorio. Contiene el resumen
+ejecutivo, la distribución de riesgos por nivel, el top 5 por severidad, el
+estado de los seis planes de acción con su presupuesto consolidado y cuatro
+recomendaciones prioritarias.
+
+La recomendación de mayor peso no es la más costosa: se propone aprobar de
+inmediato PA02 y PA04, que suman USD 5.000 y atienden dos riesgos de nivel
+Crítico, por ser los de mayor reducción de riesgo por unidad de inversión.
 
 ---
 

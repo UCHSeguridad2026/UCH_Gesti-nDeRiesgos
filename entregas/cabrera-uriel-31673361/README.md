@@ -213,7 +213,8 @@ entregas/cabrera-uriel-31673361/
 │   └── riesgos.md               # tabla de riesgos definidos
 ├── scripts/
 └── reporte-ejecutivo/
-    └── reporte.pdf
+    ├── reporte.tex              # fuente LaTeX del reporte
+    └── reporte.pdf              # reporte para el Directorio (3 páginas)
 ```
 
 ---
