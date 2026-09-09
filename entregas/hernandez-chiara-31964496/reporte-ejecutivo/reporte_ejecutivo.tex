@@ -3,204 +3,199 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[a4paper,top=1.45cm,bottom=1.35cm,left=1.45cm,right=1.45cm]{geometry}
+\usepackage[a4paper,top=2.2cm,bottom=2cm,left=2.2cm,right=2.2cm]{geometry}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{ragged2e}
-\usepackage{tikz}
 \usepackage{fancyhdr}
 \usepackage{enumitem}
 \usepackage{microtype}
 \usepackage{hyperref}
 \usepackage{lastpage}
+\usepackage{titlesec}
 
-\definecolor{navy}{HTML}{16324F}
-\definecolor{teal}{HTML}{197278}
-\definecolor{ink}{HTML}{243746}
-\definecolor{muted}{HTML}{607483}
-\definecolor{line}{HTML}{D8E1E8}
-\definecolor{panel}{HTML}{F4F7F9}
-\definecolor{critical}{HTML}{FF5C60}
-\definecolor{high}{HTML}{FFAD5C}
-\definecolor{medium}{HTML}{FFE680}
-\definecolor{low}{HTML}{8BE58B}
+% Paleta sobria: un solo tono oscuro para texto/títulos, un gris para reglas y
+% notas, y un acento discreto reservado únicamente para los tres niveles de
+% riesgo que exige leerse a simple vista en la tabla.
+\definecolor{ink}{HTML}{1F2933}
+\definecolor{muted}{HTML}{6B7785}
+\definecolor{rule}{HTML}{C7D0D8}
+\definecolor{panel}{HTML}{F6F7F8}
+\definecolor{accent}{HTML}{2E4756}
+\definecolor{critical}{HTML}{8C2F2F}
+\definecolor{high}{HTML}{A66A1E}
+\definecolor{medium}{HTML}{7A7A2E}
 
-\hypersetup{colorlinks=true,urlcolor=teal,linkcolor=teal,pdfauthor={Chiara Hernandez},pdftitle={Reporte ejecutivo de riesgos - Clínica privada}}
+\hypersetup{colorlinks=true,urlcolor=accent,linkcolor=accent,
+  pdfauthor={Chiara Hernandez},pdftitle={Reporte ejecutivo de riesgos - Clínica privada}}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{4pt}
 \setlist[itemize]{leftmargin=4.5mm,itemsep=1.5pt,topsep=2pt}
-\renewcommand{\arraystretch}{1.25}
+\renewcommand{\arraystretch}{1.3}
+
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{muted}Gestión de riesgos | Clínica privada}
-\fancyhead[R]{\small\color{muted}Reporte al Directorio}
-\fancyfoot[L]{\small\color{muted}Chiara Hernandez | LU 31964496 | Comisión G}
+\fancyhead[L]{\small\color{muted}Gestión de riesgos — Clínica privada}
+\fancyhead[R]{\small\color{muted}Reporte ejecutivo}
+\fancyfoot[L]{\small\color{muted}Chiara Hernandez \textbar\ LU 31964496 \textbar\ Comisión G}
 \fancyfoot[R]{\small\color{muted}Página \thepage\ de \pageref{LastPage}}
-\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 
-\newcommand{\sectiontitle}[1]{%
-  \vspace{1mm}{\Large\bfseries\color{navy}#1}\par\vspace{1mm}%
-  {\color{teal}\rule{\linewidth}{1.2pt}}\vspace{2mm}}
-
-\newcommand{\metric}[3]{%
-\begin{minipage}[t]{0.235\linewidth}
-\colorbox{#1}{\parbox[c][1.35cm][c]{0.92\linewidth}{\centering\color{ink}\textbf{\Large #2}\\[-1mm]\scriptsize #3}}
-\end{minipage}}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{ink}}
+  {}{0em}{}
+  [\vspace{1mm}{\color{rule}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{5mm}{3mm}
 
 \newcommand{\decisionbox}[1]{%
-\fcolorbox{teal}{panel}{\parbox{0.955\linewidth}{\small\textbf{Decisión requerida.} #1}}}
-
-\newcommand{\priority}[3]{%
-\noindent\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}m{0.75cm} X}
-\cellcolor{#2}\Large\bfseries #1 & \textbf{#3}\\[-1mm]
+\noindent\begin{tabularx}{\linewidth}{@{}p{0.2cm} X@{}}
+\color{accent}\rule{0.6pt}{\baselineskip} & \small\textbf{Decisión requerida.}\ #1
 \end{tabularx}\vspace{1mm}}
 
-\newcommand{\planbox}[6]{%
-\noindent\fcolorbox{line}{panel}{\parbox{0.955\linewidth}{%
-\begin{tabularx}{\linewidth}{X >{\centering\arraybackslash}m{1.4cm}}
-\textbf{#1} & \cellcolor{medium!80}\textbf{0\%}\\
-\end{tabularx}
-\small #2\par\vspace{1mm}
-\scriptsize\textbf{Responsable:} #3\hfill
-\textbf{Vence:} #4\hfill
-\textbf{Presupuesto:} #5\hfill
-\textbf{Riesgo:} #6
-}}\vspace{2mm}}
+\newcommand{\riskcolor}[1]{%
+  \ifnum\pdfstrcmp{#1}{Crítico}=0 critical\else
+  \ifnum\pdfstrcmp{#1}{Alto}=0 high\else medium\fi\fi}
+
+\newcommand{\planrow}[6]{%
+\noindent\textbf{#1}\hfill \textit{0\% de avance}\par
+\small #2\par
+{\small\color{muted}Responsable: #3 \quad\textbar\quad Vencimiento: #4 \quad\textbar\quad Presupuesto: #5 \quad\textbar\quad Riesgo asociado: #6}
+\par\vspace{2.5mm}}
 
 \begin{document}
 
-% --- Página 1 ---------------------------------------------------------------
-\begin{tikzpicture}[remember picture,overlay]
-  \fill[navy] (current page.north west) rectangle ([yshift=-3.35cm]current page.north east);
-  \fill[teal] ([yshift=-3.35cm]current page.north west) rectangle ([yshift=-3.47cm]current page.north east);
-\end{tikzpicture}
-\vspace*{0.25cm}
-{\color{white}\Huge\bfseries Reporte ejecutivo de riesgos}\par
+% --- Portada / encabezado ----------------------------------------------------
+\thispagestyle{empty}
+{\color{ink}\Huge\bfseries Reporte ejecutivo de riesgos}\par
 \vspace{1mm}
-{\color{white}\large Clínica privada - Registro inicial en SimpleRisk}\par
-\vspace{3mm}
-{\color{white}\small Dirigido al Directorio | 5 de septiembre de 2026 | Escenario ficticio}\par
-\vspace{1.0cm}
+{\color{muted}\large Clínica privada --- Registro inicial en SimpleRisk}\par
+\vspace{2mm}
+{\color{muted}\normalsize Dirigido al Directorio \textbar\ 5 de septiembre de 2026 \textbar\ Escenario ficticio}\par
+\vspace{2mm}
+{\color{rule}\rule{\linewidth}{0.8pt}}
+\vspace{4mm}
 
-\sectiontitle{Resumen ejecutivo}
+\pagestyle{fancy}
 
-La auditoría externa motivó la construcción de un registro inicial para una clínica de 120 empleados que atiende aproximadamente 800 pacientes diarios y depende de historias clínicas digitales, datos de obras sociales y facturación. El análisis identificó una exposición elevada: nueve de los diez riesgos requieren tratamiento prioritario o inmediato.
+\section*{Resumen ejecutivo}
 
-La concentración de riesgos críticos en ransomware, accesos indebidos y phishing muestra que la continuidad asistencial y la protección de datos sensibles dependen de fortalecer simultáneamente identidades, tecnología, procesos y recuperación. Los controles actuales se consideran parciales y aún no existe evidencia de su eficacia sostenida. El riesgo restante, R09, corresponde a fallas físicas o ambientales y se mantiene en nivel medio bajo monitoreo.
+La auditoría externa motivó la construcción de un registro inicial de riesgos para una clínica de 120 empleados que atiende aproximadamente 800 pacientes diarios y depende de historias clínicas digitales, datos de obras sociales y facturación.
+
+El análisis identificó una exposición elevada: nueve de los diez riesgos evaluados requieren tratamiento prioritario o inmediato. La concentración de riesgos críticos en ransomware, accesos indebidos y phishing indica que la continuidad asistencial y la protección de datos sensibles dependen de fortalecer simultáneamente identidades, tecnología, procesos y capacidad de recuperación. Los controles actuales se consideran parciales y aún no existe evidencia de su eficacia sostenida. El riesgo restante, R09, corresponde a fallas físicas o ambientales y se mantiene en nivel medio bajo monitoreo.
 
 \vspace{2mm}
 \noindent
-\metric{panel}{10}{riesgos evaluados}\hfill
-\metric{critical!35}{3}{críticos}\hfill
-\metric{high!55}{6}{altos}\hfill
-\metric{teal!22}{3}{planes definidos}
+\begin{tabularx}{\linewidth}{XXXX}
+\textbf{\large 10} & \textbf{\large 3} & \textbf{\large 6} & \textbf{\large 3} \\
+{\scriptsize\color{muted}riesgos evaluados} & {\scriptsize\color{muted}críticos} & {\scriptsize\color{muted}altos} & {\scriptsize\color{muted}planes definidos}
+\end{tabularx}
 
 \vspace{3mm}
-\decisionbox{autorizar el inicio de los tres planes ya definidos y exigir planes inmediatos adicionales para R01, R02 y R04. El costo inicial estimado de la cartera planificada es de USD 27.500.}
+\decisionbox{Autorizar el inicio de los tres planes de acción ya definidos y exigir planes inmediatos adicionales para los riesgos críticos R01, R02 y R04. El costo inicial estimado de la cartera planificada es de USD 27.500.}
 
-\sectiontitle{Top 5 riesgos por nivel}
+\section*{Top 5 riesgos por nivel}
 
 \small
-\begin{tabularx}{\linewidth}{>{\bfseries}c X >{\centering\arraybackslash}m{1.25cm} >{\centering\arraybackslash}m{1.35cm} X}
+\begin{tabularx}{\linewidth}{>{\bfseries}c X >{\centering\arraybackslash}m{1.6cm} >{\centering\arraybackslash}m{1.5cm} X}
 \toprule
 \textbf{ID} & \textbf{Riesgo} & \textbf{P $\times$ I} & \textbf{Nivel} & \textbf{Consecuencia principal}\\
 \midrule
-R01 & Ransomware sobre historias clínicas y sistemas de atención & 4 $\times$ 5 = 20 & \cellcolor{critical!75}\textbf{Crítico} & Paralización operativa, pérdida o exposición masiva de información.\\
-R02 & Acceso indebido a historias clínicas & 4 $\times$ 4 = 16 & \cellcolor{critical!75}\textbf{Crítico} & Vulneración de datos sensibles, consecuencias legales y pérdida de confianza.\\
-R04 & Robo de credenciales mediante phishing & 4 $\times$ 4 = 16 & \cellcolor{critical!75}\textbf{Crítico} & Acceso inicial para fraude, filtración o propagación de ataques.\\
-R03 & Alteración de información clínica & 3 $\times$ 5 = 15 & \cellcolor{high!85}\textbf{Alto} & Decisiones asistenciales basadas en datos incorrectos y pérdida de trazabilidad.\\
-R07 & Imposibilidad de recuperar respaldos & 3 $\times$ 5 = 15 & \cellcolor{high!85}\textbf{Alto} & Conversión de un incidente temporal en pérdida prolongada o permanente.\\
+R01 & Ransomware sobre historias clínicas y sistemas de atención & 4 $\times$ 5 = 20 & \textcolor{critical}{\textbf{Crítico}} & Paralización operativa, pérdida o exposición masiva de información.\\
+R02 & Acceso indebido a historias clínicas & 4 $\times$ 4 = 16 & \textcolor{critical}{\textbf{Crítico}} & Vulneración de datos sensibles, consecuencias legales y pérdida de confianza.\\
+R04 & Robo de credenciales mediante phishing & 4 $\times$ 4 = 16 & \textcolor{critical}{\textbf{Crítico}} & Acceso inicial para fraude, filtración o propagación de ataques.\\
+R03 & Alteración de información clínica & 3 $\times$ 5 = 15 & \textcolor{high}{\textbf{Alto}} & Decisiones asistenciales basadas en datos incorrectos y pérdida de trazabilidad.\\
+R07 & Imposibilidad de recuperar respaldos & 3 $\times$ 5 = 15 & \textcolor{high}{\textbf{Alto}} & Conversión de un incidente temporal en pérdida prolongada o permanente.\\
 \bottomrule
 \end{tabularx}
 \normalsize
 
 \vspace{2mm}
-{\small\color{muted}Los empates se ordenaron priorizando la posible afectación de la atención y la continuidad de los servicios esenciales. La clasificación sigue la matriz de la cátedra: crítico 16--25, alto 10--15, medio 5--9 y bajo 1--4.}
+{\small\color{muted}Los empates se ordenaron priorizando la posible afectación de la atención y la continuidad de los servicios esenciales. La clasificación sigue la matriz de la cátedra: crítico 16--25, alto 10--15, medio 5--9, bajo 1--4.}
 
 \newpage
 
-% --- Página 2 ---------------------------------------------------------------
-\sectiontitle{Estado de los planes de acción}
+% --- Página 2 -----------------------------------------------------------------
+\section*{Estado de los planes de acción}
 
-Los tres planes se encuentran en estado \textbf{Mitigation Planned}, con 0\% de avance. Por esa razón, SimpleRisk mantiene por ahora el riesgo residual igual al inherente: la reducción solo podrá reconocerse después de implementar y verificar los controles.
+Los tres planes se encuentran en estado \textbf{Mitigation Planned}, con 0\% de avance. SimpleRisk mantiene por ahora el riesgo residual igual al inherente: la reducción solo podrá reconocerse una vez implementados y verificados los controles.
 
-\planbox{PA01 - Respaldos 3-2-1 y restauración}
-{Copia aislada o inmutable, separación de credenciales y pruebas trimestrales. Es la primera prioridad porque reduce R07 y mejora la recuperación frente a R01.}
-{Frank Castle - Infraestructura y TI}{31/10/2026}{USD 8.000}{R07}
+\planrow{PA01 --- Respaldos 3-2-1 y restauración}
+{Copia aislada o inmutable, separación de credenciales y pruebas trimestrales. Primera prioridad porque reduce R07 y mejora la recuperación frente a R01.}
+{Frank Castle --- Infraestructura y TI}{31/10/2026}{USD 8.000}{R07}
 
-\planbox{PA03 - Continuidad con obras sociales}
-{Segundo enlace, conmutación automática, reintentos y SLA. Protege admisión y facturación y requiere coordinación con proveedores.}
-{Constanza Romero - Administración y Finanzas}{15/11/2026}{USD 7.500}{R08}
+\planrow{PA03 --- Continuidad con obras sociales}
+{Segundo enlace de conectividad, conmutación automática, reintentos y SLA. Protege admisión y facturación; requiere coordinación con proveedores.}
+{Constanza Romero --- Administración y Finanzas}{15/11/2026}{USD 7.500}{R08}
 
-\planbox{PA02 - Integridad de historias clínicas}
-{Trazabilidad, versionado y protección de cambios clínicos. Dirección Médica define los campos críticos y TI implementa los controles.}
-{Juliana Gattas - Dirección Médica}{15/12/2026}{USD 12.000}{R03}
+\planrow{PA02 --- Integridad de historias clínicas}
+{Trazabilidad, versionado y protección de cambios clínicos. Dirección Médica define los campos críticos; TI implementa los controles.}
+{Juliana Gattas --- Dirección Médica}{15/12/2026}{USD 12.000}{R03}
 
-\begin{flushright}
-\textbf{Inversión inicial estimada: USD 27.500}
-\end{flushright}
+\vspace{1mm}
+{\small\color{muted}Inversión inicial estimada de la cartera: \textbf{\color{ink}USD 27.500}}
 
-\sectiontitle{Hitos y criterios de aceptación}
+\section*{Hitos y criterios de aceptación}
 
-\begin{tabularx}{\linewidth}{>{\bfseries}m{1.15cm} X X}
+\small
+\begin{tabularx}{\linewidth}{>{\bfseries}m{1.1cm} X X}
 \toprule
 & \textbf{Primer hito} & \textbf{Criterio de cierre verificable}\\
 \midrule
 PA01 & Inventario de sistemas, RTO/RPO y arquitectura de respaldo aprobados. & Restauración integral trimestral dentro del tiempo objetivo, con evidencia y acciones correctivas.\\
 PA03 & Segundo proveedor y cláusulas de disponibilidad seleccionados. & Prueba semestral de conmutación y recuperación de operaciones pendientes sin pérdida de registros.\\
-PA02 & Campos clínicos críticos y eventos auditables definidos por Dirección Médica. & Registro protegido de usuario, fecha, valor anterior/nuevo e historial consultable de modificaciones.\\
+PA02 & Campos clínicos críticos y eventos auditables definidos por Dirección Médica. & Registro protegido de usuario, fecha, valor anterior/nuevo, e historial consultable de modificaciones.\\
 \bottomrule
 \end{tabularx}
+\normalsize
 
-\sectiontitle{Gobernanza y seguimiento}
+\section*{Gobernanza y seguimiento}
 
 \begin{itemize}
   \item Presentar avance mensual al Comité de Dirección; escalar desvíos de fecha o presupuesto.
-  \item El responsable de cada plan rinde cuentas; TI y Seguridad aportan ejecución y evidencia técnica.
-  \item Auditoría debe validar la eficacia antes de reducir el riesgo residual o declarar un plan completado.
+  \item El responsable de cada plan rinde cuentas por su ejecución; TI y Seguridad aportan evidencia técnica.
+  \item Auditoría debe validar la eficacia de los controles antes de reducir el riesgo residual o declarar un plan completado.
   \item R01, R02 y R04 siguen sin un plan formal específico y requieren patrocinio inmediato del Directorio.
 \end{itemize}
 
-\decisionbox{confirmar responsables, autorizar la ejecución de la cartera planificada y solicitar en 30 días planes específicos para los tres riesgos críticos.}
+\decisionbox{Confirmar responsables, autorizar la ejecución de la cartera planificada y solicitar en un plazo de 30 días planes específicos para los tres riesgos críticos restantes.}
 
 \newpage
 
-% --- Página 3 ---------------------------------------------------------------
-\sectiontitle{Recomendaciones prioritarias}
+% --- Página 3 -----------------------------------------------------------------
+\section*{Recomendaciones prioritarias}
 
-\priority{1}{critical!75}{Tratar inmediatamente los riesgos críticos.}
-\small Autorizar EDR, segmentación de red, MFA generalizado, revisión trimestral de privilegios, monitoreo de accesos y un programa continuo de concientización. El plan de respaldos mejora la recuperación, pero no reemplaza las medidas preventivas para R01, R02 y R04.
+\begin{enumerate}[leftmargin=5.5mm,itemsep=3pt,label=\textbf{\arabic*.}]
+  \item \textbf{Tratar inmediatamente los riesgos críticos.} Autorizar EDR, segmentación de red, MFA generalizado, revisión trimestral de privilegios, monitoreo de accesos y un programa continuo de concientización. El plan de respaldos mejora la recuperación, pero no reemplaza las medidas preventivas necesarias para R01, R02 y R04.
 
-\priority{2}{high!85}{Ejecutar y controlar los tres planes ya definidos.}
-\small Mantener responsables, fechas y presupuesto; medir avances mensualmente y exigir evidencias de restauración, conmutación y trazabilidad antes de reducir el riesgo residual.
+  \item \textbf{Ejecutar y controlar los tres planes ya definidos.} Mantener responsables, fechas y presupuesto; medir avances mensualmente y exigir evidencia de restauración, conmutación y trazabilidad antes de reducir el riesgo residual.
 
-\priority{3}{teal!35}{Implementar una estrategia de defensa en profundidad.}
-\small La clínica debe superponer capas de control: (1) identidad y MFA; (2) protección de endpoints, correo, red y monitoreo; y (3) respaldos inmutables probados, continuidad operativa y respuesta a incidentes. Si una capa falla, las restantes contienen el daño.
+  \item \textbf{Implementar una estrategia de defensa en profundidad.} Superponer capas de control independientes: (i) identidad y autenticación multifactor; (ii) protección de endpoints, correo y red con monitoreo activo; y (iii) respaldos inmutables probados, continuidad operativa y un procedimiento de respuesta a incidentes. Si una capa falla, las restantes deben contener el daño.
 
-\priority{4}{teal!25}{Reforzar la protección frente a amenazas externas y suplantación.}
-\small El phishing que imita a una obra social o proveedor explota la confianza del personal para obtener credenciales o acceso inicial. Se recomiendan MFA, validación por canal alternativo, filtrado de correo y capacitación práctica basada en simulacros.
+  \item \textbf{Reforzar la protección frente a amenazas externas y suplantación.} El phishing que imita a una obra social o proveedor explota la confianza del personal para obtener credenciales o un punto de acceso inicial. Se recomienda MFA generalizado, validación por canal alternativo ante solicitudes sensibles, filtrado de correo y capacitación práctica basada en simulacros periódicos.
 
-\priority{5}{medium!85}{Proteger la infraestructura física y su ubicación.}
-\small La sala técnica debe estar separada de fuentes de riesgo ambiental (calor, agua, incendio) e incorporar sensores ambientales, detección de humo y filtraciones, UPS/generador probado y control de acceso físico.
+  \item \textbf{Proteger la infraestructura física y su ubicación.} La sala técnica debe estar separada de fuentes de riesgo ambiental (calor, agua, incendio) e incorporar sensores ambientales, detección de humo y filtraciones, UPS y generador probados periódicamente, y control de acceso físico.
+\end{enumerate}
 
-\sectiontitle{Hoja de ruta para decisión del Directorio}
+\section*{Hoja de ruta para decisión del Directorio}
 
-\begin{tabularx}{\linewidth}{>{\bfseries\color{navy}}m{1.5cm} X}
+\small
+\begin{tabularx}{\linewidth}{>{\bfseries\color{ink}}m{2cm} X}
 \toprule
 0--30 días & Aprobar presupuesto y responsables; formalizar planes para R01, R02 y R04; activar MFA y revisión urgente de privilegios; definir RTO/RPO.\\
-31--60 días & Implementar copia aislada/inmutable, segundo enlace y primeras mejoras de auditoría clínica; ejecutar simulación de phishing y prueba de conmutación.\\
+31--60 días & Implementar copia aislada/inmutable, segundo enlace de conectividad y primeras mejoras de auditoría clínica; ejecutar simulación de phishing y prueba de conmutación.\\
 61--90 días & Probar restauración integral, verificar logs y versionado, revisar proveedores y reevaluar probabilidad, impacto y riesgo residual en SimpleRisk.\\
 \bottomrule
 \end{tabularx}
+\normalsize
 
 \vspace{3mm}
-\decisionbox{el Directorio debe tratar la ciberseguridad como un riesgo asistencial y de negocio. La prioridad no es solo adquirir tecnología, sino demostrar que los controles funcionan mediante pruebas, métricas y revisión independiente.}
+\decisionbox{El Directorio debe tratar la ciberseguridad como un riesgo asistencial y de negocio. La prioridad no es solo adquirir tecnología, sino demostrar que los controles funcionan mediante pruebas, métricas y revisión independiente.}
 
 \vfill
 {\scriptsize\color{muted}
-\textbf{Fuentes de referencia:} Ley 25.326 de Protección de los Datos Personales; Ley 26.529 de Derechos del Paciente e Historia Clínica; CISA, \emph{StopRansomware Guide}; HHS, \emph{Health Industry Cybersecurity Practices}; NIST SP 800-53 Rev. 5 y NIST SP 800-34. Evaluación basada en la matriz de probabilidad por impacto proporcionada por la cátedra. Todos los datos personales y organizacionales utilizados son ficticios.}
+\textbf{Fuentes de referencia:} Ley 25.326 de Protección de los Datos Personales; Ley 26.529 de Derechos del Paciente e Historia Clínica; CISA, \emph{StopRansomware Guide}; HHS, \emph{Health Industry Cybersecurity Practices}; NIST SP 800-53 Rev.\ 5 y NIST SP 800-34. Evaluación basada en la matriz de probabilidad por impacto proporcionada por la cátedra. Todos los datos personales y organizacionales utilizados son ficticios.}
 
 \end{document}
