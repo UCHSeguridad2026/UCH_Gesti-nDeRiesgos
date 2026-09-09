@@ -113,8 +113,8 @@ real de la aplicación.
 Se utiliza la matriz clásica **Probabilidad × Impacto** en escala 1–5, alineada
 con la plantilla de la Actividad A03. En SimpleRisk se selecciona el método de
 scoring **Classic**, y no CVSS, DREAD ni OWASP, porque es el único que responde a
-esa misma lógica; los demás métodos responden a modelos de puntuación distintos y
-no serían comparables con la plantilla de la cátedra.
+esa misma lógica; los demás métodos aplican modelos de puntuación distintos y no
+serían comparables con la plantilla de la cátedra.
 
 **Equivalencia de escalas.** Las denominaciones de SimpleRisk se corresponden una
 a una con las de la plantilla A03:
@@ -127,20 +127,36 @@ a una con las de la plantilla A03:
 | 4 | Likely | Probable | Major | Mayor |
 | 5 | Almost Certain | Casi seguro | Extreme/Catastrophic | Catastrófico |
 
-**Diferencia en la escala de resultado.** Ambos enfoques calculan el mismo
-producto, pero lo expresan de forma distinta. La plantilla A03 conserva el
-producto en su rango natural de 1 a 25; SimpleRisk lo normaliza a una escala de
-0 a 10 mediante la expresión (P × I) / 25 × 10.
+**Configuración aplicada.** Para que la herramienta y el instrumento formal de la
+cátedra arrojen resultados idénticos se realizaron dos ajustes en
+*Configure → Risk Formula*:
 
-El riesgo de validación cargado durante la Parte A ilustra el efecto: valorado
-como Credible (3) y Moderate (3), la plantilla A03 arroja un valor de 9 y
-SimpleRisk muestra 3.6. Son la misma valoración expresada en dos escalas.
+1. **Se desactivó la opción "Normalize scoring on a 0-10 scale".** Por defecto,
+   SimpleRisk normaliza el producto P × I mediante (P × I) / 25 × 10, lo que
+   transforma un valor de 9 en 3.6. Desactivarla conserva el producto en su rango
+   natural de 1 a 25, que es el que emplea la plantilla A03.
 
-**Criterio adoptado.** Los niveles de riesgo se clasifican según la tabla de la
-plantilla A03 —Bajo (1–4), Medio (5–9), Alto (10–15), Crítico (16–25)—, por ser
-el instrumento formal de la cátedra. En `configuracion/riesgos.md` se consignan
-ambos valores para cada riesgo, de modo que la documentación resulte contrastable
-contra las capturas de SimpleRisk sin ambigüedad.
+2. **Se redefinieron los umbrales de nivel de riesgo.** Los umbrales que trae la
+   instalación (10.1 / 7.0 / 4.0 / 0.0) están dimensionados para la escala 0–10.
+   Mantenerlos sobre valores de 1 a 25 desplaza la clasificación hacia arriba: un
+   riesgo de valor 9, que la plantilla A03 califica como Medio, quedaba
+   etiquetado como *High*. Los umbrales se ajustaron a los cortes de la A03:
+
+| Nivel (SimpleRisk) | Umbral configurado | Nivel equivalente (A03) | Rango |
+|---|:-:|---|:-:|
+| Very High | ≥ 16 | Crítico | 16–25 |
+| High | ≥ 10 | Alto | 10–15 |
+| Medium | ≥ 5 | Medio | 5–9 |
+| Low | ≥ 0 | Bajo | 1–4 |
+
+Con ambos ajustes, el valor numérico y la etiqueta de nivel coinciden entre la
+aplicación y la plantilla, de modo que las capturas de SimpleRisk y las tablas de
+`configuracion/riesgos.md` no pueden contradecirse.
+
+**Nota.** La leyenda de la matriz de SimpleRisk incluye un quinto nivel
+(*Insignificant*) que no dispone de umbral configurable propio en esta
+instalación, por lo que la clasificación opera sobre los cuatro niveles
+definidos arriba.
 
 ### 3.5 Supuestos del escenario
 
@@ -206,9 +222,9 @@ entregas/cabrera-uriel-31673361/
 
 - [X] No hay credenciales en el repositorio
 - [X] El `.gitignore` está correctamente configurado
-- [X] Las capturas no muestran datos sensibles
-- [X] Los archivos `.sql` o dumps no están subidos
+- [ ] Las capturas no muestran datos sensibles
+- [ ] Los archivos `.sql` o dumps no están subidos
 - [ ] El informe está en formato legible
 - [ ] El reporte ejecutivo está completo
-- [X] Los mensajes de commit son descriptivos
-- [X] Mi branch está actualizada y funciona
+- [ ] Los mensajes de commit son descriptivos
+- [ ] Mi branch está actualizada y funciona

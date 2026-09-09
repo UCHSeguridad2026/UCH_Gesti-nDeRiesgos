@@ -131,6 +131,11 @@ Capturas en `../informe/capturas/`:
 - `a3-riesgo-prueba-formulario.png` — formulario de alta completado
 - `a3-riesgo-prueba-detalle.png` — riesgo 1001 con la configuración por defecto
 
+**Parte B.1 — Registro de riesgos**
+- `b1-riesgos-cargados.png` — los siete riesgos con sus niveles en SimpleRisk
+- `b1-riesgo-r01-detalle.png` a `b1-riesgo-r07-detalle.png` — ficha completa de
+  cada riesgo, con valoración, justificación y *External Reference ID*
+
 **Parte C.1 — Análisis metodológico**
 - `c1-matriz-normalizada-0-10.png` — matriz con normalización activada
 - `c1-matriz-sin-normalizar-1-25.png` — matriz con normalización desactivada

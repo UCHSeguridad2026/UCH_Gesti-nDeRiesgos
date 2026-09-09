@@ -414,15 +414,21 @@ dentro del escenario; el campo *Owner* de SimpleRisk se completa con el usuario
 de la plataforma que gestiona el riesgo, dado que la aplicación sólo admite
 usuarios registrados en ese campo.
 
-| ID | Category | Risk Source | Technology | Likelihood | Impact |
-|---|---|---|---|---|---|
-| R01 | Technical Vulnerability Management | System | All | Likely | Extreme/Catastrophic |
-| R02 | Access Management | People | All | Likely | Major |
-| R03 | Policy and Procedure | People | Mail Routing | Likely | Major |
-| R04 | Sensitive Data Management | Process | Mail Routing | Likely | Major |
-| R05 | Environmental Resilience | Process | Backups | Credible | Extreme/Catastrophic |
-| R06 | Physical Security | External | Datacenter | Credible | Moderate |
-| R07 | Policy and Procedure | Process | All | Credible | Major |
+| ID | ID SimpleRisk | Category | Risk Source | Technology | Likelihood | Impact |
+|---|:-:|---|---|---|---|---|
+| R01 | 1002 | Technical Vulnerability Management | System | All | Likely | Extreme/Catastrophic |
+| R02 | 1003 | Access Management | People | All | Likely | Major |
+| R03 | 1004 | Policy and Procedure | People | Mail Routing | Likely | Major |
+| R04 | 1005 | Sensitive Data Management | Process | Mail Routing | Likely | Major |
+| R05 | 1006 | Environmental Resilience | Process | Backups | Credible | Extreme/Catastrophic |
+| R06 | 1007 | Physical Security | External | Datacenter | Credible | Moderate |
+| R07 | 1008 | Policy and Procedure | Process | All | Credible | Major |
+
+Los identificadores de SimpleRisk comienzan en 1002 porque el 1001 corresponde al
+riesgo de validación de la Parte A.3. El código del registro (R01 a R07) se cargó
+en el campo *External Reference ID* de cada riesgo, de modo que la
+correspondencia entre la documentación y la herramienta queda establecida en la
+propia aplicación y no depende de esta tabla.
 
 En todos los casos: **Site/Location** All Sites, **Team** Information Security,
 **Risk Scoring Method** Classic, **Owner** `analista_riesgos`,

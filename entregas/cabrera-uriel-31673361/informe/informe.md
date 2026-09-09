@@ -61,7 +61,8 @@ exacta que emplea SimpleRisk, está en `../configuracion/usuarios.md`.
 rol predefinido seleccionable desde el formulario de alta, o la asignación
 granular mediante la sección *User Responsibilities*. Se optó por la asignación
 granular para que cada permiso otorgado responda a una decisión explícita y
-documentable.
+documentable, en lugar de heredar un conjunto cuyo contenido no queda registrado
+en la entrega.
 
 **Criterios aplicados.** La configuración no se limita a diferenciar niveles de
 acceso, sino que materializa tres principios:
@@ -120,12 +121,13 @@ SimpleRisk calculó un riesgo inherente y residual de **3.6**, clasificado como
 controles ni mitigaciones sobre él.
 
 **Inconsistencia detectada.** Ese resultado no se correspondía con la valoración
-esperada. Según la escala de la plantilla otorgada por el profesor, una probabilidad *Posible* (3)
+esperada. Según la escala de la plantilla A03, una probabilidad *Posible* (3)
 combinada con un impacto *Moderado* (3) arroja un valor de 9, que cae dentro del
 rango 5–9 y por lo tanto corresponde al nivel **Medio**. La aplicación mostraba
 en cambio 3.6 y lo clasificaba como *Low*.
 
-La discrepancia me resulto un tanto extraña. Esto motivó revisar la configuración de
+La discrepancia no era menor: un riesgo de nivel medio presentado como bajo puede
+quedar fuera de un plan de tratamiento. Esto motivó revisar la configuración de
 scoring de la herramienta antes de continuar con el registro de riesgos del
 escenario, ya que de haberse mantenido, los siete riesgos de la Parte B habrían
 quedado sistemáticamente subvaluados respecto del instrumento de la cátedra.
@@ -195,6 +197,35 @@ Ninguno de los siete es un riesgo genérico aplicable a cualquier organización:
 todos se apoyan en una característica propia del escenario —el volumen de
 atención diaria, la naturaleza sensible de la historia clínica, el vínculo
 operativo con obras sociales o la infraestructura descrita en los supuestos.
+
+**Carga en la herramienta.** Los siete riesgos fueron registrados en SimpleRisk
+con la cuenta `analista_riesgos`, que es el rol al que corresponde la
+identificación y valoración según la matriz de permisos de la Parte A.2. El campo
+*Submitted By* de cada riesgo deja constancia de ello, lo que verifica en la
+práctica que el permiso *Able to Submit New Risks* opera como fue configurado.
+
+Cada riesgo lleva su código del registro en el campo *External Reference ID*, y
+la justificación de probabilidad e impacto se transcribió en *Additional Notes*,
+de modo que el razonamiento resulte consultable desde la propia herramienta y no
+únicamente desde este repositorio.
+
+| Ref | ID SimpleRisk | Valor | Nivel |
+|---|:-:|:-:|---|
+| R01 | 1002 | 20 | Very High |
+| R02 | 1003 | 16 | Very High |
+| R03 | 1004 | 16 | Very High |
+| R04 | 1005 | 16 | Very High |
+| R05 | 1006 | 15 | High |
+| R07 | 1008 | 12 | High |
+| R06 | 1007 | 9 | Medium |
+
+Los valores y niveles calculados por SimpleRisk coinciden exactamente con los de
+la plantilla A03 consignados en `../configuracion/riesgos.md`, lo que confirma
+que la configuración de scoring descrita en el README, sección 3.4, produce el
+resultado buscado.
+
+> Evidencia: `capturas/b1-riesgos-cargados.png`,
+> `capturas/b1-riesgo-r01-detalle.png` a `b1-riesgo-r07-detalle.png`
 
 **Distribución resultante.** Cuatro riesgos de nivel Crítico, dos de nivel Alto y
 uno Medio. La concentración en los niveles superiores es coherente con el punto
