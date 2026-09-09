@@ -10,8 +10,8 @@
 |---|---|
 | Apellido y nombre | Barbero, Lautaro |
 | Libreta universitaria | 44820797 |
-| Email institucional | *(completar)* |
-| Comisión | *(completar)* |
+| Email institucional | barberolautaro@uch.edu.ar |
+| Comisión | G |
 | Branch de entrega | `entrega/barbero-lautaro-44820797` |
 
 ---
