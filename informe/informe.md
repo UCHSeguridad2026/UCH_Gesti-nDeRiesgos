@@ -33,3 +33,10 @@ El acceso principal al sistema se realiza mediante:
 
 Al tratarse de un entorno local de laboratorio, el certificado
 HTTPS no corresponde a una autoridad certificadora pública.
+
+## Validación inicial de SimpleRisk
+
+Se creó un riesgo de prueba con el objetivo de verificar el correcto funcionamiento de la plataforma y validar el proceso de alta, evaluación y visualización de riesgos. La prueba fue realizada satisfactoriamente y posteriormente se verificó que el riesgo permaneciera almacenado en el sistema.
+
+Captura:
+- `../informe/capturas/06-riesgo-test.png`: cuenta administradora.
