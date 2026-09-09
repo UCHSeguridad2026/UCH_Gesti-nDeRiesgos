@@ -127,16 +127,12 @@ Se comparan las ventajas y limitaciones del enfoque utilizado por SimpleRisk con
 
 informe/informe.md
 
+## Decisiones de diseño y seguridad
 
-## Seguridad de la información
-El repositorio no contiene credenciales reales, contraseñas, tokens, API keys ni información sensible.
-
-Las credenciales utilizadas durante las pruebas son ficticias.
-
-Además, se utiliza un archivo .gitignore para evitar que información sensible o archivos generados localmente sean incorporados accidentalmente al repositorio.
-
-
-
+- Se trabajará exclusivamente en la branch `entrega/julian-greco-39169367`.
+- Se utilizarán datos de demostración y contraseñas locales, nunca credenciales reales.
+- Los secretos, archivos de entorno, respaldos y dumps de bases de datos permanecerán fuera del repositorio mediante `.gitignore`.
+- Las capturas serán revisadas antes de incorporarlas para evitar exponer contraseñas, tokens, direcciones IP reales o datos personales.
 - Verificación de lectura de la consigna: **girasol**.
 
 
