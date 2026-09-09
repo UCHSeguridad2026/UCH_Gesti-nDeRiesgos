@@ -29,3 +29,21 @@ El detalle del registro se documenta en `../configuracion/riesgos.md`.
 | `capturas/03-auditor-demo.png` | Usuario auditor de demostración. |
 | `capturas/04-riesgo-prueba.png` | Riesgo de prueba registrado en SimpleRisk. |
 
+## 5. Planes de acción
+
+Se planificaron tres mitigaciones para los riesgos con mayor prioridad: phishing y robo de credenciales (R-01), ransomware (R-02) y recuperación fallida de backups (R-04). Los planes contemplan autenticación multifactor, protección avanzada contra malware, segmentación de red, backups inmutables y pruebas de restauración.
+
+Los planes se encuentran en estado inicial **Planificado**. No se aceptó la mitigación ni el riesgo residual, dado que los controles propuestos aún no se implementaron.
+
+El detalle de responsables, fechas, presupuesto, esfuerzo y reducción estimada está documentado en `../configuracion/planes-accion.md`.
+
+| Archivo | Contenido |
+|---|---|
+| `capturas/09-tabla-mitigaciones-planificadas.png` | Los tres riesgos con mitigación planificada. |
+| `capturas/10-mitigacion-r01-phishing.png` | Detalle del plan PA-01. |
+| `capturas/11-mitigacion-r02-ransomware.png` | Detalle del plan PA-02. |
+| `capturas/12-mitigacion-r04-backups.png` | Detalle del plan PA-03. |
+
+## 6. Análisis crítico e integración
+
+Se comparó la matriz Classic utilizada en SimpleRisk con NIST SP 800-30 Rev. 1 y se propuso una integración futura con Jira para transformar mitigaciones en tareas técnicas trazables. El desarrollo completo, con referencias y controles de seguridad, se encuentra en `analisis-critico.md`.
