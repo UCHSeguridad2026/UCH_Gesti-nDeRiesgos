@@ -79,6 +79,7 @@ Escenario y Presupuesto: Se diseñó un plan de acción formal asociado a los ri
 **Verificación:** girasol.
 
 Checklist de auto-revisión
+
 [x] No hay credenciales ni contraseñas reales expuestas en el repositorio.[x] El .gitignore está correctamente configurado.
 
 [x] Las capturas y evidencias adjuntas no muestran datos sensibles ni reales.
