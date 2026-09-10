@@ -193,3 +193,33 @@ Fecha de vencimiento: 90 días (incluye tiempo de negociación legal).
 Responsable: Responsable de Seguridad de la Información, en conjunto con Administración.
 Presupuesto estimado: USD 800–1500 (asesoría legal externa para la redacción de los contratos).
 Estado inicial: No iniciado / Pendiente.
+
+
+4. Parte C — Análisis crítico y profundización
+4.1 Comparación metodológica: SimpleRisk vs. NIST SP 800-30
+
+SimpleRisk trabaja de forma nativa con una matriz clásica de Probabilidad × Impacto en escala 1-5 (método "Classic"), que fue la utilizada para el registro de riesgos de este TP. Como metodología alternativa para comparar se eligió NIST SP 800-30 ("Guide for Conducting Risk Assessments").
+
+Ventajas y desventajas de cada enfoque:
+
+La matriz clásica de SimpleRisk es simple, visual y de baja curva de aprendizaje: cualquier persona sin formación previa en gestión de riesgos puede completarla, y permite obtener rápidamente una priorización útil (como la Tabla de riesgos de este TP). Su principal debilidad es que los valores de probabilidad e impacto se asignan de forma bastante subjetiva, sin un desglose formal de fuentes de amenaza, capacidad del atacante o vulnerabilidad específica, lo cual puede generar inconsistencias si distintas personas cargan riesgos con criterios distintos.
+
+NIST SP 800-30, en cambio, propone un proceso mucho más estructurado: identifica fuentes de amenaza (adversarias y no adversarias), vulnerabilidades y condiciones predisponentes, y determina la probabilidad considerando explícitamente la capacidad e intención del atacante, además de definir el impacto en función de los tiers de la organización (organizacional, de misión/proceso de negocio, y de sistema de información). Esto la hace mucho más rigurosa y defendible ante un auditor o regulador, pero a costa de requerir considerablemente más tiempo, expertise específico y documentación por cada riesgo evaluado.
+
+Contexto en el que conviene cada una: la matriz clásica de SimpleRisk resulta más adecuada para organizaciones que, como la clínica de este escenario, recién están iniciando un programa formal de gestión de riesgos y necesitan una primera fotografía rápida y accionable. NIST SP 800-30 es preferible cuando existe una exigencia regulatoria fuerte, se necesita auditar en profundidad un sistema crítico específico, o la organización ya cuenta con un programa de riesgos maduro que puede sostener el esfuerzo adicional que exige esta metodología.
+
+4.2 Integración con herramienta externa
+
+Se documenta (sin implementar) una integración entre SimpleRisk y Slack, elegida por ser una herramienta de mensajería de equipo ampliamente utilizada y por encajar con el caso de uso de notificar automáticamente la aparición de riesgos de nivel alto.
+
+SimpleRisk no incluye un conector nativo a Slack, pero expone una API RESTful bajo /api (con autenticación por cookie, o mediante API keys si se cuenta con el módulo "API Extra") pensada específicamente para integrarlo con sistemas externos. La integración propuesta funcionaría de la siguiente manera:
+
+Un proceso programado (cron job) consulta periódicamente la API de SimpleRisk en busca de riesgos nuevos o modificados con nivel "Alto" o "Muy Alto".
+Al detectar uno, arma un mensaje con los datos clave del riesgo (nombre, categoría, nivel, propietario) y lo envía a un canal de Slack mediante un Incoming Webhook (una URL provista por Slack para publicar mensajes en un canal específico, sin necesidad de desarrollar una app de Slack completa).
+Esto brinda visibilidad inmediata al equipo de seguridad y a la Dirección ante la aparición de riesgos críticos, sin depender de que alguien ingrese manualmente a revisar el sistema.
+
+Esta integración no fue implementada en el marco de este TP, ya que la consigna la establece como parte obligatoria solo en su etapa de investigación y documentación (una implementación real, aunque sea con un webhook simple, corresponde a puntos extra dentro de la Parte D, optativa).
+
+5. Cierre
+
+Con esto queda completo el desarrollo de las partes obligatorias del TP (A, B y C). No se desarrollaron actividades de la Parte D (optativas) porque no organice bien mis tiempos para hacerlo disculpe.
