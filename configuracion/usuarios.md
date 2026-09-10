@@ -10,6 +10,6 @@ Los usuarios son cuentas de demostración creadas exclusivamente para el entorno
 
 ## Evidencias
 
-- `../informe/capturas/01-admin-demo.png`: cuenta administradora.
-- `../informe/capturas/02-analista-riesgos.png`: cuenta de analista.
-- `../informe/capturas/03-auditor-demo.png`: cuenta de auditor.
+- `../informe/capturas/03-user-admin.png`: cuenta administradora.
+- `../informe/capturas/04-user-analista.png`: cuenta de analista.
+- `../informe/capturas/05-user-auditor.png`: cuenta de auditor.
