@@ -1,0 +1,25 @@
+name: tp-simplerisk
+
+services:
+  simplerisk:
+    image: simplerisk/simplerisk@sha256:64b090fc4a3150e456c4802cafdf94ccc9e4b60261ec2ad5ea9bdd33e188762e
+    container_name: simplerisk
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:80:80"
+      - "127.0.0.1:443:443"
+    volumes:
+      - passwords:/passwords
+      - configurations:/configurations
+      - logs:/var/log
+      - database:/var/lib/mysql
+      - certificates:/etc/apache2/ssl
+      - application:/var/www/simplerisk
+
+volumes:
+  passwords:
+  configurations:
+  logs:
+  database:
+  certificates:
+  application:
