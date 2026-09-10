@@ -3,10 +3,19 @@
 **Alumno:** Nicolás Estrella
 **Legajo:** 31.066.692
 **Materia:** Seguridad de Sistemas
+**Email institucional:** [completar con mail de la facultad]
+**Comisión:** [completar]
+
+## Decisiones de diseño
+
+- Se optó por representar una clínica privada de 120 empleados (según el escenario propuesto por la cátedra), con foco en el servidor de historias clínicas electrónicas (HCE) como activo crítico central, dado que es el eje de la mayoría de los riesgos relevados.
+- La metodología de riesgos utilizada es la matriz clásica de probabilidad × impacto (escala 1-5) provista por SimpleRisk, justificando cada valor con el contexto específico de la clínica (falta de área de IT dedicada, ausencia de controles formales) en lugar de usar valores genéricos.
+- Se priorizaron los 7 riesgos elegidos por representar las categorías principales de un análisis de seguridad (confidencialidad, integridad, disponibilidad, legal y operativo), evitando repetir riesgos redundantes sobre el mismo activo.
+- Para la comparación metodológica de la Parte C se eligió FAIR por ser la que más contrasta con el enfoque cualitativo de SimpleRisk, al expresar el riesgo en términos de pérdida económica estimada.
 
 ## Contenido de esta entrega
 
-- `configuracion/` — Documentación de usuarios y roles configurados en SimpleRisk.
+- `configuracion/` — Documentación de usuarios/roles (usuarios.md) y del registro completo de riesgos (riesgos.md).
 - `informe/` — Informe completo del TP (Partes A, B y C) y capturas de pantalla como evidencia.
 - `reporte-ejecutivo/` — Reporte ejecutivo en PDF (resumen para dirección).
 - `entorno/` — (sin uso adicional; el entorno se levanta con el comando de Docker detallado abajo).
