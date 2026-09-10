@@ -1,0 +1,47 @@
+version: "3.8"
+# Entorno reproducible de SimpleRisk para el TP de Seguridad de Sistemas.
+# Uso:
+# 1) docker compose up -d
+# 2) Acceder a http://localhost:8080
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: simplerisk_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: Passw0rd!Demo
+      MYSQL_DATABASE: simplerisk
+      MYSQL_USER: simplerisk
+      MYSQL_PASSWORD: Passw0rd!Demo
+    volumes:
+      - simplerisk_db_data:/var/lib/mysql
+    networks:
+      - simplerisk_net
+
+  app:
+    image: simplerisk/simplerisk:latest
+    container_name: simplerisk_app
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+      - "8443:443"
+    environment:
+      DB_HOST: db
+      DB_NAME: simplerisk
+      DB_USER: simplerisk
+      DB_PASSWORD: Passw0rd!Demo
+    volumes:
+      - simplerisk_app_data:/var/www/html
+    networks:
+      - simplerisk_net
+
+volumes:
+  simplerisk_db_data:
+  simplerisk_app_data:
+
+networks:
+  simplerisk_net:
+    driver: bridge
