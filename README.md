@@ -139,13 +139,13 @@ informe/informe.md
 ## 📌 Checklist de Auto-Revisión
 *Por favor, marca las casillas correspondientes antes de realizar tu entrega:*
 
-- [ ] No hay credenciales en el repositorio.
-- [ ] El archivo `.gitignore` está correctamente configurado.
-- [ ] Las capturas de pantalla no muestran datos sensibles.
-- [ ] Los archivos `.sql` o dumps no están subidos.
-- [ ] El informe está en un formato legible.
-- [ ] El reporte ejecutivo está completo.
-- [ ] Los mensajes de commit son descriptivos.
-- [ ] Mi branch está actualizada y funciona correctamente.
+- [x] No hay credenciales en el repositorio.
+- [x] El archivo `.gitignore` está correctamente configurado.
+- [x] Las capturas de pantalla no muestran datos sensibles.
+- [x] Los archivos `.sql` o dumps no están subidos.
+- [x] El informe está en un formato legible.
+- [x] El reporte ejecutivo está completo.
+- [x] Los mensajes de commit son descriptivos.
+- [x] Mi branch está actualizada y funciona correctamente.
 
 
