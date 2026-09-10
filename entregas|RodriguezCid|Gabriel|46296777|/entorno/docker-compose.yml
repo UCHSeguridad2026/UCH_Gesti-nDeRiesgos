@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  simplerisk:
+    image: simplerisk/simplerisk:latest
+    container_name: simplerisk_app
+    ports:
+      - "8080:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - simplerisk_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  simplerisk_data:
