@@ -1,0 +1,41 @@
+# Credenciales y secretos
+.env
+.env.*
+*.key
+*.pem
+*.secret
+secrets/
+credentials/
+
+# Bases de datos y dumps
+*.sql
+*.dump
+*.db
+
+# Logs
+*.log
+logs/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Archivos de Docker generados localmente
+docker-data/
