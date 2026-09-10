@@ -172,7 +172,7 @@ Una falla en switches, routers, enlaces, configuraciones o suministro eléctrico
 | **Método de puntuación** | Classic |
 | **Probabilidad actual** | Credible — 3/5 |
 | **Impacto actual** | Extreme/Catastrophic — 5/5 |
-| **Valoración académica** | 15 — Crítico |
+| **Valoración académica** | 15 — Alto |
 | **Propietario** | Analista de riesgos |
 | **Tratamiento** | Mitigar |
 
