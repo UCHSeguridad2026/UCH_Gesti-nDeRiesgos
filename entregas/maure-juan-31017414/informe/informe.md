@@ -1,15 +1,16 @@
-Desarrollo del Trabajo Práctico
-A. Despliegue del Entorno y Resolución Técnica
+### Desarrollo del Trabajo Práctico
+
+*A. Despliegue del Entorno y Resolución Técnica*
 El trabajo práctico comenzó con el despliegue local de la plataforma SimpleRisk utilizando contenedores Docker. Durante la configuración inicial y las primeras pruebas, se presentó un error de servidor (HTTP 500) al intentar enviar el formulario de registro de riesgos. Mediante la inspección de las peticiones de red y la consola, se diagnosticó que el fallo derivaba de la configuración del modo estricto de MySQL (ONLY_FULL_GROUP_BY).
 
 Para solucionarlo, fue necesario acceder interactivamente al contenedor de la base de datos (simplerisk-db) mediante la terminal y ejecutar una sentencia SQL para reconfigurar la variable global sql_mode. Tras reiniciar los contenedores, la aplicación funcionó correctamente.
 
-B. Carga de Riesgos y Planes de Mitigación
+*B. Carga de Riesgos y Planes de Mitigación*
 Una vez estabilizado el entorno, se procedió a modelar el escenario de la clínica privada (120 empleados y 800 pacientes diarios). Se identificaron y registraron 7 riesgos específicos, abarcando vulnerabilidades críticas como accesos genéricos a historias clínicas, falta de alta disponibilidad en servidores y escasa concientización del personal ante ataques de ingeniería social.
 
 Posteriormente, utilizando el módulo Plan Mitigation, se diseñaron 3 planes de acción formales para tratar los riesgos de nivel Alto y Crítico. A cada plan se le asignó una estrategia de mitigación, un propietario responsable, un presupuesto estimado y una fecha de vencimiento (RBAC, Alta Disponibilidad/Backups, y Gestión de Parches con EDR).
 
-Parte C - Análisis Crítico y Profundización
+*Parte C - Análisis Crítico y Profundización*
 C.1. Comparación metodológica: SimpleRisk vs. FAIR
 ¿Qué es SimpleRisk?
 SimpleRisk es una plataforma de software orientada a la gestión de riesgos que utiliza un enfoque eminentemente cualitativo. Se basa en una matriz clásica de Probabilidad × Impacto (escala 1-5). No es un estándar normativo en sí mismo, sino una herramienta operativa que facilita el registro, la asignación de puntajes subjetivos y el seguimiento visual mediante una interfaz gráfica.
@@ -17,7 +18,7 @@ SimpleRisk es una plataforma de software orientada a la gestión de riesgos que 
 ¿Qué es FAIR (Factor Analysis of Information Risk)?
 FAIR es una metodología analítica y un marco de referencia puramente cuantitativo. A diferencia de las escalas de colores, FAIR modela el riesgo basándose en el impacto financiero real y las probabilidades matemáticas. Responde preguntas exactas, como: "¿Cuál es la probabilidad de perder más de $50,000 USD este año debido a una interrupción del servidor?".
 
-Ventajas y Desventajas
+*Ventajas y Desventajas*
 
 Ventaja de SimpleRisk: Agilidad y despliegue rápido. Permite evaluar decenas de riesgos en días usando el juicio experto, siendo muy visual para la alta gerencia.
 
@@ -34,7 +35,7 @@ C.2. Integración con herramienta externa
 Herramienta elegida: Slack (vía Webhooks)
 Se seleccionó Slack por ser el estándar actual en comunicación de operaciones de IT (ChatOps). Integrar alertas en la plataforma de trabajo diario asegura visibilidad inmediata, superando a los correos electrónicos que suelen perderse en bandejas saturadas.
 
-Objetivo y Arquitectura propuesta
+*Objetivo y Arquitectura propuesta*
 La integración busca automatizar la detección: cuando se registre un riesgo Alto o Crítico, el sistema empuja (push) una alerta en tiempo real al equipo técnico.
 
 Se configura una aplicación interna en Slack habilitando Incoming Webhooks hacia un canal específico (ej. #alertas-seguridad).
