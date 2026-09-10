@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  simplerisk:
+    image: simplerisk/simplerisk:latest
+    container_name: simplerisk_app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DB_USER=simplerisk
+      - DB_PASSWORD=simplerisk_pass_local
+      - DB_DATABASE=simplerisk
+      - DB_HOST=simplerisk_db
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.5
+    container_name: simplerisk_db
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=simplerisk
+      - MYSQL_USER=simplerisk
+      - MYSQL_PASSWORD=simplerisk_pass_local
+      - MYSQL_ROOT_PASSWORD=simplerisk_root_local
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
