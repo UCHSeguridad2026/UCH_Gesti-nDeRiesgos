@@ -1,0 +1,33 @@
+services:
+  simplerisk:
+    image: simplerisk/simplerisk-minimal:20260519-001
+    container_name: simplerisk-demo
+    ports:
+      - "8080:80"
+      - "8443:443"
+    environment:
+      DB_SETUP: automatic
+      DB_SETUP_PASS: ${SIMPLERISK_SETUP_PASSWORD:?Definir SIMPLERISK_SETUP_PASSWORD antes de iniciar}
+      SIMPLERISK_DB_HOSTNAME: mysql
+    depends_on:
+      - mysql
+      - smtp
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: simplerisk-mysql-demo
+    command: ["mysqld", "--sql_mode=NO_ENGINE_SUBSTITUTION"]
+    environment:
+      MYSQL_ROOT_PASSWORD: ${SIMPLERISK_SETUP_PASSWORD:?Definir SIMPLERISK_SETUP_PASSWORD antes de iniciar}
+    volumes:
+      - simplerisk-mysql-data:/var/lib/mysql
+    restart: unless-stopped
+
+  smtp:
+    image: namshi/smtp
+    container_name: simplerisk-smtp-demo
+    restart: unless-stopped
+
+volumes:
+  simplerisk-mysql-data:
