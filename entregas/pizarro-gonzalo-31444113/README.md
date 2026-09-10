@@ -15,14 +15,17 @@ Se analiza la **Clínica UCH**, una clínica privada de 120 empleados, aproximad
 
 ## Cómo levantar el entorno
 
-1. Clonar el repositorio y ubicarse en `entregas/pizarro-gonzalo-31444113`.
-2. Revisar `entorno/docker-compose.yml` y completar cualquier variable local requerida sin subir archivos `.env`.
-3. Ejecutar `docker compose -f entorno/docker-compose.yml up -d`.
-4. Consultar los contenedores con `docker compose -f entorno/docker-compose.yml ps`.
-5. Abrir en el navegador la URL publicada por Docker, completar el instalador de SimpleRisk y conservar la URL local: `[COMPLETAR]`.
-6. Crear los usuarios indicados en `configuracion/usuarios.md`, sin documentar contraseñas.
-7. Cargar los riesgos de `configuracion/riesgos.md` y asociar los planes de acción definidos allí.
-8. Verificar que SimpleRisk muestre los riesgos, niveles y responsables esperados.
+1. Instalar y abrir Docker Desktop, con Docker Compose disponible.
+2. Clonar el repositorio y ubicarse en `entregas/pizarro-gonzalo-31444113`.
+3. Ejecutar `docker compose -f entorno/docker-compose.yml pull` para descargar la imagen oficial.
+4. Ejecutar `docker compose -f entorno/docker-compose.yml up -d`.
+5. Consultar los contenedores con `docker compose -f entorno/docker-compose.yml ps`.
+6. Abrir `http://localhost:8080/` en el navegador y completar el instalador inicial de SimpleRisk. También se puede usar `https://localhost:8443/`; el navegador advertirá sobre el certificado autofirmado.
+7. Crear los usuarios indicados en `configuracion/usuarios.md`, sin documentar contraseñas.
+8. Cargar los riesgos de `configuracion/riesgos.md` y asociar los planes de acción definidos allí.
+9. Verificar que SimpleRisk muestre los riesgos, niveles y responsables esperados.
+
+También se puede ejecutar `bash entorno/setup.sh` desde la raíz del trabajo; el script descarga la imagen, levanta el contenedor y muestra las URLs de acceso.
 
 Para detener el entorno: `docker compose -f entorno/docker-compose.yml down`. Para conservar los datos, no eliminar los volúmenes sin respaldo.
 
@@ -32,7 +35,6 @@ Para detener el entorno: `docker compose -f entorno/docker-compose.yml down`. Pa
 - El nivel se calcula como `probabilidad × impacto`: bajo, medio, alto y crítico.
 - Se priorizan riesgos que afectan historias clínicas, continuidad de atención y obligaciones de privacidad.
 - Los valores son una evaluación inicial del escenario y deben revisarse con evidencia de incidentes, auditorías y métricas reales.
-- girasol xD
 
 ## Archivos de la entrega
 
