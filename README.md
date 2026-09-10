@@ -1,7 +1,21 @@
 # UCH - Seguridad - Gestión de Riesgos
-> `#UCH_GestiónDeRiesgos`
+## 👤 Datos del Alumno
+- **Nombre y Apellido:** Fabricio Hugo Funes
+- **DNI:** 45447810
+- **Comisión:** 4to Año - Licenciatura en Ciencias de la Computación
 
-Este repositorio público está destinado únicamente para las entregas de los estudiantes.
+---
+
+## 🛠️ Instrucciones para Levantar el Entorno
+1. Clonar el repositorio y posicionarse en la rama correspondiente (`entrega/funes-fabricio-45447810`).
+2. Desplegar el entorno local de SimpleRisk utilizando el archivo `docker-compose.yml` ubicado en la carpeta `entorno/`.
+3. Ejecutar los scripts de configuración inicial o seed provistos para replicar los riesgos de la clínica privada (120 empleados, 800 pacientes diarios).
+
+---
+
+## 💡 Decisiones de Diseño
+- **Metodología:** Se utilizó SimpleRisk aplicando una matriz clásica de probabilidad e impacto (escala 1 a 5) justificada según contexto real de la clínica.
+- **Alcance:** Se priorizaron 7 riesgos críticos relacionados con la confidencialidad, integridad y disponibilidad de las historias clínicas digitales y datos de facturación.
 
 ---
 
