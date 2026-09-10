@@ -70,9 +70,6 @@ El entorno debe volver a estar disponible en `https://localhost:8443/` sin pasos
 - Si la página no carga al primer intento, esperá unos segundos más: MySQL puede tardar en inicializar dentro del contenedor la primera vez.
 
 
-
-# Decisiones de diseño
-
 ## Contexto del escenario
 
 La organización simulada es una clínica privada de 120 empleados que atiende 800 pacientes por día, y maneja tres tipos de información sensible:
