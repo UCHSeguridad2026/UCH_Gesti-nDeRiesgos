@@ -71,6 +71,42 @@ docker compose down             # detener y eliminar el contenedor
 docker compose down -v          # ¡CUIDADO! borra también la base de datos
 ```
 
+### Reproducción de la configuración
+
+Levantar el contenedor deja SimpleRisk operativo pero **con la configuración de
+fábrica**, que no reproduce los resultados de esta entrega. Para replicar el
+entorno documentado deben aplicarse los siguientes pasos, en este orden:
+
+**1. Crear la cuenta administradora.** En el primer acceso, completar la pantalla
+*Default Admin Account Creation*.
+
+**2. Ajustar la fórmula de riesgo** en *Configure → Risk Formula*:
+
+- Verificar que la fórmula sea `Likelihood x Impact`.
+- **Destildar** la casilla *Normalize scoring on a 0-10 scale*.
+- Pulsar *Update*.
+
+**3. Redefinir los umbrales de nivel de riesgo**, en la misma pantalla, haciendo
+clic sobre cada valor:
+
+| Nivel | Umbral |
+|---|:-:|
+| Very High | 16 |
+| High | 10 |
+| Medium | 5 |
+| Low | 0 |
+
+Sin este paso los riesgos se muestran con niveles distintos a los documentados.
+La justificación de ambos ajustes está en la sección 3.4.
+
+**4. Crear los tres usuarios** en *Configure → User Management*, con los permisos
+detallados en `configuracion/usuarios.md`. Asignar a los tres el equipo
+*Information Security*: en SimpleRisk la pertenencia a equipos condiciona la
+visibilidad de los riesgos.
+
+**5. Cargar los riesgos** con la cuenta `analista_riesgos`, según la tabla de
+correspondencia de campos incluida al final de `configuracion/riesgos.md`.
+
 ---
 
 ## 3. Decisiones de diseño
@@ -206,12 +242,12 @@ entregas/cabrera-uriel-31673361/
 │   ├── docker-compose.yml
 │   └── setup.sh
 ├── informe/
-│   ├── informe.md
-│   └── capturas/
+│   ├── informe.md               # desarrollo completo del TP (Partes A, B y C)
+│   └── capturas/                # 28 capturas de evidencia
 ├── configuracion/
 │   ├── usuarios.md              # usuarios y roles (SIN contraseñas)
 │   └── riesgos.md               # tabla de riesgos definidos
-├── scripts/
+├── scripts/                     # sin contenido: no se automatizó la carga
 └── reporte-ejecutivo/
     ├── reporte.tex              # fuente LaTeX del reporte
     └── reporte.pdf              # reporte para el Directorio (3 páginas)
@@ -223,9 +259,9 @@ entregas/cabrera-uriel-31673361/
 
 - [X] No hay credenciales en el repositorio
 - [X] El `.gitignore` está correctamente configurado
-- [ ] Las capturas no muestran datos sensibles
-- [ ] Los archivos `.sql` o dumps no están subidos
-- [ ] El informe está en formato legible
-- [ ] El reporte ejecutivo está completo
-- [ ] Los mensajes de commit son descriptivos
-- [ ] Mi branch está actualizada y funciona
+- [X] Las capturas no muestran datos sensibles
+- [X] Los archivos `.sql` o dumps no están subidos
+- [X] El informe está en formato legible
+- [X] El reporte ejecutivo está completo
+- [X] Los mensajes de commit son descriptivos
+- [X] Mi branch está actualizada y funciona

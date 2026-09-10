@@ -618,9 +618,199 @@ lo que cuesta— es precisamente la que el Directorio formulará al momento de
 aprobar el presupuesto.
 
 ### C.2 Integración con herramienta externa
-*(Pendiente.)*
 
----
+Se documenta el diseño de una integración entre SimpleRisk y **Slack**, orientada
+a notificar automáticamente la aparición de riesgos de nivel elevado y el
+vencimiento próximo de planes de mitigación.
+
+> **Alcance de esta sección.** Se desarrolla el diseño de la integración, no su
+> implementación. La consigna requiere investigar y documentar; la
+> implementación efectiva corresponde al punto adicional, que no se aborda en
+> esta entrega.
+
+#### Problema que resuelve
+
+El registro de riesgos es un instrumento de consulta: alguien debe entrar a
+SimpleRisk para enterarse de que algo cambió. En una clínica cuyo equipo de
+sistemas tiene dos o tres personas sin dedicación exclusiva a seguridad, esa
+consulta no ocurre con regularidad, y un riesgo Crítico cargado un viernes puede
+permanecer sin lectura hasta que alguien recuerde revisar la plataforma.
+
+Un plan de mitigación con vencimiento a 45 días presenta el mismo problema en
+sentido inverso: nada avisa que la fecha se aproxima. El registro conserva la
+información pero no la empuja hacia quien debe actuar.
+
+La integración busca invertir esa relación: que la información relevante llegue
+al canal donde el equipo ya trabaja, en lugar de esperar a ser consultada.
+
+#### Vías de integración disponibles
+
+SimpleRisk expone un endpoint REST bajo `/api` que devuelve JSON y admite
+autenticación basada en cookies para un usuario con sesión iniciada. La
+generación de claves de API —el parámetro `key={key}` que permite la interacción
+automatizada desde scripts externos— corresponde al **API Extra**, un módulo
+comercial que no forma parte de SimpleRisk Core.
+
+Esta restricción condiciona el diseño:
+
+| Vía | Disponible en Core | Evaluación |
+|---|:-:|---|
+| API REST con clave de usuario | No | Sería la opción preferible. Requiere licencia del API Extra. |
+| API REST con autenticación por cookie | Sí | Obliga a automatizar el inicio de sesión y sostener la cookie. Frágil ante cambios de sesión, expiración o actualizaciones de la aplicación. |
+| Consulta directa a la base de datos | Sí | Estable y sin dependencias comerciales. Acopla la integración al esquema de datos, que puede variar entre versiones. |
+| Extra de notificaciones nativo | No | SimpleRisk ofrece un módulo de notificaciones como Extra comercial. |
+
+Se adopta la **consulta directa a la base de datos** como origen de datos. Es la
+única alternativa que ofrece estabilidad sin licencia adicional. Se asume como
+contrapartida que una actualización mayor de SimpleRisk podría requerir revisar
+las consultas, riesgo que se mitiga documentando el esquema utilizado y
+restringiendo el acceso a operaciones de lectura.
+
+#### Arquitectura propuesta
+
+El flujo de datos recorre cuatro etapas:
+
+1. Un programador (`cron`) dispara la ejecución del servicio de notificación cada
+   hora.
+2. El servicio consulta la base de datos de SimpleRisk mediante sentencias de
+   solo lectura, y contrasta el resultado contra un registro local de eventos ya
+   notificados para identificar las novedades.
+3. Por cada novedad, compone un mensaje y lo envía mediante una petición HTTPS
+   con cuerpo JSON al Incoming Webhook de Slack.
+4. Slack publica el mensaje en el canal de seguridad y el servicio deja
+   constancia del envío en su registro local, de modo que la siguiente ejecución
+   no lo repita.
+
+**Componentes:**
+
+1. **Servicio de notificación.** Script ejecutado periódicamente que consulta la
+   base de datos, determina qué eventos son nuevos y publica en Slack. Se
+   ejecuta como contenedor adicional del mismo `docker-compose`, o como tarea
+   programada en el servidor anfitrión.
+
+2. **Estado local.** SimpleRisk Core no emite eventos hacia el exterior, por lo
+   que el servicio debe operar por consulta periódica. Esto exige recordar qué
+   se notificó previamente para no repetir avisos en cada ejecución. Un archivo
+   con los identificadores ya procesados resulta suficiente para el volumen del
+   escenario.
+
+3. **Incoming Webhook de Slack.** Mecanismo por el cual una aplicación externa
+   publica mensajes en un canal mediante una petición HTTPS con cuerpo JSON,
+   sin requerir credenciales de usuario de Slack.
+
+**Cuenta de acceso.** Se define un usuario de base de datos exclusivo para la
+integración, con permiso de `SELECT` únicamente sobre las tablas necesarias. El
+servicio no requiere escritura sobre SimpleRisk, y otorgarla ampliaría la
+superficie de ataque sin beneficio: es la aplicación del principio de menor
+privilegio al plano de la integración, coherente con el criterio adoptado para
+los usuarios de la plataforma en la Parte A.2.
+
+#### Eventos a notificar
+
+| Evento | Disparador | Destinatario |
+|---|---|---|
+| Alta de riesgo Crítico | Riesgo nuevo con valor ≥ 16 | Canal de seguridad |
+| Alta de riesgo Alto | Riesgo nuevo con valor entre 10 y 15 | Canal de seguridad |
+| Vencimiento próximo de mitigación | Plan con fecha planificada a 7 días | Responsable del plan |
+| Plan vencido sin avance | Fecha superada con avance en 0 % | Canal de seguridad |
+| Riesgo sin revisión | Riesgo Crítico sin revisión en 90 días | Canal de seguridad |
+
+Los tres últimos son los que aportan mayor valor operativo, porque atienden el
+problema real del escenario: no es que los riesgos se desconozcan, sino que los
+plazos se vencen sin que nadie lo advierta.
+
+#### Diseño del mensaje
+
+El contenido del mensaje es la decisión de seguridad más relevante de todo el
+diseño, y se desarrolla en el apartado siguiente. La estructura propuesta es
+deliberadamente mínima:
+
+```json
+{
+  "text": "Nuevo riesgo de nivel Crítico registrado",
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Nuevo riesgo de nivel Crítico*\nID 1002 · Categoría: Technical Vulnerability Management"
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        { "type": "mrkdwn", "text": "Registrado por analista_riesgos · Requiere revisión" }
+      ]
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": { "type": "plain_text", "text": "Ver en SimpleRisk" },
+          "url": "https://simplerisk.interno/management/view.php?id=1002"
+        }
+      ]
+    }
+  ]
+}
+```
+
+El mensaje comunica **que existe algo que atender y dónde encontrarlo**, sin
+transportar el contenido del riesgo.
+
+#### Riesgos que introduce la propia integración
+
+Una integración de este tipo no es neutral desde el punto de vista de la
+seguridad: incorpora un canal de salida de información hacia un servicio de
+terceros. Se identifican tres consideraciones que condicionan el diseño.
+
+**1. El registro de riesgos describe las debilidades de la organización.** Un
+mensaje que informara *"Nuevo riesgo Crítico: los backups no tienen copia fuera
+de línea y la red no está segmentada"* constituiría, en manos inadecuadas, una
+guía de ataque. Por esa razón el mensaje transporta el identificador, el nivel y
+un enlace, pero nunca la descripción del riesgo, los activos afectados ni los
+controles ausentes. Quien necesite el detalle debe autenticarse en SimpleRisk,
+donde los permisos de la Parte A.2 determinan qué puede ver.
+
+**2. Slack es un tercero.** La información transita y se almacena en
+infraestructura ajena a la clínica. Aunque el mensaje no contenga datos de
+pacientes —y por tanto no active directamente el régimen de la Ley 25.326—, sí
+revela la postura de seguridad de la institución. Esto guarda relación directa
+con R07 y con el dato del DBIR de Verizon según el cual el 32 % de las brechas
+del sector Healthcare involucró la participación de terceros. La integración
+debería incorporarse al alcance del plan PA05, sumando al proveedor de mensajería
+a la revisión de contratos y cláusulas de tratamiento.
+
+**3. La URL del webhook es una credencial.** Quien la posea puede publicar
+mensajes en el canal suplantando al sistema de gestión de riesgos, lo que habilita
+un escenario de ingeniería social especialmente eficaz: un aviso falso de riesgo
+crítico con un enlace a un sitio controlado por el atacante, dirigido
+precisamente a las personas entrenadas para responder a esos avisos. La URL debe
+tratarse con el mismo cuidado que una contraseña: almacenada en variable de
+entorno o gestor de secretos, nunca incrustada en el código ni versionada en el
+repositorio, y rotada ante cualquier sospecha de exposición.
+
+Este último punto se articula con el `.gitignore` de esta entrega, que excluye
+los archivos `.env` justamente para impedir que credenciales de este tipo lleguen
+a un repositorio público.
+
+#### Limitaciones del diseño
+
+**Unidireccionalidad.** El flujo va de SimpleRisk hacia Slack. Una integración
+bidireccional —que permitiera, por ejemplo, actualizar el avance de una mitigación
+desde el propio canal— requiere escritura sobre SimpleRisk y, por lo tanto, el
+API Extra.
+
+**Latencia.** Al operar por consulta periódica y no por eventos, existe un retraso
+igual al intervalo de ejecución. Para los eventos previstos —altas de riesgo y
+vencimientos de plazo— un intervalo de una hora resulta ampliamente suficiente;
+no se trata de un caso de uso de detección en tiempo real.
+
+**Acoplamiento al esquema.** Consultar la base de datos en lugar de una interfaz
+publicada implica que cambios internos entre versiones de SimpleRisk pueden
+romper la integración. Es el costo de prescindir del módulo comercial, y debe
+asumirse explícitamente como deuda técnica de la solución.
 
 ## Referencias
 
@@ -633,3 +823,7 @@ aprobar el presupuesto.
 - ISO/IEC 27005: Information security risk management.
 - NIST (2012). *SP 800-30 Rev. 1: Guide for Conducting Risk Assessments*.
 - SimpleRisk. *Documentación oficial*. https://www.simplerisk.com/documentation
+- SimpleRisk. *The SimpleRisk API Users Guide* y *API Extra*.
+  https://www.simplerisk.com/extras/api
+- Slack. *Sending messages using Incoming Webhooks*.
+  https://api.slack.com/messaging/webhooks
