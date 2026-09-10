@@ -32,3 +32,38 @@ Se definieron 3 planes de mitigacion para los riesgos de mayor nivel:
 - Presupuesto: $0 a $100.000
 - Responsable: Gaston Alvarez
 - Requisitos de seguridad: autenticacion multifactor (MFA), filtrado anti-phishing, capacitacion periodica al personal
+## Analisis critico: SimpleRisk vs NIST SP 800-30
+
+### Enfoque de SimpleRisk
+
+SimpleRisk utiliza una matriz clasica de probabilidad x impacto (metodologia cualitativa/semi-cuantitativa de 5x5), donde cada riesgo recibe un puntaje numerico simple resultante de multiplicar ambos valores. Es rapida de aplicar, visual y facil de entender para audiencias no tecnicas, pero depende fuertemente del criterio subjetivo de quien evalua cada riesgo.
+
+### Enfoque de NIST SP 800-30
+
+La guia NIST SP 800-30 (Guide for Conducting Risk Assessments) propone un proceso mas estructurado y documentado, que incluye:
+- Identificacion explicita de fuentes de amenaza (adversarial, accidental, estructural, ambiental) y su capacidad, intencion y probabilidad de exito.
+- Analisis de vulnerabilidades asociadas a cada activo, con severidad asignada por separado.
+- Calculo de probabilidad como una combinacion de probabilidad de inicio de la amenaza y probabilidad de exito dado el inicio.
+- Documentacion extensa de supuestos e incertidumbre en cada estimacion.
+
+### Ventajas y desventajas
+
+**SimpleRisk (matriz clasica):**
+- Ventaja: rapidez de implementacion, curva de aprendizaje baja, ideal para organizaciones pequenas o medianas sin equipo dedicado de riesgos (como el caso de la clinica de este TP).
+- Desventaja: simplifica demasiado el analisis, puede subestimar riesgos compuestos (por ejemplo, cuando una amenaza depende de multiples vulnerabilidades encadenadas) y la escala 1-5 puede generar falsa precision.
+
+**NIST SP 800-30:**
+- Ventaja: mayor rigor metodologico, mejor trazabilidad de las decisiones y supuestos, mas adecuado para auditorias externas o sectores altamente regulados (como salud o finanzas).
+- Desventaja: requiere mas tiempo, mas capacitacion del equipo y mas documentacion, lo que puede ser excesivo para una organizacion chica con recursos limitados.
+
+### En que contexto conviene cada una
+
+Para una clinica de 120 empleados como la del escenario de este TP, el enfoque de SimpleRisk resulta razonable como punto de partida, dado el tamano de la organizacion y la necesidad de resultados rapidos y comunicables al directorio. Sin embargo, dado que la clinica maneja datos de salud (altamente sensibles y regulados), a mediano plazo seria recomendable migrar hacia un proceso mas alineado con NIST SP 800-30, especialmente para los riesgos clasificados como criticos o altos (R01, R02, R04), donde una mejor trazabilidad de los supuestos podria ser exigida en una auditoria de cumplimiento normativo.
+
+## Integracion con herramienta externa
+
+Se investigo la integracion de SimpleRisk con **Slack**, mediante el envio de notificaciones automaticas mediante webhooks cuando se crea un riesgo de nivel alto o critico.
+
+SimpleRisk permite configurar notificaciones por correo electronico de forma nativa, y estas pueden redirigirse a un canal de Slack mediante la funcionalidad de "Email to Slack" (cada canal de Slack puede generar una direccion de correo unica a la que reenviar notificaciones). De esta forma, cuando SimpleRisk envia un correo de alerta por un riesgo critico, ese mismo correo llega automaticamente al canal de seguridad del equipo de TI, sin necesidad de desarrollar una integracion a medida.
+
+Una alternativa mas robusta, no implementada en este TP por falta de tiempo, seria un script que consulte la API de SimpleRisk periodicamente y publique en Slack mediante un webhook nativo los riesgos que superen un umbral de puntaje definido.
