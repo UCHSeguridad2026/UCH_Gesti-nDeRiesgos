@@ -8,7 +8,6 @@ compuesto por dos contenedores:
 - SimpleRisk
 - MySQL 8.0
 
-La aplicación se expone localmente mediante el puerto 8080.
 
 ## A.2 Levantamiento del entorno
 
@@ -18,3 +17,26 @@ Desde la carpeta `entorno/` se ejecutaron:
 docker compose pull
 docker compose up -d
 docker compose ps
+```
+
+### Acceso a SimpleRisk
+
+La aplicación utiliza HTTPS. Para permitir el acceso desde el
+host se publicaron los siguientes puertos:
+
+- `8080` → HTTP
+- `8443` → HTTPS
+
+El acceso principal al sistema se realiza mediante:
+
+`https://localhost:8443`
+
+Al tratarse de un entorno local de laboratorio, el certificado
+HTTPS no corresponde a una autoridad certificadora pública.
+
+## Validación inicial de SimpleRisk
+
+Se creó un riesgo de prueba con el objetivo de verificar el correcto funcionamiento de la plataforma y validar el proceso de alta, evaluación y visualización de riesgos. La prueba fue realizada satisfactoriamente y posteriormente se verificó que el riesgo permaneciera almacenado en el sistema.
+
+Captura:
+- `../informe/capturas/06-riesgo-test.png`: cuenta administradora.
