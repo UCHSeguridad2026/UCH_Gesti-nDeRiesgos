@@ -249,6 +249,6 @@ en Alto o Crítico, lo que constituye el objetivo del tratamiento.
 
 ---
 
-> **Nota de autoría:** los valores de probabilidad e impacto reflejan un criterio profesional
-> aplicado al escenario. Deben revisarse y ajustarse según el juicio del analista antes de la
-> entrega final.
+> **Nota metodológica:** los valores de probabilidad e impacto reflejan el criterio profesional
+> aplicado al escenario de la clínica; ante nueva evidencia o datos actualizados del sector
+> (p. ej. el Verizon DBIR), corresponde recalibrarlos.
