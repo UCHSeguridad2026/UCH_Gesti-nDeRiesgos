@@ -80,9 +80,15 @@ Escenario y Presupuesto: Se diseñó un plan de acción formal asociado a los ri
 
 Checklist de auto-revisión
 [x] No hay credenciales ni contraseñas reales expuestas en el repositorio.[x] El .gitignore está correctamente configurado.
+
 [x] Las capturas y evidencias adjuntas no muestran datos sensibles ni reales.
+
 [x] Los archivos .sql o dumps de base de datos no están subidos al repositorio.
+
 [x] El informe y la documentación están completos y en formato legible (README.md y HTML).
+
 [x] El reporte ejecutivo está completo e incluye presupuestos, planes de acción y recomendaciones.
+
 [x] Los mensajes de commit son descriptivos y reflejan el avance del proyecto.
+
 [x] La branch de entrega está actualizada, sincronizada y el entorno funciona correctamente.
