@@ -1,32 +1,26 @@
-version: '3.8'
-
 services:
-  simplerisk-db:
+  db:
     image: mariadb:10.5
     container_name: simplerisk-db
     environment:
-      MYSQL_ROOT_PASSWORD: root_demo_password
+      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: simplerisk
       MYSQL_USER: simplerisk
-      MYSQL_PASSWORD: simplerisk_demo_password
-    volumes:
-      - db_data:/var/lib/mysql
+      MYSQL_PASSWORD: simpleriskpassword
     restart: always
 
-  simplerisk-app:
+  simplerisk:
     image: simplerisk/simplerisk:latest
     container_name: simplerisk-app
     ports:
-      - "8080:80"
+      - "9000:80"
+      - "9443:443"
     environment:
-      DB_HOST: simplerisk-db
+      DB_HOST: db
       DB_PORT: 3306
       DB_USERNAME: simplerisk
-      DB_PASSWORD: simplerisk_demo_password
+      DB_PASSWORD: simpleriskpassword
       DB_DATABASE: simplerisk
     depends_on:
-      - simplerisk-db
+      - db
     restart: always
-
-volumes:
-  db_data:

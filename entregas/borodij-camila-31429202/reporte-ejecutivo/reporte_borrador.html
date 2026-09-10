@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.5; color: #1e293b; }
+  h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; }
+  h2 { color: #1e293b; margin-top: 20px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+  th, td { border: 1px solid #cbd5e1; padding: 8px 12px; text-align: left; }
+  th { background-color: #0f172a; color: white; }
+  .card { background: #f8fafc; border-left: 4px solid #2563eb; padding: 12px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+  <h1>Reporte Ejecutivo de Gestión de Riesgos</h1>
+  <p><strong>Para:</strong> Directorio y Gerencia General — Clínica Privada<br>
+  <strong>De:</strong> Oficial de Seguridad de la Información (CISO) — Camila Aylen Borodij<br>
+  <strong>Fecha:</strong> Septiembre 2026</p>
+
+  <h2>1. Resumen Ejecutivo</h2>
+  <p>Tras la auditoría técnica y funcional de seguridad, se consolidó un inventario inicial de <strong>7 riesgos críticos</strong> que afectan a la disponibilidad de las Historias Clínicas Electrónicas (HCE) y la confidencialidad de datos de pacientes. Se requiere una inversión prioritaria estimada en <strong>USD 9.700</strong>.</p>
+
+  <h2>2. Top 5 Riesgos Principales</h2>
+  <table>
+    <tr><th>Riesgo / Amenaza</th><th>Prob.</th><th>Impacto</th><th>Nivel</th><th>Estado</th></tr>
+    <tr><td>Infección por Ransomware en Servidor HCE</td><td>4 (Alta)</td><td>5 (Crítico)</td><td>20 - Alto</td><td>Mitigar</td></tr>
+    <tr><td>Exfiltración de Datos Personales por Phishing</td><td>4 (Alta)</td><td>4 (Alto)</td><td>16 - Alto</td><td>Mitigar</td></tr>
+    <tr><td>Acceso No Autorizado a HCE (Sin MFA)</td><td>3 (Media)</td><td>5 (Crítico)</td><td>15 - Alto</td><td>Mitigar</td></tr>
+    <tr><td>Falla Eléctrica en Data Center sin UPS</td><td>3 (Media)</td><td>4 (Alto)</td><td>12 - Medio</td><td>Planificado</td></tr>
+    <tr><td>Indisponibilidad de Facturación AFIP / Obras Sociales</td><td>3 (Media)</td><td>3 (Medio)</td><td>9 - Medio</td><td>Aceptar</td></tr>
+  </table>
+
+  <h2>3. Planes de Acción Prioritarios</h2>
+  <div class="card"><strong>Plan 1: Despliegue de Autenticación MFA</strong><br>Presupuesto: USD 2.500 | Vencimiento: 31/12/2026</div>
+  <div class="card"><strong>Plan 2: Copias de Seguridad Inmutables y Antivirus EDR</strong><br>Presupuesto: USD 6.000 | Vencimiento: 15/11/2026</div>
+  <div class="card"><strong>Plan 3: Programa de Concientización en Phishing</strong><br>Presupuesto: USD 1.200 | Vencimiento: 30/10/2026</div>
+</body>
+</html>
