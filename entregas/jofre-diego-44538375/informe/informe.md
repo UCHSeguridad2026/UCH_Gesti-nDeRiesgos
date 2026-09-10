@@ -63,3 +63,19 @@ Este riesgo fue utilizado únicamente como prueba funcional de la herramienta, p
 El detalle se encuentra documentado en:
 
 `configuracion/riesgos.md`
+
+### 7. Riesgos del escenario y planes de acción
+
+Se definieron y cargaron en SimpleRisk siete riesgos específicos del escenario de la clínica, contemplando aspectos de confidencialidad, integridad, disponibilidad, continuidad operativa y dependencia de terceros.
+
+Para cada riesgo se documentaron los activos afectados, la probabilidad e impacto, su justificación, el nivel resultante, los controles existentes, el tratamiento propuesto y el propietario correspondiente.
+
+Además, se definieron tres planes de acción asociados a riesgos de nivel alto o muy alto:
+
+- Protección contra ransomware.
+- Fortalecimiento de autenticación y prevención de phishing.
+- Fortalecimiento de la estrategia de backups.
+
+El detalle completo de los riesgos, sus evaluaciones, tratamientos, planes de acción y evidencias se encuentra en:
+
+`configuracion/riesgos.md`
