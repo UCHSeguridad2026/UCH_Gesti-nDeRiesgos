@@ -168,3 +168,28 @@ Se definieron 7 riesgos específicos del contexto de la clínica, cubriendo las 
 - **Propietario:** Administración/Facturación.
 
 ---
+3.5 Planes de acción para riesgos de nivel alto
+
+Se definieron 3 planes de acción asociados a riesgos de nivel Alto del registro, seleccionados de forma de cubrir distintos tipos de tratamiento (técnico, de procesos/personas, y legal/contractual):
+
+Plan de acción 1 — asociado al Riesgo 2 (Backups del sistema de HCE sin prueba de restauración)
+Título: Implementación de pruebas trimestrales de restauración de backups.
+Descripción: Diseñar y ejecutar un cronograma de pruebas de restauración del backup de la base de datos de HCE en un entorno aislado, documentando resultados, tiempos de restauración obtenidos (RTO real) y definiendo una política formal de retención.
+Fecha de vencimiento: 60 días desde la aprobación del plan.
+Responsable: Jefe de IT / Sistemas.
+Presupuesto estimado: USD 500–1000 (horas de trabajo del equipo de IT y, si aplica, un entorno de pruebas separado).
+Estado inicial: No iniciado / Pendiente.
+Plan de acción 2 — asociado al Riesgo 5 (Credenciales compartidas en guardias nocturnas)
+Título: Eliminación de usuario genérico y alta de accesos individuales para el personal de guardia.
+Descripción: Dar de baja el usuario compartido "guardia_noche", crear cuentas individuales para todo el personal que realiza guardias, y evaluar una solución de acceso rápido (tarjeta/PIN corto) que no sacrifique trazabilidad por velocidad de login.
+Fecha de vencimiento: 45 días.
+Responsable: Jefe de IT / Sistemas, en coordinación con Dirección Médica para la capacitación del personal.
+Presupuesto estimado: USD 300–600 (principalmente horas de configuración; más si se implementa hardware de acceso rápido).
+Estado inicial: No iniciado / Pendiente.
+Plan de acción 3 — asociado al Riesgo 6 (Falta de NDA con proveedores externos de TI)
+Título: Formalización contractual con proveedores externos de TI.
+Descripción: Redactar y firmar con cada proveedor externo con acceso a sistemas o datos un contrato que incluya acuerdo de confidencialidad (NDA) y cláusulas de encargado de tratamiento de datos personales conforme a la Ley 25.326.
+Fecha de vencimiento: 90 días (incluye tiempo de negociación legal).
+Responsable: Responsable de Seguridad de la Información, en conjunto con Administración.
+Presupuesto estimado: USD 800–1500 (asesoría legal externa para la redacción de los contratos).
+Estado inicial: No iniciado / Pendiente.

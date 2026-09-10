@@ -47,6 +47,8 @@ comision: G
 
 ## Decisiones de diseño
 
+GIRASOL :D
+
 - **Imagen utilizada:** `simplerisk/simplerisk` (imagen oficial *all-in-one*, incluye Apache + PHP + MySQL en un solo contenedor), en lugar de `simplerisk-minimal` + MySQL separado. Se eligió por simplicidad: un solo servicio, sin necesidad de coordinar variables de entorno entre contenedores ni de un servicio SMTP adicional.
 - **Puertos:** se mapearon `8080` y `8443` en el host (en vez de `80`/`443`) para evitar conflictos con otros servicios que suelen ocupar esos puertos en Windows (IIS, otros contenedores, etc.).
 - **Persistencia:** esta imagen no documenta oficialmente un volumen externo para los datos; mientras no se elimine el contenedor (`docker rm`) los datos persisten entre `docker compose stop` / `up`. Se documenta esta limitación en vez de asumir una ruta de volumen no confirmada.
@@ -130,3 +132,16 @@ Para mantener consistencia entre los riesgos definidos, se establecieron de ante
 - **Responsable de Seguridad de la Información:** riesgos transversales de confidencialidad y legales.
 - **Dirección Médica:** riesgos que afectan directamente la atención al paciente.
 - **Administración/Facturación:** riesgos vinculados a obras sociales y facturación.
+
+
+## 📌 Checklist de Auto-Revisión
+*Por favor, marca las casillas correspondientes antes de realizar tu entrega:*
+
+- [x] No hay credenciales en el repositorio.
+- [x] El archivo `.gitignore` está correctamente configurado.
+- [x] Las capturas de pantalla no muestran datos sensibles.
+- [x] Los archivos `.sql` o dumps no están subidos.
+- [x] El informe está en un formato legible.
+- [x] El reporte ejecutivo está completo.
+- [x] Los mensajes de commit son descriptivos.
+- [x] Mi branch está actualizada y funciona correctamente.
