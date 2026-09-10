@@ -17,7 +17,8 @@ services:
     image: simplerisk/simplerisk:latest
     container_name: simplerisk_app_clinica
     ports:
-      - "8000:80"
+      - "80:80"
+      - "443:443"
     environment:
       - DB_HOST=db_clinica
       - DB_USER=admin_demo
