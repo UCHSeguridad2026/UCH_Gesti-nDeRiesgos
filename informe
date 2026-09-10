@@ -1,1 +1,94 @@
+# Informe de Gestión de Riesgos - Clínica Privada
 
+## 1. Contexto Organizacional
+- **Organización:** Clínica privada con 120 empleados y un flujo diario de aproximadamente 800 pacientes.
+- **Activos Críticos:** Historias clínicas digitales (HCD), base de datos de pacientes, sistemas de facturación y conectividad de red.
+- **Herramienta utilizada:** SimpleRisk (Matriz clásica de probabilidad e impacto, escala 1 a 5).
+
+---
+
+## 2. Registro de Riesgos (Parte B)
+
+### R01: Ransomware en base de datos clínica
+- **Categoría:** Sensitive Data Management / Integridad y Disponibilidad
+- **Activos afectados:** Base de Datos H.C., Servidor principal
+- **Probabilidad:** 5 (Almost Certain) - Impacto: 5 (Catastrophic) -> **Nivel de Riesgo: 10 (High)**
+- **Controles existentes:** Antivirus básico.
+- **Plan de tratamiento:** Mitigar (Implementar respaldos cifrados inmutables y segmentación de red).
+- **Propietario del riesgo:** Fabricio Funes
+
+### R02: Robo de credenciales médicas - Phishing
+- **Categoría:** Access Management / Confidencialidad
+- **Activos afectados:** Credenciales de usuarios, Portal Médico
+- **Probabilidad:** 4 (Almost Certain) - Impacto: 4 (Major) -> **Nivel de Riesgo: 8 (High)**
+- **Controles existentes:** Filtro de spam básico.
+- **Plan de tratamiento:** Mitigar (Implementar autenticación multifactor - MFA y capacitación obligatoria).
+- **Propietario del riesgo:** Fabricio Funes
+
+### R03: Caída del enlace de internet principal
+- **Categoría:** Third-Party Management / Disponibilidad
+- **Activos afectados:** Conectividad, Sistema de Facturación y Obras Sociales
+- **Probabilidad:** 4 (Likely) - Impacto: 4 (Major) -> **Nivel de Riesgo: 6.4 (Medium)**
+- **Controles existentes:** Conexión única ISP.
+- **Plan de tratamiento:** Mitigar (Contratar enlace secundario de resguardo redundante).
+- **Propietario del riesgo:** Fabricio Funes
+
+### R04: Acceso no autorizado a red Wi-Fi interna
+- **Categoría:** Technical Vulnerability Management / Confidencialidad
+- **Activos afectados:** Red Wi-Fi Administrativa
+- **Probabilidad:** 4 (Almost Certain) - Impacto: 3 (Moderate) -> **Nivel de Riesgo: 6 (Medium)**
+- **Controles existentes:** Contraseña compartida genérica.
+- **Plan de tratamiento:** Mitigar (Implementar WPA2/3 Enterprise con autenticación individual 802.1X).
+- **Propietario del riesgo:** Fabricio Funes
+
+### R05: Pérdida de datos por falla de hardware del servidor
+- **Categoría:** Physical Security / Disponibilidad
+- **Activos afectados:** Servidor de Base de Datos
+- **Probabilidad:** 2 (Unlikely) - Impacto: 5 (Catastrophic) -> **Nivel de Riesgo: 4 (Medium)**
+- **Controles existentes:** Almacenamiento simple sin RAID.
+- **Plan de tratamiento:** Mitigar (Configurar arreglos de discos redundantes RAID y respaldos locales periódicos).
+- **Propietario del riesgo:** Fabricio Funes
+
+### R06: Filtración accidental de datos por correo
+- **Categoría:** Sensitive Data Management / Confidencialidad
+- **Activos afectados:** Datos de pacientes (PHI)
+- **Probabilidad:** 3 (Credible) - Impacto: 3 (Moderate) -> **Nivel de Riesgo: 3.6 (Low)**
+- **Controles existentes:** Ninguno.
+- **Plan de tratamiento:** Mitigar (Establecer políticas de prevención de pérdida de datos - DLP en correo).
+- **Propietario del riesgo:** Fabricio Funes
+
+### R07: Daño físico a equipos por inundación/incendio
+- **Categoría:** Environmental Resilience / Disponibilidad
+- **Activos afectados:** Infraestructura Física, Servidores
+- **Probabilidad:** 1 (Remote) - Impacto: 5 (Catastrophic) -> **Nivel de Riesgo: 2 (Low)**
+- **Controles existentes:** Extintores portátiles.
+- **Plan de tratamiento:** Aceptar / Monitorear (Mejorar protocolos de revisión de elementos físicos).
+- **Propietario del riesgo:** Fabricio Funes
+
+---
+
+## 3. Planes de Acción Asociados
+1. **PA-01: Despliegue de Respaldos Inmutables (R01)**
+   - *Fecha límite:* 30/10/2026
+   - *Responsable:* Área de Infraestructura
+   - *Presupuesto:* $1,200 USD
+   - *Estado:* New / Open
+2. **PA-02: Implementación de MFA Institucional (R02)**
+   - *Fecha límite:* 15/11/2026
+   - *Responsable:* Seguridad Informática
+   - *Presupuesto:* $800 USD
+   - *Estado:* New / Open
+3. **PA-03: Redundancia de Enlace de Internet (R03)**
+   - *Fecha límite:* 30/11/2026
+   - *Responsable:* Redes y Comunicaciones
+   - *Presupuesto:* $500 USD
+   - *Estado:* New / Open
+
+---
+
+## 4. Análisis Crítico y Profundización (Parte C)
+- **Comparación Metodológica (SimpleRisk vs. NIST SP 800-30):**
+  - *SimpleRisk* destaca por su agilidad, facilidad de despliegue rápido y una interfaz web intuitiva basada en una matriz clásica de probabilidad e impacto, ideal para organizaciones que necesitan un registro inicial operativo sin fricción.
+  - *NIST SP 800-30* ofrece un enfoque mucho más profundo, exhaustivo y granular orientado a la evaluación detallada de amenazas específicas, vulnerabilidades y el impacto en la cadena de suministro, siendo ideal para organizaciones maduras o reguladas.
+- **Integración Tecnológica:**
+  - Se documenta la viabilidad de integrar SimpleRisk con sistemas de tickets (Jira/ServiceNow) o canales de alerta mediante webhooks para notificar de manera automatizada la creación de riesgos de nivel Alto a los equipos de respuesta a incidentes.
