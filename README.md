@@ -5,14 +5,14 @@
 * Nombre Completo: Marco Asensio
 * Libreta Universitaria (Legajo): 31071489
 * Email Institucional: marcoasensio3140@gmail.com
-* Comision: cuarto anio
+* Comision: cuarto año
 
 
 # Instrucciones para Levantar el Entorno
 
 
 
-# Decisiones de Disenio
+# Decisiones de Diseño
 * Metodologia: Se utilizo una matriz clasica de probabilidad x impacto provista por SimpleRisk
 * Verificacion de lectura: Para constatar la revision completa del material de catedra, se incluye la palabra clave obligatoria: **girasol**
 
