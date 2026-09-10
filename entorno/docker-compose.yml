@@ -1,0 +1,33 @@
+services:
+  simplerisk:
+    image: simplerisk/simplerisk
+    container_name: simplerisk
+    ports:
+      - "8080:80"
+      - "443:443"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: simplerisk
+      DB_USER: simplerisk
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: simplerisk-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: simplerisk
+      MYSQL_USER: simplerisk
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    command:
+      - --sql-mode=
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
