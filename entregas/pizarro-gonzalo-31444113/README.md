@@ -25,9 +25,9 @@ Se analiza la **Clínica UCH**, una clínica privada de 120 empleados, aproximad
 8. Cargar los riesgos de `configuracion/riesgos.md` y asociar los planes de acción definidos allí.
 9. Verificar que SimpleRisk muestre los riesgos, niveles y responsables esperados.
 
-También se puede ejecutar `bash entorno/setup.sh` desde la raíz del trabajo; el script descarga la imagen, levanta el contenedor y muestra las URLs de acceso.
+También se puede ejecutar `bash entorno/setup.sh` desde la raíz del trabajo; el script descarga la imagen, levanta el contenedor y muestra las URLs de acceso. La configuración de SimpleRisk, su base de datos y las credenciales internas se almacenan en los volúmenes nombrados `simplerisk_data`, `simplerisk_database` y `simplerisk_passwords`.
 
-Para detener el entorno: `docker compose -f entorno/docker-compose.yml down`. Para conservar los datos, no eliminar los volúmenes sin respaldo.
+Para detener el entorno: `docker compose -f entorno/docker-compose.yml down`. Este comando conserva los volúmenes y permite recuperar la instalación al ejecutar nuevamente `up -d`. No ejecutar `docker compose -f entorno/docker-compose.yml down -v` salvo que se quiera eliminar la configuración y los datos; realizar respaldos de los volúmenes antes de cualquier operación destructiva.
 
 ## Decisiones de diseño
 

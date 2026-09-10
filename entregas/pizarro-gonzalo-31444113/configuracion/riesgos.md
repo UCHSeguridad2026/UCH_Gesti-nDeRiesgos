@@ -117,15 +117,15 @@ Los tres planes están asociados a los riesgos de mayor nivel priorizados por la
 ### PA-01 - Recuperación probada de HCE y servicios críticos (riesgo 1004)
 
 - **Descripción:** implementar backup 3-2-1 con una copia cifrada e inmutable fuera del entorno productivo, definir RTO/RPO para HCE y admisión, y ejecutar una restauración documentada de prueba con evidencia de resultados.
-- **Vencimiento:** 09/10/2026.
-- **Responsable:** Jefe de Sistemas.
-- **Presupuesto estimado:** USD 4.500 (almacenamiento inmutable, configuración y horas de prueba).
+- **Vencimiento:** 15/01/2027.
+- **Responsable:** Administrador.
+- **Presupuesto estimado:** USD 200.001–300.000
 - **Estado inicial:** No iniciado.
 
 ### PA-02 - Contención de ransomware en la red clínica (riesgo 1005)
 
 - **Descripción:** separar la red clínica de la administrativa, desplegar EDR en servidores y puestos críticos, bloquear ejecución de macros no confiables y realizar un ejercicio de aislamiento y respuesta con Sistemas y Dirección Médica.
-- **Vencimiento:** 23/10/2026.
+- **Vencimiento:** 10/11/2026.
 - **Responsable:** Responsable de Seguridad de la Información.
 - **Presupuesto estimado:** USD 7.500 (licencias EDR, segmentación, configuración y ejercicio).
 - **Estado inicial:** En planificación.

@@ -5,4 +5,13 @@ services:
     ports:
       - "8080:80"
       - "8443:443"
+    volumes:
+      - simplerisk_data:/var/www/simplerisk
+      - simplerisk_database:/var/lib/mysql
+      - simplerisk_passwords:/passwords
     restart: unless-stopped
+
+volumes:
+  simplerisk_data:
+  simplerisk_database:
+  simplerisk_passwords:
