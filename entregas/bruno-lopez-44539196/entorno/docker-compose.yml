@@ -1,0 +1,13 @@
+services:
+  simplerisk:
+    image: simplerisk/simplerisk:20260828-001
+    container_name: simplerisk
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - simplerisk-data:/var/www/simplerisk
+    restart: unless-stopped
+
+volumes:
+  simplerisk-data:
