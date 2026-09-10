@@ -5,7 +5,7 @@
 - Nombre completo: Ulises Wójcik
 - LU/legajo: 31196930
 - Email institucional: wojcikulises@uch.edu.ar
-- Comisión: de Sistemas — Comisión G
+- Comisión:G
 
 ## Escenario
 
@@ -45,11 +45,11 @@ Palabra de verificación del documento de la cátedra: `girasol`.
 
 ## Checklist
 
-- [x] No hay credenciales reales en el repositorio.
-- [x] El `.gitignore` está configurado.
-- [x] Las capturas no muestran datos sensibles.
-- [x] No se incluyeron bases de datos ni dumps.
-- [x] El informe es legible.
-- [x] El reporte ejecutivo está completo.
-- [x] Los mensajes de commit son descriptivos.
-- [x] La branch está actualizada antes de entregar.
+- [ ] No hay credenciales reales en el repositorio.
+- [ ] El `.gitignore` está configurado.
+- [ ] Las capturas no muestran datos sensibles.
+- [ ] No se incluyeron bases de datos ni dumps.
+- [ ] El informe es legible.
+- [ ] El reporte ejecutivo está completo.
+- [ ] Los mensajes de commit son descriptivos.
+- [ ] La branch está actualizada antes de entregar.
