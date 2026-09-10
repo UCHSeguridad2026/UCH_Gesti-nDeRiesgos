@@ -35,6 +35,7 @@ Para detener el entorno: `docker compose -f entorno/docker-compose.yml down`. Es
 - El nivel se calcula como `probabilidad × impacto`: bajo, medio, alto y crítico.
 - Se priorizan riesgos que afectan historias clínicas, continuidad de atención y obligaciones de privacidad.
 - Los valores son una evaluación inicial del escenario y deben revisarse con evidencia de incidentes, auditorías y métricas reales.
+- GIRASOL!!!! casi me lo olvido xD
 
 ## Archivos de la entrega
 
