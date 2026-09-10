@@ -2,7 +2,7 @@
 
 ## Criterio de valoración
 
-La clínica privada tiene 120 empleados, atiende aproximadamente 800 pacientes por día y administra historias clínicas electrónicas (HCE), datos de obras sociales y facturación. La probabilidad y el impacto se califican de 1 a 5. Para coincidir con el valor ya cargado en SimpleRisk, el nivel se calcula como `P × I / 2,5`. No hay mitigaciones planificadas ni revisión de gerencia aprobada al 09/09/2026.
+La clínica privada tiene 120 empleados, atiende aproximadamente 800 pacientes por día y administra historias clínicas electrónicas (HCE), datos de obras sociales y facturación. La probabilidad y el impacto se califican de 1 a 5. SimpleRisk mostró el nivel normalizado con la fórmula `P × I / 2,5`; se adopta esa fórmula como fuente de verdad para estandarizar este registro y el resto de la entrega. No hay mitigaciones planificadas ni revisión de gerencia aprobada al 09/09/2026.
 
 | Puntaje | Interpretación de probabilidad | Interpretación de impacto |
 |---:|---|---|
@@ -120,22 +120,22 @@ Los tres planes están asociados a los riesgos de mayor nivel priorizados por la
 - **Vencimiento:** 15/01/2027.
 - **Responsable:** Administrador.
 - **Presupuesto estimado:** USD 200.001–300.000
-- **Estado inicial:** No iniciado.
+- **Estado inicial:** 0% / No iniciado.
 
 ### PA-02 - Contención de ransomware en la red clínica (riesgo 1005)
 
 - **Descripción:** separar la red clínica de la administrativa, desplegar EDR en servidores y puestos críticos, bloquear ejecución de macros no confiables y realizar un ejercicio de aislamiento y respuesta con Sistemas y Dirección Médica.
 - **Vencimiento:** 10/11/2026.
-- **Responsable:** Responsable de Seguridad de la Información.
-- **Presupuesto estimado:** USD 7.500 (licencias EDR, segmentación, configuración y ejercicio).
-- **Estado inicial:** En planificación.
+- **Responsable:** Analista de Riesgo.
+- **Presupuesto estimado:** USD 200.001-300.000 (licencias EDR, segmentación, configuración y ejercicio).
+- **Estado inicial:** 0% / No iniciado.
 
 ### PA-03 - Control de acceso a HCE (riesgo 1002)
 
 - **Descripción:** activar MFA para cuentas con acceso a HCE, recertificar permisos por rol y servicio, eliminar cuentas compartidas y configurar una revisión mensual de accesos anómalos con evidencia para Compliance.
-- **Vencimiento:** 06/11/2026.
-- **Responsable:** Jefe de Sistemas, con validación del Director Médico.
-- **Presupuesto estimado:** ARS 3.200.000 (MFA, gestión de identidades, configuración y capacitación).
-- **Estado inicial:** No iniciado.
+- **Vencimiento:** 12/12/2026.
+- **Responsable:** Analista de Riesgo.
+- **Presupuesto estimado:** USD 100.001-200.000 (MFA, RBAC, depuración de usuarios, auditoría de accesos y capacitación).
+- **Estado inicial:** 0% / No iniciado.
 
 

@@ -32,7 +32,8 @@ Para detener el entorno: `docker compose -f entorno/docker-compose.yml down`. Es
 ## Decisiones de diseño
 
 - Se utiliza una matriz cualitativa de probabilidad por impacto, ambos en escala de 1 a 5.
-- El nivel se calcula como `probabilidad × impacto`: bajo, medio, alto y crítico.
+- SimpleRisk mostró el nivel normalizado con la fórmula `P × I / 2,5`; se adopta esa fórmula como fuente de verdad para estandarizar todos los documentos y valores cargados.
+- Los rangos bajo, medio, alto y crítico se interpretan sobre el nivel normalizado que calcula SimpleRisk.
 - Se priorizan riesgos que afectan historias clínicas, continuidad de atención y obligaciones de privacidad.
 - Los valores son una evaluación inicial del escenario y deben revisarse con evidencia de incidentes, auditorías y métricas reales.
 - GIRASOL!!!! casi me lo olvido xD

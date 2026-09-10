@@ -33,7 +33,7 @@ El nivel se calcula como `P × I / 2,5`. Los valores del Top 5 coinciden con los
 | PA-02 | 1005 | Desplegar EDR, segmentar la red y capacitar contra phishing | 10/11/2026 | Analista de Riesgo | USD 200.001–300.000 | 0% / No iniciado |
 | PA-03 | 1002 | Implementar MFA y RBAC, depurar usuarios y auditar accesos | 12/12/2026 | Analista de Riesgo | USD 100.001–200.000 | 0% / No iniciado |
 
-Los planes requieren aprobación de gerencia para pasar a ejecución. El estado informado es inicial al 09/09/2026 y no implica que la mitigación esté implementada. Los responsables operativos son Administrador y Analista de Riesgo, con participación de Data Center & Storage e Information Security.
+Los planes requieren aprobación de gerencia para pasar a ejecución. El estado informado es inicial al 09/09/2026 y no implica que la mitigación esté implementada. Los responsables operativos son Administrador y Analista de Riesgo.
 
 El tratamiento propuesto sigue la analogía de los tres cerditos: una primera capa resistente representa la prevención y el endurecimiento, una segunda capa representa la segmentación y los controles de acceso, y una tercera capa representa backups, monitoreo y recuperación. La defensa en profundidad evita depender de una única medida frente a una amenaza externa.
 

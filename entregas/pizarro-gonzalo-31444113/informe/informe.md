@@ -7,7 +7,7 @@ El objetivo es construir un registro inicial de riesgos para la **Clínica UCH**
 
 ## 2. Metodología aplicada
 
-Se empleó una matriz de probabilidad e impacto de 1 a 5. La probabilidad estima la posibilidad de ocurrencia en el contexto planteado y el impacto considera consecuencias sobre la atención, confidencialidad de datos sanitarios, integridad de facturación y cumplimiento. El nivel se obtiene multiplicando ambos valores y luego diviendo entre 2,5, se priorizan los riesgos críticos y altos.
+Se empleó una matriz de probabilidad e impacto de 1 a 5. La probabilidad estima la posibilidad de ocurrencia en el contexto planteado y el impacto considera consecuencias sobre la atención, confidencialidad de datos sanitarios, integridad de facturación y cumplimiento. SimpleRisk mostró el nivel normalizado con la fórmula `P × I / 2,5`, por lo que se adopta esa fórmula como fuente de verdad y se estandarizan con ella todos los documentos y valores cargados. Se priorizan los riesgos críticos y altos.
 
 La matriz facilita la comunicación con la dirección y permite ordenar acciones con pocos datos. Su limitación es que comprime escenarios distintos en un único número, depende del criterio de quien valora y no expresa por sí sola incertidumbre ni pérdida económica. Por eso las justificaciones deben revisarse con incidentes, auditorías y métricas.
 
