@@ -95,3 +95,5 @@ El presente trabajo práctico tiene como objetivo familiarizar a los estudiantes
   - SimpleRisk destaca por su agilidad, rapidez de despliegue y una interfaz web intuitiva basada en una matriz clásica de probabilidad e impacto, ideal para organizaciones que necesitan un registro operativo inicial rápido.
   - NIST SP 800-30 ofrece un enfoque altamente granular, formal y exhaustivo para la evaluación detallada de amenazas, vulnerabilidades y el impacto operativo, siendo más adecuado para entornos con alta madurez en cumplimiento normativo.
 - **Integración Tecnológica:** Se documenta la integración de SimpleRisk mediante webhooks hacia herramientas externas de tickets o mensajería (como Slack, Jira o sistemas de SIEM) para notificar de forma automatizada la apertura de riesgos críticos a los equipos de respuesta.
+  ---
+> **Nota PROFE:** Las capturas de pantalla de la configuración de SimpleRisk se encuentran consolidadas e integradas dentro del archivo `reporte.pdf` ubicado en la carpeta `reporte-ejecutivo/`.
