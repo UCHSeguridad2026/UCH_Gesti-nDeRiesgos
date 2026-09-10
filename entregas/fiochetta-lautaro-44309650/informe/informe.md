@@ -4,6 +4,8 @@
 **Materia:** Seguridad de Sistemas — Licenciatura en Ciencias de la Computación, 4to año
 **Escenario:** Responsable de seguridad de una clínica privada de 120 empleados, 800 pacientes/día, con historias clínicas digitales, datos de obras sociales y facturación.
 
+**Confirmación de lectura del enunciado:** confirmo haber leído el enunciado completo del TP, incluyendo la sección de verificación de lectura — palabra clave: **girasol**.
+
 ---
 
 ## Parte A — Instalación y Configuración Básica

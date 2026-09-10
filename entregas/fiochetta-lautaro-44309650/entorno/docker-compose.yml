@@ -1,16 +1,9 @@
 # entorno/docker-compose.yml
-# Entorno reproducible de SimpleRisk para el TP de Seguridad de Sistemas.
-#
-# Usa la imagen todo-en-uno "simplerisk/simplerisk" (LAMP + MySQL + SimpleRisk
-# en un solo contenedor). Es la misma imagen usada para la instalación real de
-# este TP (confirmado con `docker inspect simplerisk --format "{{.Config.Image}}"`),
-# por eso este archivo la refleja tal cual en vez de la variante "minimal" con
-# base de datos separada.
-#
+
 # Uso:
-#   cd entorno
-#   docker compose up -d
-#   Luego abrir http://localhost:8080 (asistente de instalación inicial)
+# cd entorno
+# docker compose up -d
+# Luego abrir http://localhost:8080 ó https://localhost:8443
 
 version: "3.6"
 
