@@ -18,16 +18,16 @@ A continuación, se detallan los pasos exactos para levantar la infraestructura 
 
 **Requisitos Previos:**
 1. Tener instalado Docker Desktop (con WSL 2 habilitado) y asegurarse de que el motor de Docker esté en ejecución.
-2. Abrir una terminal y posicionarse dentro del directorio del proyecto (carpeta `entorno/`), donde deben coexistir los archivos `docker-compose.yml` y `.env`.
+2. Abrir una terminal y posicionarse dentro del directorio del proyecto (carpeta `entorno/`), donde se encuentra el archivo `docker-compose.yml`.
 
 **Ejecución y Despliegue:**
-1. El proyecto incluye un archivo `.env` preconfigurado. No es necesario modificarlo.
+1. El archivo `docker-compose.yml` incluye credenciales de demostración predefinidas (usuario y base de datos de MySQL). No es necesario modificarlas para levantar el entorno.
 2. Ejecute los siguientes comandos para crear la red e iniciar los contenedores en segundo plano:
     `cd entorno/`
     `docker compose up -d`
 3. Espere entre 30 y 45 segundos para que la base de datos configure las tablas internas. Puede verificar que ambos contenedores estén en estado "Up" con el comando:
     `docker compose ps`
-4. Acceda a la plataforma abriendo un navegador web en: `https://localhost:8443`
+4. Acceda a la plataforma abriendo un navegador web en: `https://localhost` (el contenedor expone los puertos 80 y 443 directamente sobre el host).
 
 ---
 
