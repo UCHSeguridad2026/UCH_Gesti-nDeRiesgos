@@ -1,8 +1,8 @@
 # Informe — TP SimpleRisk, Gestión de Riesgos con SimpleRisk
 
 **Materia:** Seguridad de Sistemas — 4to año, Licenciatura en Ciencias de la Computación
-**Alumno/a:** <completar nombre completo, LU, email institucional>
-**Comisión:** <completar>
+**Alumno/a:** Mateo Agustin Falanti - 31645404 - mateofalantiuch@gmail.com 
+**Comisión:** g
 
 ---
 
@@ -14,9 +14,6 @@ Antes de empezar con la instalación, se preparó el flujo de trabajo en Git de 
 2. Se creó una rama individual siguiendo la convención `entrega/<apellido>-<nombre>-<lu>`, sin realizar ningún commit sobre `main`.
 3. Dentro de la rama, se armó la estructura de carpetas exigida (`entorno/`, `informe/`, `configuracion/`, `reporte-ejecutivo/`), y se configuró un `.gitignore` para evitar subir credenciales, dumps de base de datos, binarios pesados de VM y logs con datos sensibles.
 4. Se decidió trabajar con Docker Desktop sobre Windows como entorno de virtualización, en lugar de una VM completa (VirtualBox/Vagrant), por ser más liviano y reproducible para este caso.
-
-Todos los commits realizados durante el desarrollo del TP se hicieron con mensajes descriptivos en español, evitando mensajes genéricos como "fix" o "asd", de acuerdo a lo pedido en la consigna.
-
 ---
 
 ## 2. Parte A — Instalación y configuración básica
