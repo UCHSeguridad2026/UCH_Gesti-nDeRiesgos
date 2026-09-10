@@ -67,3 +67,23 @@ Se investigo la integracion de SimpleRisk con **Slack**, mediante el envio de no
 SimpleRisk permite configurar notificaciones por correo electronico de forma nativa, y estas pueden redirigirse a un canal de Slack mediante la funcionalidad de "Email to Slack" (cada canal de Slack puede generar una direccion de correo unica a la que reenviar notificaciones). De esta forma, cuando SimpleRisk envia un correo de alerta por un riesgo critico, ese mismo correo llega automaticamente al canal de seguridad del equipo de TI, sin necesidad de desarrollar una integracion a medida.
 
 Una alternativa mas robusta, no implementada en este TP por falta de tiempo, seria un script que consulte la API de SimpleRisk periodicamente y publique en Slack mediante un webhook nativo los riesgos que superen un umbral de puntaje definido.
+
+## Actividad optativa D1: Analisis de seguridad de la instalacion por defecto
+
+Se realizaron tres verificaciones sobre la instalacion por defecto de SimpleRisk (imagen oficial `simplerisk/simplerisk:latest` sobre Docker):
+
+### Hallazgo 1: Content-Security-Policy permisiva
+
+El header CSP devuelto por el servidor es `default-src * 'unsafe-inline' 'unsafe-eval' data:`. Esta configuracion permite cargar recursos desde cualquier origen y ejecutar scripts inline y `eval()`, anulando practicamente el proposito de la CSP como mitigacion contra ataques XSS. Se detecto ademas una inconsistencia: el header `Referrer-Policy` aparece duplicado con dos valores distintos (`no-referrer-when-downgrade` y `origin`), lo que sugiere una configuracion de servidor descuidada o superpuesta entre distintas capas (aplicacion + servidor web).
+
+**Mitigacion propuesta:** restringir la CSP a los origenes especificos que realmente necesita la aplicacion (scripts propios, CDN si corresponde) y eliminar `unsafe-inline` y `unsafe-eval`. Unificar la configuracion de `Referrer-Policy` en un unico valor explicito, por ejemplo `strict-origin-when-cross-origin`.
+
+### Hallazgo 2: Version de PHP
+
+Se verifico la version de PHP en ejecucion dentro del contenedor: PHP 8.3.6. Es una version reciente y sin vulnerabilidades criticas conocidas al momento de este analisis, por lo que no representa un riesgo inmediato, aunque se recomienda mantener un proceso de actualizacion periodica de la imagen base.
+
+### Hallazgo 3: Proceso ejecutado como root
+
+Se verifico el usuario bajo el cual corre el proceso principal del contenedor (`docker exec simplerisk_app whoami`), resultando en `root`. Ejecutar la aplicacion web como usuario con privilegios administrativos dentro del contenedor viola el principio de minimo privilegio: ante una vulnerabilidad de ejecucion remota de codigo en la aplicacion, un atacante obtendria control total del contenedor en lugar de estar limitado a los permisos de un usuario sin privilegios.
+
+**Mitigacion propuesta:** modificar el Dockerfile o `docker-compose.yml` para ejecutar el proceso de Apache/PHP con un usuario dedicado sin privilegios (por ejemplo `www-data`), y aplicar `USER` en el Dockerfile antes del `ENTRYPOINT`.
