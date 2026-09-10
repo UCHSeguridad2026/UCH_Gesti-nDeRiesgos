@@ -47,3 +47,24 @@ curl -X POST -H 'Content-type: application/json' \
 ### C. Beneficios Operativos de la Integración
 1. **Reducción del MTTI (Tiempo Medio de Identificación):** El equipo de infraestructura recibe la notificación en sus dispositivos móviles en menos de 2 segundos tras el envío del registro.
 2. **Centralización Operativa:** Evita que el personal técnico tenga que auditar manualmente el panel de SimpleRisk de forma periódica, centralizando los incidentes en el canal oficial de comunicación de la empresa.
+
+
+---
+
+## 3. Parte D: Actividades Optativas (Bonificación +1 Punto)
+
+### Actividad D1: Análisis de Seguridad de la Instalación por Defecto de SimpleRisk
+
+Evaluando la arquitectura de contenedores desplegada localmente mediante Docker Compose, se identificaron tres (3) vulnerabilidades de configuración y malas prácticas críticas en la instalación por defecto, proponiendo sus respectivas mitigaciones de nivel corporativo:
+
+#### 1. Exposición de Credenciales en Texto Plano (Docker Compose Variables)
+* **Vulnerabilidad:** Las contraseñas del motor de base de datos (`MYSQL_PASSWORD` y `MYSQL_ROOT_PASSWORD`) están hardcodeadas directamente en texto plano dentro del archivo `docker-compose.yml`. Cualquier usuario con acceso de lectura al repositorio de Git puede comprometer la integridad total de la base de datos de la clínica.
+* **Mitigación:** Implementar el uso de archivos de entorno ocultos (`.env`) agregados a la directiva `.gitignore`, o utilizar mecanismos de almacenamiento seguro como **Docker Secrets** para inyectar las credenciales en memoria durante el tiempo de ejecución (runtime).
+
+#### 2. Ausencia de Headers HTTP de Seguridad y Uso de HTTP Nativo
+* **Vulnerabilidad:** La configuración predeterminada del servidor Apache dentro de la imagen de SimpleRisk expone la plataforma a ataques de redirección maliciosa o secuestro de clics (Clickjacking) debido a la ausencia de headers HTTP críticos como `X-Frame-Options: DENY`, `Strict-Transport-Security` (HSTS) y `Content-Security-Policy` (CSP).
+* **Mitigación:** Configurar un proxy inverso perimetral (como **Nginx** o **Traefik**) por delante del contenedor de SimpleRisk. Este proxy será el responsable exclusivo de forzar conexiones seguras HTTPS mediante certificados válidos y de inyectar las cabeceras de seguridad requeridas en cada petición web.
+
+#### 3. Uso de la Cuenta Administrativa por Defecto ('admin')
+* **Vulnerabilidad:** La instalación inicial fuerza al sistema a operar bajo un identificador predecible y estandarizado (`admin`), lo que simplifica de manera drástica la ejecución de ataques automatizados de fuerza bruta o diccionario orientados al panel de inicio de sesión de la clínica.
+* **Mitigación:** Aplicar una política estricta de endurecimiento (Hardening) que consista en la creación inmediata de un usuario con privilegios elevados con nomenclatura corporativa compleja (ej: `adm_mendoza_sec`), seguida de la **desactivación o baja absoluta e inmediata de la cuenta nativa `admin`** en la base de datos.
