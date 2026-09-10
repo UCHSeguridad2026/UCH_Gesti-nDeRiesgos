@@ -7,7 +7,7 @@ El objetivo es construir un registro inicial de riesgos para la **Clínica UCH**
 
 ## 2. Metodología aplicada
 
-Se empleó una matriz de probabilidad e impacto de 1 a 5. La probabilidad estima la posibilidad de ocurrencia en el contexto planteado y el impacto considera consecuencias sobre la atención, confidencialidad de datos sanitarios, integridad de facturación y cumplimiento. El nivel se obtiene multiplicando ambos valores y se priorizan los riesgos críticos y altos.
+Se empleó una matriz de probabilidad e impacto de 1 a 5. La probabilidad estima la posibilidad de ocurrencia en el contexto planteado y el impacto considera consecuencias sobre la atención, confidencialidad de datos sanitarios, integridad de facturación y cumplimiento. El nivel se obtiene multiplicando ambos valores y luego diviendo entre 2,5, se priorizan los riesgos críticos y altos.
 
 La matriz facilita la comunicación con la dirección y permite ordenar acciones con pocos datos. Su limitación es que comprime escenarios distintos en un único número, depende del criterio de quien valora y no expresa por sí sola incertidumbre ni pérdida económica. Por eso las justificaciones deben revisarse con incidentes, auditorías y métricas.
 
@@ -34,7 +34,4 @@ Antes de usar el entorno fuera de laboratorio se deben revisar: versión soporta
 ## 7. Evidencias y pendientes
 
 - Capturas de usuarios, riesgos y planes: `capturas/`.
-- URL y versión de SimpleRisk: pendiente de registrar después de la carga manual.
-- Riesgo de prueba: pendiente de registrar después de la carga manual.
-- IDs de riesgos y planes en SimpleRisk: pendientes de registrar después de la carga manual.
 - Reporte ejecutivo PDF: `../reporte-ejecutivo/reporte.pdf`.

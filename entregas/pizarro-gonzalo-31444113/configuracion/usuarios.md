@@ -13,7 +13,6 @@ Las cuentas deben crearse con credenciales ficticias y únicas para el entorno l
 
 - Fecha de creación: `[COMPLETAR]`
 - URL local de SimpleRisk: `[COMPLETAR]`
-- Captura de usuarios y roles: `../informe/capturas/[COMPLETAR]`
-- Se verificó el acceso de cada rol: `[PENDIENTE]`
+- Captura de usuarios y roles: `../informe/capturas/`
 
-No se documentan contraseñas. Deben guardarse únicamente en un gestor local o entregarse por un canal seguro si el docente las solicita.
+
