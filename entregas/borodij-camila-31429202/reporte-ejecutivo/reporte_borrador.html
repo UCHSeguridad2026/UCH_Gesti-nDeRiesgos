@@ -1,39 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<style>
-  body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.5; color: #1e293b; }
-  h1 { color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 8px; }
-  h2 { color: #1e293b; margin-top: 20px; }
-  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-  th, td { border: 1px solid #cbd5e1; padding: 8px 12px; text-align: left; }
-  th { background-color: #0f172a; color: white; }
-  .card { background: #f8fafc; border-left: 4px solid #2563eb; padding: 12px; margin-bottom: 12px; }
-</style>
+    <meta charset="UTF-8">
+    <title>Reporte Ejecutivo de Gestión de Riesgos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; color: #333; line-height: 1.6; }
+        h1 { color: #1a365d; border-bottom: 2px solid #2b6cb0; padding-bottom: 8px; }
+        h2 { color: #2c5282; margin-top: 25px; }
+        .meta { background-color: #ebf8ff; padding: 12px; border-left: 4px solid #3182ce; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #cbd5e0; padding: 10px; text-align: left; }
+        th { background-color: #f7fafc; color: #2d3748; }
+        .badge-alto { background-color: #fed7d7; color: #9b2c2c; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+        .badge-medio { background-color: #feebc8; color: #9c4221; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+        .plan-box { background-color: #f7fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 6px; margin-bottom: 12px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+    </style>
 </head>
 <body>
-  <h1>Reporte Ejecutivo de Gestión de Riesgos</h1>
-  <p><strong>Para:</strong> Directorio y Gerencia General — Clínica Privada<br>
-  <strong>De:</strong> Oficial de Seguridad de la Información (CISO) — Camila Aylen Borodij<br>
-  <strong>Fecha:</strong> Septiembre 2026</p>
 
-  <h2>1. Resumen Ejecutivo</h2>
-  <p>Tras la auditoría técnica y funcional de seguridad, se consolidó un inventario inicial de <strong>7 riesgos críticos</strong> que afectan a la disponibilidad de las Historias Clínicas Electrónicas (HCE) y la confidencialidad de datos de pacientes. Se requiere una inversión prioritaria estimada en <strong>USD 9.700</strong>.</p>
+    <h1>Reporte Ejecutivo de Gestión de Riesgos</h1>
+    
+    <div class="meta">
+        <strong>Para:</strong> Directorio y Gerencia General - Clínica Privada<br>
+        <strong>De:</strong> Oficial de Seguridad de la Información (CISO) - Camila Aylen Borodij<br>
+        <strong>Fecha:</strong> Septiembre 2026
+    </div>
 
-  <h2>2. Top 5 Riesgos Principales</h2>
-  <table>
-    <tr><th>Riesgo / Amenaza</th><th>Prob.</th><th>Impacto</th><th>Nivel</th><th>Estado</th></tr>
-    <tr><td>Infección por Ransomware en Servidor HCE</td><td>4 (Alta)</td><td>5 (Crítico)</td><td>20 - Alto</td><td>Mitigar</td></tr>
-    <tr><td>Exfiltración de Datos Personales por Phishing</td><td>4 (Alta)</td><td>4 (Alto)</td><td>16 - Alto</td><td>Mitigar</td></tr>
-    <tr><td>Acceso No Autorizado a HCE (Sin MFA)</td><td>3 (Media)</td><td>5 (Crítico)</td><td>15 - Alto</td><td>Mitigar</td></tr>
-    <tr><td>Falla Eléctrica en Data Center sin UPS</td><td>3 (Media)</td><td>4 (Alto)</td><td>12 - Medio</td><td>Planificado</td></tr>
-    <tr><td>Indisponibilidad de Facturación AFIP / Obras Sociales</td><td>3 (Media)</td><td>3 (Medio)</td><td>9 - Medio</td><td>Aceptar</td></tr>
-  </table>
+    <h2>1. Resumen Ejecutivo</h2>
+    <p>
+        Tras la auditoría técnica y funcional de seguridad de la infraestructura tecnológica, se consolidó un inventario inicial de <strong>7 riesgos críticos</strong> que afectan la disponibilidad de las Historias Clínicas Electrónicas (HCE), la continuidad operativa y la confidencialidad de los datos de los pacientes. Para mitigar los escenarios de mayor impacto y asegurar el cumplimiento normativo (Ley de Protección de Datos Personales), se requiere la aprobación e inversión prioritaria estimada en <strong>USD 28.500</strong>[cite: 1].
+    </p>
 
-  <h2>3. Planes de Acción Prioritarios</h2>
-  <div class="card"><strong>Plan 1: Despliegue de Autenticación MFA</strong><br>Presupuesto: USD 2.500 | Vencimiento: 31/12/2026</div>
-  <div class="card"><strong>Plan 2: Copias de Seguridad Inmutables y Antivirus EDR</strong><br>Presupuesto: USD 6.000 | Vencimiento: 15/11/2026</div>
-  <div class="card"><strong>Plan 3: Programa de Concientización en Phishing</strong><br>Presupuesto: USD 1.200 | Vencimiento: 30/10/2026</div>
+    <h2>2. Top 5 Riesgos por Nivel</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Riesgo / Amenaza</th>
+                <th>Prob.</th>
+                <th>Impacto</th>
+                <th>Nivel</th>
+                <th>Tratamiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Infección por Ransomware en Servidor HCE</strong></td>
+                <td>4 (Alta)[cite: 1]</td>
+                <td>5 (Crítico)[cite: 1]</td>
+                <td><span class="badge-alto">20 - Alto</span>[cite: 1]</td>
+                <td>Mitigar[cite: 1]</td>
+            </tr>
+            <tr>
+                <td><strong>Exfiltración de Datos Personales por Phishing</strong></td>
+                <td>4 (Alta)[cite: 1]</td>
+                <td>4 (Alto)[cite: 1]</td>
+                <td><span class="badge-alto">16 - Alto</span>[cite: 1]</td>
+                <td>Mitigar[cite: 1]</td>
+            </tr>
+            <tr>
+                <td><strong>Acceso No Autorizado a HCE (Sin MFA)</strong></td>
+                <td>3 (Media)[cite: 1]</td>
+                <td>5 (Crítico)[cite: 1]</td>
+                <td><span class="badge-alto">15 - Alto</span>[cite: 1]</td>
+                <td>Mitigar[cite: 1]</td>
+            </tr>
+            <tr>
+                <td><strong>Falla Eléctrica en Data Center sin UPS Adecuada</strong></td>
+                <td>3 (Media)[cite: 1]</td>
+                <td>4 (Alto)[cite: 1]</td>
+                <td><span class="badge-medio">12 - Medio</span>[cite: 1]</td>
+                <td>Mitigar</td>
+            </tr>
+            <tr>
+                <td><strong>Indisponibilidad de Facturación AFIP / Obras Sociales</strong></td>
+                <td>3 (Media)[cite: 1]</td>
+                <td>3 (Medio)[cite: 1]</td>
+                <td><span class="badge-medio">9 - Medio</span>[cite: 1]</td>
+                <td>Aceptar[cite: 1]</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3. Estado de los Planes de Acción</h2>
+    
+    <div class="plan-box">
+        <h3>Plan 1: Implementación de Backups Inmutables y Agentes EDR</h3>
+        <p><strong>Asociado a:</strong> Ransomware en Servidor HCE</p>
+        <p><strong>Responsable:</strong> analista_sec / CTO | <strong>Vencimiento:</strong> 30/11/2026 | <strong>Presupuesto:</strong> USD 15.000</p>
+        <p><strong>Estado:</strong> Planificado (En Espera de Aprobación)</p>
+    </div>
+
+    <div class="plan-box">
+        <h3>Plan 2: Despliegue de Autenticación MFA y Campaña Anti-Phishing</h3>
+        <p><strong>Asociado a:</strong> Exfiltración por Phishing</p>
+        <p><strong>Responsable:</strong> analista_sec / CISO | <strong>Vencimiento:</strong> 31/10/2026 | <strong>Presupuesto:</strong> USD 5.000</p>
+        <p><strong>Estado:</strong> Planificado (En Espera de Aprobación)</p>
+    </div>
+
+    <div class="plan-box">
+        <h3>Plan 3: Integración de IdP y Control RBAC en Portal Web</h3>
+        <p><strong>Asociado a:</strong> Acceso No Autorizado sin MFA</p>
+        <p><strong>Responsable:</strong> analista_sec / Dev Lead | <strong>Vencimiento:</strong> 15/12/2026 | <strong>Presupuesto:</strong> USD 8.500</p>
+        <p><strong>Estado:</strong> Planificado (En Espera de Aprobación)</p>
+    </div>
+
+    <h2>4. Recomendaciones Prioritarias</h2>
+    <ul>
+        <li><strong>Aprobación Inmediata de Presupuesto:</strong> Autorizar la asignación presupuestaria de USD 28.500 para ejecutar las tres mitigaciones técnicas críticas antes del cierre del cuarto trimestre de 2026.</li>
+        <li><strong>Implementación Obligatoria de MFA:</strong> Priorizar la activación del segundo factor de autenticación en los accesos remotos y portales médicos dentro de los próximos 30 días.</li>
+        <li><strong>Aislamiento de Red e Inmutabilidad de Backups:</strong> Garantizar la segmentación de red VLAN para la base de datos de HCE y establecer copias de seguridad desconectadas para blindar la clínica ante posibles ataques de Ransomware.</li>
+        <li><strong>Sensibilización Continua:</strong> Formalizar el programa de concientización periódica contra la ingeniería social para todo el personal administrativo y de salud.</li>
+    </ul>
+
 </body>
 </html>
