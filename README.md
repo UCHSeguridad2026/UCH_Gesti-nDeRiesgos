@@ -1,28 +1,67 @@
-# UCH - Seguridad - Gestión de Riesgos
-> `#UCH_GestiónDeRiesgos`
+# TP SimpleRisk — Seguridad de Sistemas
 
-Este repositorio público está destinado únicamente para las entregas de los estudiantes.
+## Datos del estudiante
+- Nombre completo: [Federico Diego Anguita]
+- D.N.I: [44.404.612]
+- Email institucional: [fdanguita@gmail.com]
+- Comisión: [Comisión G]
 
----
+## Objetivo
+El trabajo implementa un registro inicial de riesgos para una clínica privada de 120 empleados y aproximadamente 800 pacientes por día, utilizando SimpleRisk como herramienta de gestión.
 
-## 📌 Checklist de Auto-Revisión
-*Por favor, marca las casillas correspondientes antes de realizar tu entrega:*
+## Cómo levantar el entorno
 
+### Requisitos
+- Docker Desktop o Docker Engine + Docker Compose.
+- Navegador web.
+
+### Instalación
+1. Ubicarse en la carpeta "entorno".
+2. Ejecutar:
+
+```bash
+docker compose up -d
+```
+
+3. Verificar:
+
+```bash
+docker compose ps
+```
+
+4. Abrir en el navegador "http://localhost/".
+5. Completar el asistente inicial de SimpleRisk.
+6. Crear los tres usuarios indicados en "configuracion/usuarios.md".
+7. Crear el riesgo de prueba.
+8. Cargar los siete riesgos del escenario según "configuracion/riesgos.md".
+9. Crear los tres planes de acción.
+10. Tomar capturas de pantalla y guardarlas en "informe/capturas/".
+
+> La instalación reproducible se documenta con Docker Compose. La documentación oficial de SimpleRisk ofrece una imagen Docker y recomienda persistencia de datos para despliegues reales.
+
+## Decisiones de diseño
+- Se utiliza una matriz cualitativa de probabilidad × impacto de 1 a 5, coherente con la consigna.
+- El nivel de riesgo se calcula como "Probabilidad × Impacto".
+- Se considera alto un resultado de 15 a 25.
+- Los riesgos fueron diseñados específicamente para el contexto de una clínica y no como riesgos genéricos.
+- Los valores son estimaciones académicas y deben validarse con datos reales antes de utilizarse en una organización.
+- Se eligió FAIR como metodología alternativa para la comparación metodológica.
+- La integración externa propuesta utiliza un sistema de tickets/webhook como mecanismo de seguimiento de planes de acción.
+
+## Verificación
+Palabra clave solicitada por la cátedra: **girasol**.
+
+## Checklist de auto-revisión
 - [ ] No hay credenciales en el repositorio.
-- [ ] El archivo `.gitignore` está correctamente configurado.
-- [ ] Las capturas de pantalla no muestran datos sensibles.
-- [ ] Los archivos `.sql` o dumps no están subidos.
-- [ ] El informe está en un formato legible.
+- [ ] El ".gitignore" está configurado.
+- [ ] Las capturas no muestran datos sensibles.
+- [ ] No hay archivos ".sql" o dumps reales.
+- [ ] El informe es legible.
 - [ ] El reporte ejecutivo está completo.
 - [ ] Los mensajes de commit son descriptivos.
-- [ ] Mi branch está actualizada y funciona correctamente.
+- [ ] La branch está actualizada y funciona.
+- [ ] Se reemplazaron los datos personales de este README.
+- [ ] Se ejecutó realmente la instalación de SimpleRisk y se agregaron capturas.
 
----
-
-## ⚠️ Política de Branches y Resolución de Conflictos
-
-- **Responsabilidad:** Cada estudiante es responsable exclusivo de su propia branch.
-- **Errores de Commit:** Si por error haces un commit sobre `main` o sobre la branch de otro compañero, avisa inmediatamente al docente.
-- **Restricciones:** No se permite hacer `git push --force` sobre ninguna branch compartida.
-- **Soporte:** Ante dudas sobre Git, consulta al docente antes de realizar operaciones destructivas (`reset`, `rebase`, `push -f`).
-
+## Nota de entrega
+Los documentos de análisis y planificación están preparados. La parte que necesariamente debe realizarse en el equipo del estudiante es la ejecución de SimpleRisk, creación de usuarios/riesgos/planes dentro de la interfaz y obtención de capturas reales. No deben presentarse como realizadas si todavía no fueron ejecutadas.
