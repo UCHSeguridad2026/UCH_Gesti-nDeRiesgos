@@ -5,8 +5,6 @@
 - Nombre: Farrando Valentino.
 - Legajo: 31782371.
 - Correo de contacto: valenfarra@gmail.com.
-- Email institucional: pendiente de confirmar.
-- Comisión: pendiente de completar.
 - Rama: entrega/farrando-valentino-31782371.
 
 ## Objetivo
@@ -49,8 +47,16 @@ instancia local de práctica.
 
 El archivo Compose inicia la aplicación, pero no carga por sí solo
 los usuarios, activos, riesgos y planes del ejercicio.
-Las instrucciones para reproducir esa configuración se incorporarán
-en los próximos avances.
+La configuración del ejercicio se reproduce manualmente siguiendo:
+
+- [Usuarios y permisos](configuracion/usuarios.md).
+- [Inventario de activos](configuracion/activos.md).
+- [Riesgos y criterios de evaluación](configuracion/riesgos.md).
+- [Planes de tratamiento](configuracion/planes.md).
+
+Crear primero los usuarios y activos, configurar la matriz Classic
+sin normalización y después registrar los riesgos y sus planes.
+Los identificadores numéricos pueden variar en una instalación nueva.
 
 ## Avance del trabajo
 
@@ -64,13 +70,24 @@ En la instancia local se completaron:
 - Asignación de propietarios.
 - Registro de tres planes de mitigación pendientes de ejecución.
 
-Pendiente de incorporar al repositorio:
+## Documentación de la entrega
 
-- Documentación detallada y capturas.
-- Comparación metodológica.
-- Propuesta de integración.
-- Reporte ejecutivo de hasta tres páginas.
-- Revisión final de reproducibilidad.
+- [Informe técnico y evidencias](informe/informe.md).
+- [Capturas](informe/capturas/).
+- [Reporte ejecutivo de tres páginas](reporte-ejecutivo/reporte.pdf).
+
+El informe incluye la comparación con NIST SP 800-30
+y la propuesta de integración con GitHub Issues.
+La integración es una propuesta, no una implementación.
+
+La parte D opcional queda fuera del alcance.
+
+## Verificaciones pendientes
+
+- Revisión final de archivos y capturas antes de publicar.
+- Prueba completa de reproducción en una instalación nueva.
+- Publicación de la rama en GitHub cuando se habilite
+  el permiso de escritura.
 
 ## Decisiones de diseño
 
@@ -102,7 +119,7 @@ Se completará a medida que se verifique cada punto.
 - [ ] El .gitignore está correctamente configurado.
 - [ ] Las capturas no muestran datos sensibles.
 - [ ] Los archivos .sql o dumps no están subidos.
-- [ ] El informe está en formato legible.
-- [ ] El reporte ejecutivo está completo.
-- [ ] Los mensajes de commit son descriptivos.
+- [x] El informe está en formato legible.
+- [x] El reporte ejecutivo está completo.
+- [x] Los mensajes de commit son descriptivos.
 - [ ] Mi branch está actualizada y funciona.
